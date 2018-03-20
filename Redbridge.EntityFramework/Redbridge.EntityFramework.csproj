@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{56C45C64-F125-4269-8145-467B29853EE4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Redbridge.EntityFramework</RootNamespace>
+    <AssemblyName>Redbridge.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DbContextRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="InMemoryDbSet.cs" />
+    <Compile Include="DbEntityValidationResultExtensions.cs" />
+    <Compile Include="PageRequestExtensions.cs" />
+    <Compile Include="WorkUnit.cs" />
+    <Compile Include="SqlAzureDbConfiguration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Redbridge.EntityFramework.nuspec" />
+    <None Include="App.config" />
+    <None Include="Redbridge.EntityFramework.symbols.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Redbridge.SDK.Windows\Redbridge.SDK.Windows.csproj">
+      <Project>{CE6544EC-07AE-4322-94A6-A644C7361E6F}</Project>
+      <Name>Redbridge.SDK.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Redbridge\Redbridge.csproj">
+      <Project>{FA042554-BC38-4B47-B6EF-A10AC76CB200}</Project>
+      <Name>Redbridge</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

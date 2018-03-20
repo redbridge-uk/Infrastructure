@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Redbridge\Redbridge.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Unity" Version="5.7.3" />
+  </ItemGroup>
+</Project>

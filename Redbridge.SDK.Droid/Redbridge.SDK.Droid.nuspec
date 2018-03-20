@@ -1,0 +1,23 @@
+﻿<package>
+  <metadata>
+    <id>Redbridge.SDK.Droid</id>
+    <version>1.0.83</version>
+    <title>Redbridge Core SDK for Android</title>
+    <authors>Redbridge</authors>
+    <owners>Redbridge</owners>
+    <projectUrl>https://github.com/redbridge-uk/resources/wiki</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Redbridge SDK portable client SDK library for iOS</description>
+    <copyright>Copyright Redbridge 2017</copyright>
+    <tags>Redbridge, Portable, Xamarin, Android, SDK</tags>
+    <dependencies>
+    	<dependency id="Redbridge.SDK" version="2.0.14"/>
+    </dependencies>
+  </metadata>
+ 
+	<files>
+    	<file src="bin/Release/Redbridge.SDK.Droid.dll" target="lib/MonoAndroid/"/>
+	</files>
+
+  </package>

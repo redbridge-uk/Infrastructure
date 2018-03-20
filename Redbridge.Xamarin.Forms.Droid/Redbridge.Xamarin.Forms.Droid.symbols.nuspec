@@ -1,0 +1,26 @@
+﻿<package>
+  <metadata>
+    <id>Redbridge.Xamarin.Forms.Droid</id>
+    <version>1.0.83</version>
+    <title>Redbridge MVVM Xamarin Forms Android Library</title>
+    <authors>Redbridge</authors>
+    <owners>Redbridge</owners>
+    <projectUrl>https://github.com/redbridge-uk/resources/wiki</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Redbridge Xamarin Forms MVVM portable client SDK library for Android</description>
+    <copyright>Copyright Redbridge 2017</copyright>
+    <tags>Redbridge, MVVM, Forms, Portable, Xamarin, Android, Library</tags>
+    <dependencies>
+    	<dependency id="Redbridge.SDK.Droid" version="1.0.83"/>
+    	<dependency id="Redbridge.Xamarin.Forms" version="1.0.83"/>
+    </dependencies>
+  </metadata>
+ 
+	<files>
+    	<file src="bin/Debug/Redbridge.Xamarin.Forms.Droid.dll" target="lib/MonoAndroid/"/>
+        <file src="bin/Debug/Redbridge.Xamarin.Forms.Droid.pdb" target="lib/MonoAndroid/"/>
+        <file src="**\*.cs" target="src" />
+	</files>
+
+  </package>

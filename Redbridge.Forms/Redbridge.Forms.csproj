@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ActionSheet\" />
+    <Folder Include="Alerts\" />
+    <Folder Include="ApplicationModel\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Factories\" />
+    <Folder Include="Navigation\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
+    <Folder Include="Markup\" />
+    <Folder Include="Views\Managers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Redbridge\Redbridge.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Reactive" Version="3.1.1" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.280555" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Redbridge.Xamarin.Forms.2.0.8.nupkg" />
+    <None Remove="Redbridge.Xamarin.Forms.2.0.8.symbols.nupkg" />
+  </ItemGroup>
+</Project>

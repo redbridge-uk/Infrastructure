@@ -1,0 +1,23 @@
+﻿<package>
+	<metadata>
+		<id>Redbridge.EntityFramework</id>
+		<version>2.0.14</version>
+		<title>Redbridge EntityFramework</title>
+		<authors>Redbridge</authors>
+		<owners>Redbridge</owners>
+		<projectUrl>https://github.com/redbridge-uk/resources/wiki</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Redbridge C# Windows Library for working with Entity Framework in a unit of work style.</description>
+		<copyright>Copyright Redbridge 2018</copyright>
+		<tags>Redbridge, C#, Windows, EntityFramework, EF, UnitOfWork</tags>
+		<dependencies>
+			<dependency id="EntityFramework" version="6.2.0"/>
+    		<dependency id="Redbridge.SDK" version="2.0.14"/>
+    		<dependency id="Redbridge.SDK.Windows" version="2.0.14"/>
+    	</dependencies>
+	</metadata>
+	<files>
+		<file src="bin/Release/Redbridge.EntityFramework.dll" target="lib/net461/"/>
+	</files>
+</package>

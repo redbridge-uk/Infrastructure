@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A369B5B2-12A2-46E4-8D9F-F1F67389E00E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Redbridge.Console</RootNamespace>
+    <AssemblyName>Redbridge.Console</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ArgumentAttribute.cs" />
+    <Compile Include="CommandLineArguments.cs" />
+    <Compile Include="CommandLineOptionsAttribute.cs" />
+    <Compile Include="CommandLineOptionsCollection.cs" />
+    <Compile Include="CommandLineParseException.cs" />
+    <Compile Include="ConsoleProgressBar.cs" />
+    <Compile Include="ConsoleWriter.cs" />
+    <Compile Include="EnumParameterAttribute.cs" />
+    <Compile Include="GuidParameterAttribute.cs" />
+    <Compile Include="HelpAttribute.cs" />
+    <Compile Include="IntegerParameterAttribute.cs" />
+    <Compile Include="OptionRequiredException.cs" />
+    <Compile Include="ParameterAttribute.cs" />
+    <Compile Include="ParameterCollection.cs" />
+    <Compile Include="ParameterCollectionAttribute.cs" />
+    <Compile Include="PropertyArgumentAttribute.cs" />
+    <Compile Include="StringParameterAttribute.cs" />
+    <Compile Include="SwitchAttribute.cs" />
+    <Compile Include="UnknownOptionException.cs" />
+    <Compile Include="MultiKeyedCollection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Redbridge.Console.nuspec" />
+    <None Include="Redbridge.Console.symbols.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Redbridge\Redbridge.csproj">
+      <Project>{FA042554-BC38-4B47-B6EF-A10AC76CB200}</Project>
+      <Name>Redbridge</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

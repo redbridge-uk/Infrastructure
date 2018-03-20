@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.SDK.Windows", "Redbridge.SDK.Windows.csproj", "{CE6544EC-07AE-4322-94A6-A644C7361E6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE6544EC-07AE-4322-94A6-A644C7361E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE6544EC-07AE-4322-94A6-A644C7361E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE6544EC-07AE-4322-94A6-A644C7361E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE6544EC-07AE-4322-94A6-A644C7361E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

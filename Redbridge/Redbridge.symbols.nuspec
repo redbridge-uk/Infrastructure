@@ -1,0 +1,25 @@
+﻿<package>
+	<metadata>
+		<id>Redbridge.SDK</id>
+		<version>2.0.14</version>
+		<title>Redbridge SDK</title>
+		<authors>Redbridge</authors>
+		<owners>Redbridge</owners>
+		<projectUrl>https://github.com/redbridge-uk/resources/wiki</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Redbridge SDK portable client library</description>
+		<copyright>Copyright Redbridge 2018</copyright>
+		<tags>Redbridge, Portable, C#, SDK</tags>
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="10.0.3"/>
+        </dependencies>
+	</metadata>
+	<files>
+		<file src="bin/Debug/netstandard2.0/Redbridge.pdb" target="lib/netstandard2.0/"/>
+        <file src="bin/Debug/netstandard2.0/Redbridge.dll" target="lib/netstandard2.0/"/>
+        <file src="bin/Debug/netstandard2.0/Redbridge.dll" target="lib/net461/"/>
+        <file src="bin/Debug/netstandard2.0/Redbridge.dll" target="lib/net461/"/>
+		<file src="**\*.cs" target="src" />
+	</files>
+</package>
