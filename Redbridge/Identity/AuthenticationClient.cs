@@ -35,6 +35,7 @@ namespace Redbridge.Identity
 
         protected void SetStatus (ClientConnectionStatus status)
         {
+            Logger.WriteDebug($"Authentication client status changing to: {status}");
             _status.OnNext(status);
         }
 

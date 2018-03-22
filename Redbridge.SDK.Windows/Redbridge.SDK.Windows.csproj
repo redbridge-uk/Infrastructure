@@ -61,7 +61,6 @@
     <Compile Include="Configuration\SessionManagerSection.cs" />
     <Compile Include="Diagnostics\ConsoleLogWriter.cs" />
     <Compile Include="Diagnostics\ConsoleWriter.cs" />
-    <Compile Include="Validation\ObjectValidator.cs" />
     <Compile Include="Validation\PropertyValidatorCollection.cs" />
     <Compile Include="Validation\Markup\PropertyValidatorAttribute.cs" />
     <Compile Include="Validation\PropertyValidationResult.cs" />

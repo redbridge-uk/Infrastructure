@@ -7,5 +7,4 @@ namespace Redbridge.Identity
 		Connected,
         Refreshing,
 	}
-	
 }

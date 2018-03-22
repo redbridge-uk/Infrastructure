@@ -58,22 +58,26 @@ namespace Redbridge.Identity.OAuthServer
 
         protected void ClearTokens()
         {
+            Logger.WriteDebug("Authentication client has cleared access and refresh tokens.");
 			_accessToken = null;
 			_refreshToken = null;
         }
 
         protected void SetAccessToken (string token)
         {
+            Logger.WriteDebug("Authentication client stored access token.");
             _accessToken = token;
         }
 
         protected void SetRefreshToken (string token)
         {
+            Logger.WriteDebug("Authentication client stored refresh token.");
             _refreshToken = token;
         }
 
 		protected override Task OnLogoutAsync()
 		{
+            Logger.WriteDebug("Authentication client is beginning logout process...");
 			_accessToken = null;
             CancelRefresh();
             return base.OnLogoutAsync();
@@ -81,20 +85,24 @@ namespace Redbridge.Identity.OAuthServer
 
 		protected void SetupExpiry(int expiresInSeconds)
 		{
+            Logger.WriteDebug("Authentication client is configuring refresh token expiry...");
+
 			if (_tokenExpiredObservable != null)
 			{
+                Logger.WriteDebug("Authentication client is cancelling previous expiry timer...");
 				_tokenExpiredObservable.Dispose();
 				_tokenExpiredObservable = null;
 			}
 
 			if (expiresInSeconds > 0)
 			{
+                Logger.WriteDebug($"Authentication client is configuring expiry timer from requested {expiresInSeconds} seconds...");
 				var eagerExpiryTime = Convert.ToInt32((95M / 100M) * (decimal)expiresInSeconds);
 				Logger.WriteInfo($"{ClientType} token expiry set as {expiresInSeconds} seconds from now. Setting local expiry to just before {eagerExpiryTime} seconds...");
 				_tokenExpiredObservable = Observable.Timer(TimeSpan.FromSeconds(eagerExpiryTime)).Take(1)
 													.Subscribe(async (l) =>
 				{
-					Logger.WriteInfo("Access token has expired.");
+					Logger.WriteInfo("Access token has expired requesting refresh...");
 					await OnRefreshAccessTokenAsync();
 				});
 			}
@@ -111,6 +119,9 @@ namespace Redbridge.Identity.OAuthServer
 			var uri = new Uri(_serviceUri, "oauth/token");
 			var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post);
 			var data = new OAuthRefreshTokenAccessTokenRequestData() { ClientId = _clientId, ClientSecret = _clientSecret, RefreshToken = _refreshToken };
+            Logger.WriteDebug($"Refresh request client id: {_clientId}");
+            Logger.WriteDebug($"Refresh request client id: {_clientSecret?.Substring(0, 5)}XXXX");
+            Logger.WriteDebug($"Refresh request client id: {_refreshToken}");
 			var token = await request.ExecuteAsync(data.AsDictionary());
 
             if (token != null)

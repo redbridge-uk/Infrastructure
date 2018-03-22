@@ -8,19 +8,13 @@ namespace Redbridge.ApiManagement
 {
 public abstract class ApiAction<TIn1, TContext> : ApiCall
 {
-	private readonly IObjectValidator _validator;
 	private readonly IApiContextProvider<TContext> _contextProvider;
 	private readonly IApiContextAuthorizer<TContext> _authority;
 
-	protected ApiAction(IObjectValidator validator, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority) : base(logger)
+	protected ApiAction(ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority) : base(logger)
 	{
-		if (authority == null)throw new ArgumentNullException(nameof(authority));
-		if (validator == null) throw new ArgumentNullException(nameof(validator));
-		if (contextProvider == null) throw new ArgumentNullException(nameof(contextProvider));
-
-		_authority = authority;
-		_validator = validator;
-		_contextProvider = contextProvider;
+		_authority = authority ?? throw new ArgumentNullException(nameof(authority));
+		_contextProvider = contextProvider ?? throw new ArgumentNullException(nameof(contextProvider));
 	}
 
 	public async Task InvokeAsync(TIn1 in1)
@@ -39,10 +33,7 @@ public abstract class ApiAction<TIn1, TContext> : ApiCall
 
 	protected abstract Task OnInvoke(TIn1 in1, TContext context);
 
-	protected virtual void OnBeforeInvoke(TIn1 in1)
-	{
-		_validator.Validate(in1).OnFailThrowValidationException();
-	}
+	protected virtual void OnBeforeInvoke(TIn1 in1)	{	}
 
 	protected virtual void OnAfterInvoke() { }
 }
@@ -53,11 +44,9 @@ public abstract class ApiAction<TIn1, TContext> : ApiCall
 		private readonly IApiContextAuthorizer<TContext> _authority;
 
 			protected ApiAction(ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority) : base(logger)
-		{	
-			if (authority == null) throw new ArgumentNullException(nameof(authority));
-			if (contextProvider == null) throw new ArgumentNullException(nameof(contextProvider));
-			_authority = authority;
-			_contextProvider = contextProvider;
+		{
+			_authority = authority ?? throw new ArgumentNullException(nameof(authority));
+			_contextProvider = contextProvider ?? throw new ArgumentNullException(nameof(contextProvider));
 		}
 
 		public async Task InvokeAsync()

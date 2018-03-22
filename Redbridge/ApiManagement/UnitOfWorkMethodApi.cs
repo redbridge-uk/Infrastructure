@@ -58,11 +58,10 @@ namespace Redbridge.ApiManagement
     {
         private readonly IUnitOfWorkFactory<TUnitOfWork> _unitOfWorkFactory;
 
-        protected UnitOfWorkMethodApi(IUnitOfWorkFactory<TUnitOfWork> unitOfWorkFactory, IObjectValidator validator, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
-            : base(validator, logger, contextProvider, authority)
+        protected UnitOfWorkMethodApi(IUnitOfWorkFactory<TUnitOfWork> unitOfWorkFactory, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
+            : base(logger, contextProvider, authority)
         {
-            if (unitOfWorkFactory == null) throw new ArgumentNullException(nameof(unitOfWorkFactory));
-            _unitOfWorkFactory = unitOfWorkFactory;
+            _unitOfWorkFactory = unitOfWorkFactory ?? throw new ArgumentNullException(nameof(unitOfWorkFactory));
         }
 
         protected IUnitOfWorkFactory<TUnitOfWork> Factory => _unitOfWorkFactory;
@@ -106,11 +105,10 @@ namespace Redbridge.ApiManagement
     {
         private readonly IUnitOfWorkFactory<TUnitOfWork> _unitOfWorkFactory;
 
-        protected UnitOfWorkMethodApi(IUnitOfWorkFactory<TUnitOfWork> unitOfWorkFactory, IObjectValidator validator, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
-            : base(validator, logger, contextProvider, authority)
+        protected UnitOfWorkMethodApi(IUnitOfWorkFactory<TUnitOfWork> unitOfWorkFactory, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
+            : base(logger, contextProvider, authority)
         {
-            if (unitOfWorkFactory == null) throw new ArgumentNullException(nameof(unitOfWorkFactory));
-            _unitOfWorkFactory = unitOfWorkFactory;
+            _unitOfWorkFactory = unitOfWorkFactory ?? throw new ArgumentNullException(nameof(unitOfWorkFactory));
         }
 
         protected IUnitOfWorkFactory<TUnitOfWork> Factory => _unitOfWorkFactory;
@@ -152,11 +150,10 @@ namespace Redbridge.ApiManagement
     {
         private readonly IUnitOfWorkFactory<TUnitOfWork> _unitOfWorkFactory;
 
-        protected UnitOfWorkMethodApi(IUnitOfWorkFactory<TUnitOfWork> unitOfWorkFactory, IObjectValidator validator, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
-            : base(validator, logger, contextProvider, authority)
+        protected UnitOfWorkMethodApi(IUnitOfWorkFactory<TUnitOfWork> unitOfWorkFactory, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
+            : base(logger, contextProvider, authority)
         {
-            if (unitOfWorkFactory == null) throw new ArgumentNullException(nameof(unitOfWorkFactory));
-            _unitOfWorkFactory = unitOfWorkFactory;
+            _unitOfWorkFactory = unitOfWorkFactory ?? throw new ArgumentNullException(nameof(unitOfWorkFactory));
         }
 
         protected IUnitOfWorkFactory<TUnitOfWork> Factory => _unitOfWorkFactory;

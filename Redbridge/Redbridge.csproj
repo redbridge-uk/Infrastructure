@@ -124,5 +124,7 @@
     <None Remove="Tests\obj\Release\Redbridge.SDK.Tests.dll" />
     <None Remove="Redbridge.SDK.2.0.8.nupkg" />
     <None Remove="Redbridge.SDK.2.0.8.symbols.nupkg" />
+    <None Remove="Redbridge.SDK.2.0.15.nupkg" />
+    <None Remove="Redbridge.SDK.2.0.15.symbols.nupkg" />
   </ItemGroup>
 </Project>

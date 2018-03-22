@@ -8,18 +8,15 @@ namespace Redbridge.ApiManagement
 {
 	public abstract class ApiMethod<TIn1, TIn2, TIn3, TReturn, TContext> : ApiCall
 	{
-		private readonly IObjectValidator _validator;
 		private readonly IApiContextProvider<TContext> _contextProvider;
 		readonly IApiContextAuthorizer<TContext> _authority;
 
-		protected ApiMethod(IObjectValidator validator, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
+		protected ApiMethod(ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
 				: base(logger)
 		{
 			
 			if (authority == null) throw new ArgumentNullException(nameof(authority));
-			if (validator == null) throw new ArgumentNullException(nameof(validator));
 			if (contextProvider == null) throw new ArgumentNullException(nameof(contextProvider));
-			_validator = validator;
 			_contextProvider = contextProvider;
 			_authority = authority;
 		}
@@ -41,12 +38,7 @@ namespace Redbridge.ApiManagement
 
 		protected abstract Task<TReturn> OnInvoke(TIn1 in1, TIn2 in2, TIn3 in3, TContext context);
 
-		protected virtual void OnBeforeInvoke(TIn1 in1, TIn2 in2, TIn3 in3)
-		{
-			_validator.Validate(in1).OnFailThrowValidationException();
-			_validator.Validate(in2).OnFailThrowValidationException();
-			_validator.Validate(in3).OnFailThrowValidationException();
-		}
+		protected virtual void OnBeforeInvoke(TIn1 in1, TIn2 in2, TIn3 in3) {}
 
 		protected virtual void OnAfterInvoke(TIn1 in1, TIn2 in2, TIn3 in3, TReturn result) {}
 	}
@@ -54,17 +46,14 @@ namespace Redbridge.ApiManagement
 
 	public abstract class ApiMethod<TIn1, TIn2, TReturn, TContext> : ApiCall
 	{
-		private readonly IObjectValidator _validator;
 		private readonly IApiContextProvider<TContext> _contextProvider;
 		private readonly IApiContextAuthorizer<TContext> _authority;
 
-		protected ApiMethod(IObjectValidator validator, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority) : base(logger)
+		protected ApiMethod(ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority) : base(logger)
 		{
 			
 			if (authority == null) throw new ArgumentNullException(nameof(authority));
-			if (validator == null) throw new ArgumentNullException(nameof(validator));
 			if (contextProvider == null) throw new ArgumentNullException(nameof(contextProvider));
-			_validator = validator;
 			_contextProvider = contextProvider;
             _authority = authority;
 		}
@@ -88,8 +77,6 @@ namespace Redbridge.ApiManagement
 
 		protected virtual void OnBeforeInvoke(TIn1 in1, TIn2 in2)
 		{
-			_validator.Validate(in1).OnFailThrowValidationException();
-			_validator.Validate(in2).OnFailThrowValidationException();
 		}
 
 		protected virtual void OnAfterInvoke(TIn1 in1, TIn2 in2, TReturn result) { }
@@ -97,18 +84,15 @@ namespace Redbridge.ApiManagement
 
 	public abstract class ApiMethod<TIn1, TReturn, TContext> : ApiCall
 	{
-		private readonly IObjectValidator _validator;
 		private readonly IApiContextProvider<TContext> _contextProvider;
 		readonly IApiContextAuthorizer<TContext> _authority;
 
-		protected ApiMethod(IObjectValidator validator, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
+		protected ApiMethod(ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
 		: base(logger)
 		{
 
 			if (authority == null) throw new ArgumentNullException(nameof(authority));
-			if (validator == null) throw new ArgumentNullException(nameof(validator));
 			if (contextProvider == null) throw new ArgumentNullException(nameof(contextProvider));
-			_validator = validator;
 			_contextProvider = contextProvider;
 			_authority = authority;
 		}
@@ -135,7 +119,6 @@ namespace Redbridge.ApiManagement
 
 		protected virtual void OnBeforeInvoke(TIn1 in1)
 		{
-			_validator.Validate(in1).OnFailThrowValidationException();
 		}
 
 		protected virtual void OnAfterInvoke(TIn1 in1, TReturn result) { }
