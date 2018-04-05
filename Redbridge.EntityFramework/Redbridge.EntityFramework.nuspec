@@ -1,7 +1,7 @@
 ﻿<package>
 	<metadata>
 		<id>Redbridge.EntityFramework</id>
-		<version>2.0.16</version>
+		<version>2.0.17</version>
 		<title>Redbridge EntityFramework</title>
 		<authors>Redbridge</authors>
 		<owners>Redbridge</owners>
@@ -13,8 +13,8 @@
 		<tags>Redbridge, C#, Windows, EntityFramework, EF, UnitOfWork</tags>
 		<dependencies>
 			<dependency id="EntityFramework" version="6.2.0"/>
-    		<dependency id="Redbridge.SDK" version="2.0.16"/>
-    		<dependency id="Redbridge.SDK.Windows" version="2.0.16"/>
+    		<dependency id="Redbridge.SDK" version="2.0.17"/>
+    		<dependency id="Redbridge.SDK.Windows" version="2.0.17"/>
     	</dependencies>
 	</metadata>
 	<files>
