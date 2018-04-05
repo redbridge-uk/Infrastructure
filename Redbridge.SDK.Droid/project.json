@@ -7,6 +7,6 @@
     "System.Security.Principal": "4.3.0"
   },
   "frameworks": {
-    "MonoAndroid,Version=v7.1": {}
+    "MonoAndroid,Version=v5.0": {}
   }
 }

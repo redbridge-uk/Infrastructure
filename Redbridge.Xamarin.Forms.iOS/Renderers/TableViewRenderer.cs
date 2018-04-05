@@ -22,7 +22,7 @@ namespace Redbridge.Xamarin.Forms.iOS
         {
             var section = _model.Table.Sections[(int)indexPath.LongSection];
             var cell = section.Cells[(int)indexPath.LongRow];
-            switch (cell.CellHeight )
+            switch (cell.CellHeight)
             {
                 case TableCellHeight.Custom:
                     return 220F;
@@ -50,35 +50,35 @@ namespace Redbridge.Xamarin.Forms.iOS
 
 			if (e.NewElement != null)
 			{
-				var model = e.NewElement.BindingContext as ITableViewModel;
-				var tableView = Control as UITableView;
-
-				if (model != null)
-				{
+                var tableView = Control as UITableView;
+                if (e.NewElement.BindingContext is ITableViewModel model)
+                {
                     tableView.RowHeight = UITableView.AutomaticDimension;
-                    tableView.Source = new RedbridgeTableViewModelRenderer(model, e.NewElement); 
-					tableView.EstimatedRowHeight = 40;
+                    tableView.EstimatedRowHeight = 40;
 
-					switch (model.SeparatorStyle)
-					{
-						case TableCellSeparatorStyle.SingleLine:
-							tableView.SeparatorStyle = UITableViewCellSeparatorStyle.SingleLine;
-							break;
+                    if (!model.HasUnevenRows)
+                        tableView.Source = new RedbridgeTableViewModelRenderer(model, e.NewElement);
 
-						case TableCellSeparatorStyle.SingleLineEtched:
-							tableView.SeparatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched;
-							break;
+                    switch (model.SeparatorStyle)
+                    {
+                        case TableCellSeparatorStyle.SingleLine:
+                            tableView.SeparatorStyle = UITableViewCellSeparatorStyle.SingleLine;
+                            break;
 
-						case TableCellSeparatorStyle.DoubleLineEtched:
-							tableView.SeparatorStyle = UITableViewCellSeparatorStyle.DoubleLineEtched;
-							break;
+                        case TableCellSeparatorStyle.SingleLineEtched:
+                            tableView.SeparatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched;
+                            break;
 
-						default:
-							tableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
-							break;
-					}
-				}
-			}
+                        case TableCellSeparatorStyle.DoubleLineEtched:
+                            tableView.SeparatorStyle = UITableViewCellSeparatorStyle.DoubleLineEtched;
+                            break;
+
+                        default:
+                            tableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
+                            break;
+                    }
+                }
+            }
 		}
 	}
 }

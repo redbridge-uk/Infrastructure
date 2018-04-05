@@ -54,11 +54,6 @@ namespace Redbridge.Forms
             _editMode.OnNext(!EditMode);
         }
 
-        protected virtual ValidationResultCollection OnValidate ()
-        {
-            return new ValidationResultCollection(true);
-        }
-
         public bool EditMode
         {
             get { return _editMode.Value; }

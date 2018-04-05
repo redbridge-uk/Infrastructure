@@ -64,10 +64,5 @@ namespace Redbridge.Forms
 		{
 			return new BusyOperation(this);
 		}
-
-        public ValidationResultCollection Validate ()
-        {
-            return new ValidationResultCollection(true);
-        }
 	}
 }
