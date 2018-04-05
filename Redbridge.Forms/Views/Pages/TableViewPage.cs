@@ -23,15 +23,18 @@ namespace Redbridge.Forms
 		private Dictionary<ITableCellViewModel, Cell> _tableCellViewModelMap = new Dictionary<ITableCellViewModel, Cell>();
         private Dictionary<Cell, ITableCellViewModel> _tableCellReverseViewModelMap = new Dictionary<Cell, ITableCellViewModel>();
 
-		public TableViewPage (ITableCellFactory cellFactory)
+		public TableViewPage(ITableCellFactory cellFactory)
 		{
-			if (cellFactory == null) throw new ArgumentNullException(nameof(cellFactory));
-			_cellFactory = cellFactory;
-			_tableView = new TableView();
-            _tableView.Margin = new Thickness(0, -6, 0, 0);
-			_searchBar = new SearchBar();
-            _searchBar.Margin = 0;
-			_pageManager = new BusyPageConfigurationManager<TableViewModel>(this);
+            _cellFactory = cellFactory ?? throw new ArgumentNullException(nameof(cellFactory));
+            _tableView = new TableView
+            {
+                Margin = new Thickness(0, -6, 0, 0)
+            };
+            _searchBar = new SearchBar
+            {
+                Margin = 0
+            };
+            _pageManager = new BusyPageConfigurationManager<TableViewModel>(this);
 
 			var grid = new Grid();
 			grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto }); // Searchbar row.
@@ -60,12 +63,11 @@ namespace Redbridge.Forms
 		{
 			base.OnBindingContextChanged();
 
-			var context = this.BindingContext as ITableViewModel;
-			if (context != null)
-			{
-				this.SetBinding(TableProperty, "Table");
-			}
-		}
+            if (this.BindingContext is ITableViewModel context)
+            {
+                this.SetBinding(TableProperty, "Table");
+            }
+        }
 
 		public TableViewModel Table
 		{
@@ -75,14 +77,12 @@ namespace Redbridge.Forms
 
 		static void OnTableChanged(BindableObject bindable, object oldValue, object newValue)
 		{
-			var self = bindable as TableViewPage;
-			if (self != null)
-			{
-				var tableViewModel = newValue as TableViewModel;
-				if ( tableViewModel != null )
-					self.SetupTable(tableViewModel);
-			}
-		}
+            if (bindable is TableViewPage self)
+            {
+                if (newValue is TableViewModel tableViewModel)
+                    self.SetupTable(tableViewModel);
+            }
+        }
 
 		private void SetupTable(TableViewModel viewModel)
 		{
@@ -114,10 +114,9 @@ namespace Redbridge.Forms
 
 		private void ConnectViewModel(TableViewModel viewModel)
 		{
-			if (viewModel == null) throw new ArgumentNullException(nameof(viewModel));
-
-			_currentViewModel = viewModel;
+            _currentViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
 			_pageManager.ConfigurePage(_currentViewModel);
+            _tableView.HasUnevenRows = _currentViewModel.HasUnevenRows;
 			_tableView.Intent = viewModel.Intent;
             _tableView.BackgroundColor = viewModel.BackgroundColour;
 

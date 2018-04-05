@@ -11,8 +11,9 @@ namespace Redbridge.Forms
     [View(typeof(TableViewPage))]
     public class TableViewModel : NavigationPageViewModel, ITableViewModel
 	{
+		private bool _hasUnevenRows;
 		private bool _isFocused;
-		private bool _pullToRefreshEnabled = true;
+        private bool _pullToRefreshEnabled = true;
 		private TableCellSeparatorStyle _separatorStyle;
 		private Color _tintColour;
 
@@ -64,6 +65,19 @@ namespace Redbridge.Forms
 
 		protected virtual void OnRefreshTable() {}
 
+        public bool HasUnevenRows
+        {
+            get { return _hasUnevenRows; }
+            set
+            {
+                if (value != _hasUnevenRows)
+                {
+                    _hasUnevenRows = value;
+                    OnPropertyChanged(nameof(HasUnevenRows));
+                }
+            }
+        }
+
         public bool IsFocused
 		{
 			get { return _isFocused; }
@@ -72,7 +86,7 @@ namespace Redbridge.Forms
 				if (value != _isFocused)
 				{
 					_isFocused = value;
-					OnPropertyChanged("IsFocused");
+					OnPropertyChanged(nameof(IsFocused));
 				}
 			}
 		}
@@ -85,7 +99,7 @@ namespace Redbridge.Forms
 				if (value != _tintColour)
 				{
 					_tintColour = value;
-					OnPropertyChanged("TintColour");
+					OnPropertyChanged(nameof(TintColour));
 				}
 			}
 		}
@@ -98,7 +112,7 @@ namespace Redbridge.Forms
 				if (value != _pullToRefreshEnabled)
 				{
 					_pullToRefreshEnabled = value;
-					OnPropertyChanged("PullToRefreshEnabled");
+					OnPropertyChanged(nameof(PullToRefreshEnabled));
 				}
 			}
 		}
@@ -121,7 +135,7 @@ namespace Redbridge.Forms
 				if (value != _separatorStyle)
 				{
 					_separatorStyle = value;
-					OnPropertyChanged("SeparatorStyle");
+					OnPropertyChanged(nameof(SeparatorStyle));
 				}
 			}
 		}

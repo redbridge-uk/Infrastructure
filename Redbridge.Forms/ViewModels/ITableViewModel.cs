@@ -13,5 +13,6 @@ namespace Redbridge.Forms
         bool ShowSearchBar { get; set; }
         ObservableCollection<TableSectionViewModel> Sections { get; }
         TableIntent Intent { get; set; }
+        bool HasUnevenRows { get; set; }
 	}
 }
