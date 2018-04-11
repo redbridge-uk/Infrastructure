@@ -38,7 +38,7 @@ namespace Redbridge.Forms
 
 			var grid = new Grid();
 			grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto }); // Searchbar row.
-			grid.RowDefinitions.Add(new RowDefinition(){ Height = GridLength.Auto }); // Content row.
+			grid.RowDefinitions.Add(new RowDefinition(){ Height = GridLength.Star }); // Content row.
 			grid.Children.Add(_searchBar, 0, 0);
 			grid.Children.Add(_tableView, 0, 1);
 			grid.Children.Add(_pageManager.ActivityIndicator, 0, 1);
