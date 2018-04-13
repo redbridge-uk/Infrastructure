@@ -11,8 +11,7 @@ namespace Redbridge.Forms
 
 		public NavigationPageViewModel(INavigationService navigationService, ISchedulerService scheduler) : base(scheduler)
 		{
-			if (navigationService == null) throw new ArgumentNullException(nameof(navigationService));
-			_navigationService = navigationService;
+            _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
 			ShowToolbar = false;
 		}
 
@@ -24,7 +23,7 @@ namespace Redbridge.Forms
 				if (_barImageSource != value)
 				{
 					_barImageSource = value;
-					OnPropertyChanged("NavigationBarIcon");
+					OnPropertyChanged(nameof(NavigationBarIcon));
 				}
 			}
 		}

@@ -3,27 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Redbridge.Diagnostics;
-using Redbridge.SDK;
 using Xamarin.Forms;
 
 namespace Redbridge.Forms
 {
-	public class NavigationService : INavigationService
+	public class NavigationService: INavigationService
 	{
-		private readonly IViewFactory _viewFactory;
-		private readonly ILogger _logger;
-		private readonly IViewModelFactory _viewModelFactory;
-		private List<Page> _modalStack = new List<Page>();
-        private Dictionary<Page, IPageViewModel> _pageViewModelMap = new Dictionary<Page, IPageViewModel>();
+		protected readonly IViewFactory _viewFactory;
+        protected readonly ILogger _logger;
+        protected readonly IViewModelFactory _viewModelFactory;
+        protected List<Page> _modalStack = new List<Page>();
+        protected Dictionary<Page, IPageViewModel> _pageViewModelMap = new Dictionary<Page, IPageViewModel>();
 
 		public NavigationService (IViewModelFactory viewModelFactory, IViewFactory viewFactory, ILogger logger)
 		{
-			if (viewModelFactory == null) throw new ArgumentNullException(nameof(viewModelFactory));
-			if (logger == null) throw new ArgumentNullException(nameof(logger));
-			if (viewFactory == null) throw new ArgumentNullException(nameof(viewFactory));
-			_viewFactory = viewFactory;
-			_logger = logger;
-			_viewModelFactory = viewModelFactory;
+            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
+			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
+			_viewModelFactory = viewModelFactory ?? throw new ArgumentNullException(nameof(viewModelFactory));
 		}
 
 		public Page CurrentPage
@@ -35,46 +31,52 @@ namespace Redbridge.Forms
 					return _modalStack.Last();
 				}
 
-				var tabController = Application.Current.MainPage as TabbedPage;
+                if (Application.Current.MainPage is TabbedPage tabController)
+                {
+                    return tabController.CurrentPage;
+                }
 
-				if (tabController != null)
-				{
-					return tabController.CurrentPage;
-				}
+                if (Application.Current.MainPage is NavigationPage navigationController)
+                {
+                    return navigationController;
+                }
 
-				var navigationController = Application.Current.MainPage as NavigationPage;
-
-				if (navigationController != null)
-				{
-					return navigationController;
-				}
-
-				return Application.Current.MainPage;
+                return Application.Current.MainPage;
 			}
 		}
 
-		private INavigation Navigation
+		protected INavigation Navigation
 		{
 			get
 			{
 				var page = CurrentPage;
-				return page.Navigation;
+				return page?.Navigation;
 			}
 		}
 
 		public async Task PopAsync()
-		{
-			var page = await Navigation.PopAsync();
-            _pageViewModelMap[page].NavigateBack();
-            _pageViewModelMap.Remove(page);
+        {
+            var page = Navigation.NavigationStack.Last();
+            var vm = _pageViewModelMap[page];
+            if (await vm.NavigateBack())
+            {
+                await Navigation.PopAsync();
+                vm.Dispose();
+                _pageViewModelMap.Remove(page);
+            }
 		}
 
 		public async Task PopModalAsync()
 		{
-			var page = await Navigation.PopModalAsync();
-            _pageViewModelMap[page].NavigateBack();
-			_modalStack.Remove(page);
-            _pageViewModelMap.Remove(page);
+            var page = Navigation.ModalStack.Last();
+            var vm = _pageViewModelMap[page];
+            if (await vm.NavigateBack())
+            {
+                await Navigation.PopModalAsync();
+                vm.Dispose();
+                _modalStack.Remove(page);
+                _pageViewModelMap.Remove(page);
+            }
 		}
 
 		public async Task PushAsync<T>() where T : IPageViewModel

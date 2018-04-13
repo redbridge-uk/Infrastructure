@@ -1,10 +1,11 @@
 using System;
+using System.Threading.Tasks;
 using Redbridge.Validation;
 using Xamarin.Forms;
 
 namespace Redbridge.Forms
 {
-	public interface IPageViewModel : IViewModel
+	public interface IPageViewModel: IViewModel, IDisposable
 	{
 		string Title { get; }
 		ToolbarViewModel Toolbar { get; }
@@ -13,7 +14,11 @@ namespace Redbridge.Forms
 		bool ShowNavigationBar { get; }
 		Color NavigationBarTextColour { get; }
 		Color NavigationBarColour { get; }
-        bool NavigateBack();
+        /// <summary>
+        /// Return false to stop navigation
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> NavigateBack();
         ValidationResultCollection Validate();
 	}
 }

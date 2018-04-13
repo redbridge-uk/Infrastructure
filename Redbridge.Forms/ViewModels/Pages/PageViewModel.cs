@@ -3,6 +3,9 @@ using Redbridge.SDK;
 using Xamarin.Forms;
 using System.Reactive.Linq;
 using Redbridge.Validation;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Redbridge.Forms
 {
@@ -16,11 +19,11 @@ namespace Redbridge.Forms
         private Color _navigationBarColour;
         private Color _navigationBarTextColour;
         private Color _backgroundColour;
+        private readonly IList<IDisposable> _disposables = new List<IDisposable>();
 
         public PageViewModel(ISchedulerService scheduler)
         {
-            if (scheduler == null) throw new ArgumentNullException(nameof(scheduler));
-            Scheduler = scheduler;
+            Scheduler = scheduler ?? throw new ArgumentNullException(nameof(scheduler));
             Title = "Title";
             Toolbar = new ToolbarViewModel();
             SearchBar = new SearchBarViewModel();
@@ -33,18 +36,17 @@ namespace Redbridge.Forms
                 NavigationBarTextColour = RedbridgeThemeManager.Current.NavigationTextColour;
             }
 
-            RedbridgeThemeManager.Theme
+            AddToDisposables(RedbridgeThemeManager.Theme
                                  .Where(t => t != null)
                                  .ObserveOn(Scheduler.UiScheduler)
                                  .Subscribe((rt) =>
-            {
-                NavigationBarColour = rt.NavigationBarColour;
-                NavigationBarTextColour = rt.NavigationTextColour;
-            });
+                                 {
+                                    NavigationBarColour = rt.NavigationBarColour;
+                                    NavigationBarTextColour = rt.NavigationTextColour;
+                                 }));
         }
 
         public ISchedulerService Scheduler { get; }
-
         public ToolbarViewModel Toolbar { get; private set; }
         public SearchBarViewModel SearchBar { get; private set; }
 
@@ -56,7 +58,7 @@ namespace Redbridge.Forms
                 if (_navigationBarColour != value)
                 {
                     _navigationBarColour = value;
-                    OnPropertyChanged("NavigationBarColour");
+                    OnPropertyChanged(nameof(NavigationBarColour));
                 }
             }
         }
@@ -69,7 +71,7 @@ namespace Redbridge.Forms
                 if (_backgroundColour != value)
                 {
                     _backgroundColour = value;
-                    OnPropertyChanged("BackgroundColour");
+                    OnPropertyChanged(nameof(BackgroundColour));
                 }
             }
         }
@@ -82,7 +84,7 @@ namespace Redbridge.Forms
                 if (_navigationBarTextColour != value)
                 {
                     _navigationBarTextColour = value;
-                    OnPropertyChanged("NavigationBarTextColour");
+                    OnPropertyChanged(nameof(NavigationBarTextColour));
                 }
             }
         }
@@ -95,7 +97,7 @@ namespace Redbridge.Forms
                 if (_showNavigationBar != value)
                 {
                     _showNavigationBar = value;
-                    OnPropertyChanged("ShowNavigationBar");
+                    OnPropertyChanged(nameof(ShowNavigationBar));
                 }
             }
         }
@@ -108,7 +110,7 @@ namespace Redbridge.Forms
                 if (_showSearchBar != value)
                 {
                     _showSearchBar = value;
-                    OnPropertyChanged("ShowSearchBar");
+                    OnPropertyChanged(nameof(ShowSearchBar));
                 }
             }
         }
@@ -121,7 +123,7 @@ namespace Redbridge.Forms
                 if (_showToolbar != value)
                 {
                     _showToolbar = value;
-                    OnPropertyChanged("ShowToolbar");
+                    OnPropertyChanged(nameof(ShowToolbar));
                 }
             }
         }
@@ -134,7 +136,7 @@ namespace Redbridge.Forms
                 if (_pageTitle != value)
                 {
                     _pageTitle = value;
-                    OnPropertyChanged("Title");
+                    OnPropertyChanged(nameof(Title));
                 }
             }
         }
@@ -147,7 +149,7 @@ namespace Redbridge.Forms
                 if (_pageIcon != value)
                 {
                     _pageIcon = value;
-                    OnPropertyChanged("Icon");
+                    OnPropertyChanged(nameof(Icon));
                 }
             }
         }
@@ -157,19 +159,38 @@ namespace Redbridge.Forms
             return OnValidate();
         }
 
+        public async Task<bool> NavigateBack()
+        {
+            return await OnNavigateBack();
+        }
+
+        public void Dispose()
+        {
+            if (_disposables.Any())
+                foreach (var disposable in _disposables)
+                    disposable.Dispose();
+
+            OnDispose();
+        }
+
+        /// <summary>
+        /// When this view model is disposed the given disposable will also be disposed
+        /// </summary>
+        protected void AddToDisposables(IDisposable disposable)
+        {
+            _disposables.Add(disposable);
+        }
+
+        protected virtual void OnDispose() { }
+
         protected virtual ValidationResultCollection OnValidate()
         {
             return new ValidationResultCollection(true);
         }
 
-        public bool NavigateBack()
+        protected virtual async Task<bool> OnNavigateBack()
         {
-            return OnNavigateBack();
-        }
-
-        protected virtual bool OnNavigateBack()
-        {
-            return true;
+            return await Task.FromResult(true);
         }
     }
 }

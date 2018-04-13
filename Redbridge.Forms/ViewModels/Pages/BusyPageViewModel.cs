@@ -15,20 +15,20 @@ namespace Redbridge.Forms
 
 		public BusyPageViewModel(ISchedulerService scheduler) : base(scheduler) 
 		{
-			if (RedbridgeThemeManager.HasTheme)
+            if (RedbridgeThemeManager.HasTheme)
 			{
 				BusyIndicatorColour = RedbridgeThemeManager.Current.BusyIndicatorColour;
 			}
 
-			RedbridgeThemeManager.Theme.Where(rt => rt != null)
+			AddToDisposables(RedbridgeThemeManager.Theme.Where(rt => rt != null)
 								 .ObserveOn(Scheduler.UiScheduler)
 								 .Subscribe(rt => 
 			{
 				BusyIndicatorColour = rt.BusyIndicatorColour;
-			});
+			}));
 		}
 
-		public IObservable<bool> Busy 
+        public IObservable<bool> Busy 
 		{ 
 			get { return _busySubject; }
 		}
@@ -62,7 +62,14 @@ namespace Redbridge.Forms
 
 		protected BusyOperation BeginBusyOperation()
 		{
-			return new BusyOperation(this);
+            return new BusyOperation(this);
 		}
-	}
+
+        protected override void OnDispose()
+        {
+            base.OnDispose();
+            _busySubject.OnCompleted();
+            _busySubject.Dispose();
+        }
+    }
 }

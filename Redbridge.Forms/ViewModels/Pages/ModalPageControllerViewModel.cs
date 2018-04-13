@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Redbridge.Forms.Markup;
 using Xamarin.Forms;
 
@@ -19,9 +20,13 @@ namespace Redbridge.Forms
 
         public bool ShowNavigationBar => false;
 
-        public bool NavigateBack()
+        public async Task<bool> NavigateBack()
         {
-            return true;
+            return await Task.FromResult(true);
+        }
+
+        public virtual void Dispose()
+        {
         }
     }
 
