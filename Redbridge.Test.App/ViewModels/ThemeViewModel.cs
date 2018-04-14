@@ -2,6 +2,7 @@
 using Redbridge.Forms;
 using System.Reactive.Linq;
 using System;
+using System.Threading.Tasks;
 
 namespace TesterApp
 {
@@ -21,10 +22,5 @@ namespace TesterApp
 				Title = rt.Name;
 			});
 		}
-
-        protected override bool OnNavigateBack()
-        {
-            return base.OnNavigateBack();
-        }
 	}
 }

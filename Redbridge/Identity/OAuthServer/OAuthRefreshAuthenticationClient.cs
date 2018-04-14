@@ -139,8 +139,8 @@ namespace Redbridge.Identity.OAuthServer
                 else
                 {
                     Logger.WriteWarning($"The refresh response from the token service returned either no access token or no refresh token, this is considered a failure.");
-                    Logger.WriteDebug($"Refreshed access token: {token.AccessToken}");
-                    Logger.WriteDebug($"Refresh token: {token.RefreshToken}");
+                    Logger.WriteWarning($"Refreshed access token: {token.AccessToken}");
+                    Logger.WriteWarning($"Refresh token: {token.RefreshToken}");
                     CancelRefresh();
                     SetStatus(ClientConnectionStatus.Disconnected);
                 }
