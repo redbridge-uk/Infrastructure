@@ -167,8 +167,12 @@ namespace Redbridge.Forms
         public void Dispose()
         {
             if (_disposables.Any())
+            {
                 foreach (var disposable in _disposables)
                     disposable.Dispose();
+
+                _disposables.Clear();
+            }
 
             OnDispose();
         }

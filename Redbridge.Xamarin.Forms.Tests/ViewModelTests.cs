@@ -1,14 +1,57 @@
+using Moq;
 using NUnit.Framework;
-using System;
+using Redbridge.SDK;
+using System.Reactive.Concurrency;
+using System.Threading.Tasks;
+
 namespace Redbridge.Forms.Tests
 {
-	[TestFixture()]
+    public class ViewModelOne: NavigationPageViewModel
+    {
+        public bool OnDisposeCalled { get; set; }
+
+        public ViewModelOne(ISchedulerService scheduler, INavigationService navService) :
+            base(navService, scheduler)
+        {
+        }
+
+        protected override void OnDispose()
+        {
+            base.OnDispose();
+            OnDisposeCalled = true;
+        }
+    }
+
+    public class MockSchedulerService: ISchedulerService
+    {
+        public IScheduler UiScheduler => new Mock<IScheduler>().Object;
+
+        public IScheduler BackgroundScheduler => new Mock<IScheduler>().Object;
+
+        public TaskScheduler TaskScheduler => throw new System.NotImplementedException();
+    }
+
+    [TestFixture()]
 	public class ViewModelTests
 	{
 		[Test()]
-		public void TestCase()
+		public void GivenNavigationPageViewModel_WhenDispose_OnDisposeInSubClassIsInvoked()
 		{
-			//var model = new ViewModel();
-		}
-	}
+            var mockNavigationService = new Mock<INavigationService>();
+			var model = new ViewModelOne(new MockSchedulerService(), mockNavigationService.Object);
+            var modelCastAsInterface = (IPageViewModel)model;
+            modelCastAsInterface.Dispose();
+            Assert.IsTrue(model.OnDisposeCalled);
+        }
+
+        [Test()]
+        public void GivenModalPageControllerViewModel_WhenDispose_OnDisposeInWrappedPageIsInvoked()
+        {
+            var mockNavigationService = new Mock<INavigationService>();
+            var model = new ViewModelOne(new MockSchedulerService(), mockNavigationService.Object);
+            var modalViewModel = new ModalPageControllerViewModel(model);
+            modalViewModel.Dispose();
+            Assert.IsTrue(model.OnDisposeCalled);
+        }
+    }
 }

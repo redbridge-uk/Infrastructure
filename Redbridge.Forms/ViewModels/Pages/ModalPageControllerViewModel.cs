@@ -27,6 +27,7 @@ namespace Redbridge.Forms
 
         public virtual void Dispose()
         {
+            CurrentPage?.Dispose();
         }
     }
 

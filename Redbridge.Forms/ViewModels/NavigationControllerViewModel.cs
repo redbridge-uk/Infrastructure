@@ -16,7 +16,7 @@ namespace Redbridge.Forms
 	}
 
     [View(typeof(NavigationControllerPage))]
-	public abstract class NavigationControllerViewModel : ViewModel, INavigationControllerViewModel
+	public abstract class NavigationControllerViewModel : ViewModel, INavigationControllerViewModel, IDisposable
 	{
 		private INavigationPageModel _currentPage;
 		private Color _navigationBarColour;
@@ -34,8 +34,7 @@ namespace Redbridge.Forms
 
 		public NavigationControllerViewModel(INavigationPageModel rootPage) : this()
 		{
-			if (rootPage == null) throw new ArgumentNullException(nameof(rootPage));
-			CurrentPage = rootPage;
+            CurrentPage = rootPage ?? throw new ArgumentNullException(nameof(rootPage));
 		}
 
 		public Color NavigationBarColour
@@ -46,7 +45,7 @@ namespace Redbridge.Forms
 				if (_navigationBarColour != value)
 				{
 					_navigationBarColour = value;
-					OnPropertyChanged("NavigationBarColour");
+					OnPropertyChanged(nameof(NavigationBarColour));
 				}
 			}
 		}
@@ -59,7 +58,7 @@ namespace Redbridge.Forms
 				if (_navigationBarTextColour != value)
 				{
 					_navigationBarTextColour = value;
-					OnPropertyChanged("NavigationBarTextColour");
+					OnPropertyChanged(nameof(NavigationBarTextColour));
 				}
 			}
 		}
@@ -72,7 +71,7 @@ namespace Redbridge.Forms
 				if (_navigationBarIcon != value)
 				{
 					_navigationBarIcon = value;
-					OnPropertyChanged("NavigationBarIcon");
+					OnPropertyChanged(nameof(NavigationBarIcon));
 				}
 			}
 		}
@@ -95,12 +94,12 @@ namespace Redbridge.Forms
 						NavigationBarColour = _currentPage.NavigationBarColour;
 					}
 
-					OnPropertyChanged("CurrentPage");
+					OnPropertyChanged(nameof(CurrentPage));
 				}
 			}
 		}
 
-        public ValidationResultCollection Validate ()
+        public ValidationResultCollection Validate()
         {
             return OnValidate();
         }
@@ -109,5 +108,13 @@ namespace Redbridge.Forms
         {
             return new ValidationResultCollection(true);
         }
-	}
+
+        public void Dispose()
+        {
+            CurrentPage?.Dispose();
+            OnDispose();
+        }
+
+        protected virtual void OnDispose() { }
+    }
 }
