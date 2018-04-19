@@ -6,6 +6,7 @@ using Redbridge.Validation;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 
 namespace Redbridge.Forms
 {
@@ -19,7 +20,7 @@ namespace Redbridge.Forms
         private Color _navigationBarColour;
         private Color _navigationBarTextColour;
         private Color _backgroundColour;
-        private readonly IList<IDisposable> _disposables = new List<IDisposable>();
+        private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
         public PageViewModel(ISchedulerService scheduler)
         {
@@ -166,14 +167,7 @@ namespace Redbridge.Forms
 
         public void Dispose()
         {
-            if (_disposables.Any())
-            {
-                foreach (var disposable in _disposables)
-                    disposable.Dispose();
-
-                _disposables.Clear();
-            }
-
+            _disposables.Dispose();
             OnDispose();
         }
 
@@ -182,6 +176,7 @@ namespace Redbridge.Forms
         /// </summary>
         protected void AddToDisposables(IDisposable disposable)
         {
+            if (disposable == null)throw new ArgumentNullException(nameof(disposable));
             _disposables.Add(disposable);
         }
 
