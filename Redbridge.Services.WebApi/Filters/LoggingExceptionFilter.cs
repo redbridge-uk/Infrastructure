@@ -22,9 +22,11 @@ namespace Redbridge.Services.WebApi.Filters
 			{
                 _logger.WriteDebug($"Logging that an exception has occurred in LoggingExceptionFilter: {actionExecutedContext.Exception.Message}...");
 
-				var response = new HttpResponseMessage(HttpStatusCode.Unauthorized)
+                var response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
 				{
 					RequestMessage = actionExecutedContext.Request,
+                    ReasonPhrase = actionExecutedContext.Exception.Message,
+
 				};
 
 				actionExecutedContext.Response = response;
