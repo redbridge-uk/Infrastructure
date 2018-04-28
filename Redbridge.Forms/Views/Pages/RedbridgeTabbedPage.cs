@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Redbridge.Linq;
 using Xamarin.Forms;
 
@@ -47,15 +46,14 @@ namespace Redbridge.Forms
 		{
 			base.OnBindingContextChanged();
 
-			var context = this.BindingContext as ITabbedNavigationControllerViewModel;
-			if (context != null)
-			{
-				if (_viewModel != null)
-					DisconnectCurrentModel();
+            if (this.BindingContext is ITabbedNavigationControllerViewModel context)
+            {
+                if (_viewModel != null)
+                    DisconnectCurrentModel();
 
-				ConnectMasterViewModel(context);
-			}
-		}
+                ConnectMasterViewModel(context);
+            }
+        }
 
 		private void DisconnectCurrentModel()
 		{

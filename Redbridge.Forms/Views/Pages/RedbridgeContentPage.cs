@@ -60,11 +60,11 @@ namespace Redbridge.Forms
 
         protected override bool OnBackButtonPressed()
         {
-            if (BindingContext is IPageViewModel model)
+            if (CurrentModel != null)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    if (await model.NavigateBack())
+                    if (await CurrentModel.NavigateBack())
                         OnHardwareBackButtonPressed?.Invoke(this, this);
                 });
 

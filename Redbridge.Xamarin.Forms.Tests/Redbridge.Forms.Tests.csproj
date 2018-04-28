@@ -62,7 +62,6 @@
     <Compile Include="Mocks\MockSchedulerService.cs" />
     <Compile Include="NavigationServiceTests.cs" />
     <Compile Include="ViewModelTests.cs" />
-    <Compile Include="TableViewModelTests.cs" />
     <Compile Include="SwitchCellViewModelTests.cs" />
     <Compile Include="ActionSheetOptionTests.cs" />
     <Compile Include="Cells\TextEntryCellViewModelTests.cs" />

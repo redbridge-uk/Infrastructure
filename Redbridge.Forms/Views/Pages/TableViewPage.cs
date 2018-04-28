@@ -9,7 +9,7 @@ using Redbridge.Linq;
 
 namespace Redbridge.Forms
 {
-	public class TableViewPage : ContentPage, IView
+	public class TableViewPage : ContentPage, IView, IHardwareNavigationAware
 	{
 		public static readonly BindableProperty TableProperty = BindableProperty.Create("Table", typeof(TableViewModel), typeof(TableViewPage), null, propertyChanged:OnTableChanged);
 		private BusyPageConfigurationManager<TableViewModel> _pageManager;
@@ -69,7 +69,23 @@ namespace Redbridge.Forms
             }
         }
 
-		public TableViewModel Table
+        protected override bool OnBackButtonPressed()
+        {
+            if (BindingContext is IPageViewModel model)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (await model.NavigateBack())
+                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                });
+
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
+        }
+
+        public TableViewModel Table
 		{
 			get { return (TableViewModel)GetValue(TableProperty); }
 			set { SetValue(TableProperty, value); }
