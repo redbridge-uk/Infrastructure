@@ -36,7 +36,7 @@ namespace Redbridge.Services.WebApi.Filters
                     _logger.WriteException(context.Exception);
             }
 
-            return Task.FromResult(true);
+            return Task.CompletedTask;
 		}
 	}
 }
