@@ -23,7 +23,9 @@ namespace Redbridge.Forms
 		private Dictionary<ITableCellViewModel, Cell> _tableCellViewModelMap = new Dictionary<ITableCellViewModel, Cell>();
         private Dictionary<Cell, ITableCellViewModel> _tableCellReverseViewModelMap = new Dictionary<Cell, ITableCellViewModel>();
 
-		public TableViewPage(ITableCellFactory cellFactory)
+        public event EventHandler<Page> OnHardwareBackButtonPressed;
+
+        public TableViewPage(ITableCellFactory cellFactory)
 		{
             _cellFactory = cellFactory ?? throw new ArgumentNullException(nameof(cellFactory));
             _tableView = new TableView
