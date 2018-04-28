@@ -22,12 +22,10 @@ namespace Redbridge.Forms
 
         public async Task<bool> NavigateBack()
         {
-            return await Task.FromResult(true);
-        }
+            if (CurrentPage != null)
+                return await CurrentPage.NavigateBack();
 
-        public virtual void Dispose()
-        {
-            CurrentPage?.Dispose();
+            return await Task.FromResult(true);
         }
     }
 

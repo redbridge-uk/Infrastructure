@@ -15,12 +15,9 @@ namespace Redbridge.SDK
 
 		public SchedulerService(IScheduler uiScheduler, IScheduler backgroundScheduler, TaskScheduler taskScheduler)
 		{
-			if (uiScheduler == null) throw new ArgumentNullException(nameof(uiScheduler));
-			if (backgroundScheduler == null) throw new ArgumentNullException(nameof(backgroundScheduler));
-			if (taskScheduler == null) throw new ArgumentNullException(nameof(taskScheduler));
-			UiScheduler = uiScheduler;
-			BackgroundScheduler = backgroundScheduler;
-			TaskScheduler = taskScheduler;
+            UiScheduler = uiScheduler ?? throw new ArgumentNullException(nameof(uiScheduler));
+			BackgroundScheduler = backgroundScheduler ?? throw new ArgumentNullException(nameof(backgroundScheduler));
+			TaskScheduler = taskScheduler ?? throw new ArgumentNullException(nameof(taskScheduler));
 		}
 
 		public IScheduler UiScheduler { get; }

@@ -16,8 +16,7 @@ namespace Redbridge.Console.Test
 		[TestCase]
 		public void ConstructEnumParameterAttribute_BlankName_ExpectException()
 		{
-			var attribute = new EnumParameterAttribute(string.Empty);
-			Assert.IsNotNull(attribute);
+            Assert.Throws<CommandLineParseException>(() => new EnumParameterAttribute(string.Empty));
 		}
 
 		[TestCase]

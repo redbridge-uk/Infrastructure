@@ -166,7 +166,7 @@ namespace Redbridge.Forms
 			return actualIndex.IndexOf(cell);
 		}
 
-		void SetupSections(ObservableCollection<TableSectionViewModel> sections)
+		private void SetupSections(ObservableCollection<TableSectionViewModel> sections)
 		{
 			_tableView.Root.Clear();
 			sections.Where(s => s.IsVisible)
@@ -211,7 +211,7 @@ namespace Redbridge.Forms
 			}
 		}
 
-		void RemoveSection(TableSectionViewModel obj)
+		private void RemoveSection(TableSectionViewModel obj)
 		{
 			if (obj == null) throw new ArgumentNullException(nameof(obj));
 
@@ -227,7 +227,7 @@ namespace Redbridge.Forms
 			_tableView.Root.Remove(view);
 		}
 
-		void AddSection(TableSectionViewModel obj, int sectionIndex)
+        private void AddSection(TableSectionViewModel obj, int sectionIndex)
 		{
 			if (obj == null) throw new ArgumentNullException(nameof(obj));
 

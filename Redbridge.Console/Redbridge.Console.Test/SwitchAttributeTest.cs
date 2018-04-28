@@ -15,9 +15,8 @@ namespace Redbridge.Console.Test
 
 		[TestCase]
 		public void ConstructSwitchAttribute_BlankName_ExpectException()
-		{
-			var attribute = new SwitchAttribute(string.Empty);
-			Assert.IsNotNull(attribute);
+        {
+            Assert.Throws<CommandLineParseException>(() => new SwitchAttribute(string.Empty));
 		}
 	}
 }

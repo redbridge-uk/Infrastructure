@@ -7,5 +7,9 @@ namespace Redbridge.Forms
 	{ 
 		object BindingContext { get; set; }
 	}
-	
+
+    public interface IHardwareNavigationAware
+    {
+        event EventHandler<Page> OnHardwareBackButtonPressed;
+    }
 }

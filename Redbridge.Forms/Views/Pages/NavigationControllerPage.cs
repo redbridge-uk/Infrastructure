@@ -8,12 +8,13 @@ namespace Redbridge.Forms
         public ModalNavigationControllerPage(IViewFactory viewFactory) : base(viewFactory) {}
     }
 
-    public class NavigationControllerPage : NavigationPage, IView
+    public class NavigationControllerPage : NavigationPage, IView, IHardwareNavigationAware
 	{
+        public event EventHandler<Page> OnHardwareBackButtonPressed;
 		private NavigationControllerViewModel _viewModel;
 		private readonly IViewFactory _viewFactory;
 
-		public NavigationControllerPage(IViewFactory viewFactory)
+        public NavigationControllerPage(IViewFactory viewFactory)
 		{
 			_viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
 		}
@@ -50,22 +51,23 @@ namespace Redbridge.Forms
 		{
 			base.OnBindingContextChanged();
 
-			var context = BindingContext as NavigationControllerViewModel;
-			if (context != null)
-			{
-				if (_viewModel != null)
-					DisconnectCurrentModel();
-				
-				ConnectMasterViewModel(context);
-			}
-		}
+            if (BindingContext is NavigationControllerViewModel context)
+            {
+                if (_viewModel != null)
+                    DisconnectCurrentModel();
+
+                ConnectMasterViewModel(context);
+            }
+        }
 
 		private void ConnectMasterViewModel(NavigationControllerViewModel viewModel)
 		{
 			_viewModel = viewModel;
 
-			if (_viewModel.CurrentPage == null) throw new NotSupportedException("You must specify a current page for the master navigation controller.");
-			BarBackgroundColor = viewModel.NavigationBarColour;
+			if (_viewModel.CurrentPage == null)
+                throw new NotSupportedException("You must specify a current page for the master navigation controller.");
+
+            BarBackgroundColor = viewModel.NavigationBarColour;
 			BarTextColor = viewModel.NavigationBarTextColour;
 			this.SetBinding(BarBackgroundColorProperty, "NavigationBarColour");
 			this.SetBinding(BarTextColorProperty, "NavigationBarTextColour");
@@ -74,14 +76,24 @@ namespace Redbridge.Forms
 			PushAsync(page);
 		}
 
-		protected override bool OnBackButtonPressed()
-		{
-			var result = base.OnBackButtonPressed();
-			CurrentPageModel.NavigateBack();
-			return result;
-		}
 
-		private void DisconnectCurrentModel()
+        protected override bool OnBackButtonPressed()
+        {
+            if (CurrentPageModel != null && CurrentPageModel is IPageViewModel model)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (await model.NavigateBack())
+                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                });
+
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
+        }
+
+        private void DisconnectCurrentModel()
 		{
 			_viewModel = null;
 		}

@@ -1,6 +1,7 @@
 using Moq;
 using NUnit.Framework;
 using Redbridge.SDK;
+using Redbridge.Xamarin.Forms.Tests.Mocks;
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 
@@ -20,15 +21,6 @@ namespace Redbridge.Forms.Tests
             base.OnDispose();
             OnDisposeCalled = true;
         }
-    }
-
-    public class MockSchedulerService: ISchedulerService
-    {
-        public IScheduler UiScheduler => new Mock<IScheduler>().Object;
-
-        public IScheduler BackgroundScheduler => new Mock<IScheduler>().Object;
-
-        public TaskScheduler TaskScheduler => throw new System.NotImplementedException();
     }
 
     [TestFixture()]
