@@ -27,8 +27,8 @@ namespace Redbridge.Xamarin.Forms.Tests
             var mockLogger = new Mock<ILogger>();
             var mockScheduler = new MockSchedulerService();
 
-            mockCurrentPageService.Setup((app) => app.GetCurrent()).Returns(mockMainPage.Object);
-            mockCurrentPageService.Setup((app) => app.GetNavigation()).Returns(mockNavigation.Object);
+            mockCurrentPageService.Setup((app) => app.Current).Returns(mockMainPage.Object);
+            mockCurrentPageService.Setup((app) => app.Navigation).Returns(mockNavigation.Object);
 
             var mockPage = new Mock<Page>();
             var mockHardwareButtoneEnabledPage = mockPage.As<IHardwareNavigationAware>();
@@ -46,7 +46,7 @@ namespace Redbridge.Xamarin.Forms.Tests
             mockNavigation.Verify((nav) => nav.PushAsync(mockPage.Object), Times.Once);
 
             // Simulate that the hardware back button was called
-            mockHardwareButtoneEnabledPage.Raise((vm) => vm.OnHardwareBackButtonPressed += null,
+            mockHardwareButtoneEnabledPage.Raise((vm) => vm.BackButtonPressed += null,
                                                  EventArgs.Empty,
                                                  mockPage.Object);
 
@@ -67,11 +67,11 @@ namespace Redbridge.Xamarin.Forms.Tests
             var mockLogger = new Mock<ILogger>();
             var mockScheduler = new MockSchedulerService();
 
-            mockCurrentPageService.Setup((app) => app.GetCurrent()).Returns(mockMainPage.Object);
-            mockCurrentPageService.Setup((app) => app.GetNavigation()).Returns(mockNavigation.Object);
+            mockCurrentPageService.Setup((app) => app.Current).Returns(mockMainPage.Object);
+            mockCurrentPageService.Setup((app) => app.Navigation).Returns(mockNavigation.Object);
 
             var mockPage = new Mock<Page>();
-            var mockHardwareButtoneEnabledPage = mockPage.As<IHardwareNavigationAware>();
+            var mockHardwareButtonEnabledPage = mockPage.As<IHardwareNavigationAware>();
 
             mockViewFactory.Setup((factory) => factory.CreatePage(It.IsAny<object>(), true))
                            .Returns(mockPage.Object);
@@ -86,7 +86,7 @@ namespace Redbridge.Xamarin.Forms.Tests
             mockNavigation.Verify((nav) => nav.PushModalAsync(mockPage.Object), Times.Once);
 
             // Simulate that the hardware back button was called
-            mockHardwareButtoneEnabledPage.Raise((vm) => vm.OnHardwareBackButtonPressed += null,
+            mockHardwareButtonEnabledPage.Raise((vm) => vm.BackButtonPressed += null,
                                                  EventArgs.Empty,
                                                  mockPage.Object);
 
@@ -109,8 +109,8 @@ namespace Redbridge.Xamarin.Forms.Tests
             var mockViewModel = new Mock<IPageViewModel>();
             var mockPage = new Mock<Page>();
 
-            mockCurrentPageService.Setup((app) => app.GetCurrent()).Returns(mockMainPage.Object);
-            mockCurrentPageService.Setup((app) => app.GetNavigation()).Returns(mockNavigation.Object);
+            mockCurrentPageService.Setup((app) => app.Current).Returns(mockMainPage.Object);
+            mockCurrentPageService.Setup((app) => app.Navigation).Returns(mockNavigation.Object);
             mockViewModel.Setup((vm) => vm.NavigateBack()).Returns(Task.FromResult(false));
             mockNavigation.Setup((nav) => nav.NavigationStack).Returns(new List<Page>(new Page[] { mockPage.Object }));
 
@@ -147,8 +147,8 @@ namespace Redbridge.Xamarin.Forms.Tests
             var mockViewModel = new Mock<IPageViewModel>();
             var mockPage = new Mock<Page>();
 
-            mockCurrentPageService.Setup((app) => app.GetCurrent()).Returns(mockMainPage.Object);
-            mockCurrentPageService.Setup((app) => app.GetNavigation()).Returns(mockNavigation.Object);
+            mockCurrentPageService.Setup((app) => app.Current).Returns(mockMainPage.Object);
+            mockCurrentPageService.Setup((app) => app.Navigation).Returns(mockNavigation.Object);
             mockViewModel.Setup((vm) => vm.NavigateBack()).Returns(Task.FromResult(true));
             mockNavigation.Setup((nav) => nav.NavigationStack).Returns(new List<Page>(new Page[] { mockPage.Object }));
 

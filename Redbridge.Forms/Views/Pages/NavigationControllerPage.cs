@@ -10,7 +10,7 @@ namespace Redbridge.Forms
 
     public class NavigationControllerPage : NavigationPage, IView, IHardwareNavigationAware
 	{
-        public event EventHandler<Page> OnHardwareBackButtonPressed;
+        public event EventHandler<Page> BackButtonPressed;
 		private NavigationControllerViewModel _viewModel;
 		private readonly IViewFactory _viewFactory;
 
@@ -84,7 +84,7 @@ namespace Redbridge.Forms
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (await model.NavigateBack())
-                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                        BackButtonPressed?.Invoke(this, this);
                 });
 
                 return true;

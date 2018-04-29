@@ -35,7 +35,7 @@ namespace Redbridge.Forms
 				if (_modalStack.Any())
 					return _modalStack.Last();
 
-                return _currentPageService.GetCurrent();
+                return _currentPageService.Current;
 			}
 		}
 
@@ -43,7 +43,7 @@ namespace Redbridge.Forms
 		{
 			get
 			{
-                return _currentPageService.GetNavigation();
+                return _currentPageService.Navigation;
             }
 		}
 
@@ -97,7 +97,7 @@ namespace Redbridge.Forms
         protected async Task InitialisePage(Page page, IPageViewModel model)
         {
             if (page is IHardwareNavigationAware view)
-                view.OnHardwareBackButtonPressed += ViewOnBackButtonPressed;
+                view.BackButtonPressed += ViewOnBackButtonPressed;
 
             await Navigation.PushAsync(page);
             _pageViewModelMap.Add(page, model);
@@ -106,7 +106,7 @@ namespace Redbridge.Forms
         protected async Task InitialiseModalPage(Page page, IPageViewModel model)
         {
             if (page is IHardwareNavigationAware view)
-                view.OnHardwareBackButtonPressed += ViewOnBackButtonPressed;
+                view.BackButtonPressed += ViewOnBackButtonPressed;
 
             await Navigation.PushModalAsync(page);
             _modalStack.Add(page);
@@ -116,7 +116,7 @@ namespace Redbridge.Forms
         protected async Task CleanupPage(Page page)
         {
             if (page is IHardwareNavigationAware view)
-                view.OnHardwareBackButtonPressed -= ViewOnBackButtonPressed;
+                view.BackButtonPressed -= ViewOnBackButtonPressed;
 
             if (_pageViewModelMap.TryGetValue(page, out var viewModel))
             {

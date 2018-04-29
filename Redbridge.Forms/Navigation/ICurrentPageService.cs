@@ -4,8 +4,8 @@ namespace Redbridge.Forms.Navigation
 {
     public interface ICurrentPageService
     {
-        Page GetCurrent();
+        Page Current { get; }
 
-        INavigation GetNavigation();
+        INavigation Navigation { get; }
     }
 }

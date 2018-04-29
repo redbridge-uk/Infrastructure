@@ -23,7 +23,7 @@ namespace Redbridge.Forms
 		private Dictionary<ITableCellViewModel, Cell> _tableCellViewModelMap = new Dictionary<ITableCellViewModel, Cell>();
         private Dictionary<Cell, ITableCellViewModel> _tableCellReverseViewModelMap = new Dictionary<Cell, ITableCellViewModel>();
 
-        public event EventHandler<Page> OnHardwareBackButtonPressed;
+        public event EventHandler<Page> BackButtonPressed;
 
         public TableViewPage(ITableCellFactory cellFactory)
 		{
@@ -78,7 +78,7 @@ namespace Redbridge.Forms
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (await model.NavigateBack())
-                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                        BackButtonPressed?.Invoke(this, this);
                 });
 
                 return true;

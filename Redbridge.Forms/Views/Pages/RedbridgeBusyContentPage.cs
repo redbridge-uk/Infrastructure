@@ -6,7 +6,7 @@ namespace Redbridge.Forms
 {
 	public class RedbridgeBusyContentPage: ContentPage, IView, IHardwareNavigationAware
 	{
-        public event EventHandler<Page> OnHardwareBackButtonPressed;
+        public event EventHandler<Page> BackButtonPressed;
 		private IBusyPageViewModel _currentViewModel;
 		private BusyPageConfigurationManager<IBusyPageViewModel> _pageManager;
 
@@ -76,7 +76,7 @@ namespace Redbridge.Forms
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (await model.NavigateBack())
-                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                        BackButtonPressed?.Invoke(this, this);
                 });
 
                 return true;

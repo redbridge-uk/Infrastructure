@@ -17,7 +17,7 @@ namespace Redbridge.Forms
 			_viewFactory = viewFactory;
 		}
 
-        public event EventHandler<Page> OnHardwareBackButtonPressed;
+        public event EventHandler<Page> BackButtonPressed;
 
         protected override bool OnBackButtonPressed()
         {
@@ -26,7 +26,7 @@ namespace Redbridge.Forms
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (await model.NavigateBack())
-                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                        BackButtonPressed?.Invoke(this, this);
                 });
 
                 return true;
