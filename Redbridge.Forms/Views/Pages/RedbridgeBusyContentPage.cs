@@ -1,14 +1,16 @@
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Redbridge.Forms
 {
-	public class RedbridgeBusyContentPage : ContentPage, IView
+	public class RedbridgeBusyContentPage: ContentPage, IView, IHardwareNavigationAware
 	{
+        public event EventHandler<Page> OnHardwareBackButtonPressed;
 		private IBusyPageViewModel _currentViewModel;
 		private BusyPageConfigurationManager<IBusyPageViewModel> _pageManager;
 
-		public RedbridgeBusyContentPage()
+        public RedbridgeBusyContentPage()
 		{
 			_pageManager = new BusyPageConfigurationManager<IBusyPageViewModel>(this);
 		}
@@ -17,13 +19,11 @@ namespace Redbridge.Forms
 		{
 			base.OnBindingContextChanged();
 
-			var context = this.BindingContext as IBusyPageViewModel;
-
-			if (context != null)
-			{
-				ConnectViewModel(context);
-			}
-		}
+            if (this.BindingContext is IBusyPageViewModel context)
+            {
+                ConnectViewModel(context);
+            }
+        }
 
 		private void DisconnectCurrentModel()
 		{
@@ -38,19 +38,17 @@ namespace Redbridge.Forms
 
 		private void ConnectViewModel(IBusyPageViewModel viewModel)
 		{
-			if (viewModel == null) throw new ArgumentNullException(nameof(viewModel));
-			_currentViewModel = viewModel;
+            _currentViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
 			_pageManager.ConfigurePage(_currentViewModel);
 
 			if (Content != null)
 			{
-				var layout = Content as Layout<View>;
-				if (layout != null)
-				{
-					layout.Children.Add(_pageManager.ActivityIndicator);
-				}
+                if (Content is Layout<View> layout)
+                {
+                    layout.Children.Add(_pageManager.ActivityIndicator);
+                }
 
-				_pageManager.SetBusyHost(Content);
+                _pageManager.SetBusyHost(Content);
 			}
 		}
 
@@ -69,6 +67,22 @@ namespace Redbridge.Forms
 		{
 			_currentViewModel?.OnDisappearing();
 			base.OnDisappearing();
-		}
-	}
+        }
+         
+        protected override bool OnBackButtonPressed()
+        {
+            if (BindingContext is IPageViewModel model)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (await model.NavigateBack())
+                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                });
+
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
+        }
+    }
 }

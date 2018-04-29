@@ -9,7 +9,7 @@ using Redbridge.Linq;
 
 namespace Redbridge.Forms
 {
-	public class TableViewPage : ContentPage, IView
+	public class TableViewPage : ContentPage, IView, IHardwareNavigationAware
 	{
 		public static readonly BindableProperty TableProperty = BindableProperty.Create("Table", typeof(TableViewModel), typeof(TableViewPage), null, propertyChanged:OnTableChanged);
 		private BusyPageConfigurationManager<TableViewModel> _pageManager;
@@ -23,7 +23,9 @@ namespace Redbridge.Forms
 		private Dictionary<ITableCellViewModel, Cell> _tableCellViewModelMap = new Dictionary<ITableCellViewModel, Cell>();
         private Dictionary<Cell, ITableCellViewModel> _tableCellReverseViewModelMap = new Dictionary<Cell, ITableCellViewModel>();
 
-		public TableViewPage(ITableCellFactory cellFactory)
+        public event EventHandler<Page> OnHardwareBackButtonPressed;
+
+        public TableViewPage(ITableCellFactory cellFactory)
 		{
             _cellFactory = cellFactory ?? throw new ArgumentNullException(nameof(cellFactory));
             _tableView = new TableView
@@ -69,7 +71,23 @@ namespace Redbridge.Forms
             }
         }
 
-		public TableViewModel Table
+        protected override bool OnBackButtonPressed()
+        {
+            if (BindingContext is IPageViewModel model)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (await model.NavigateBack())
+                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                });
+
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
+        }
+
+        public TableViewModel Table
 		{
 			get { return (TableViewModel)GetValue(TableProperty); }
 			set { SetValue(TableProperty, value); }
@@ -166,7 +184,7 @@ namespace Redbridge.Forms
 			return actualIndex.IndexOf(cell);
 		}
 
-		void SetupSections(ObservableCollection<TableSectionViewModel> sections)
+		private void SetupSections(ObservableCollection<TableSectionViewModel> sections)
 		{
 			_tableView.Root.Clear();
 			sections.Where(s => s.IsVisible)
@@ -211,7 +229,7 @@ namespace Redbridge.Forms
 			}
 		}
 
-		void RemoveSection(TableSectionViewModel obj)
+		private void RemoveSection(TableSectionViewModel obj)
 		{
 			if (obj == null) throw new ArgumentNullException(nameof(obj));
 
@@ -227,7 +245,7 @@ namespace Redbridge.Forms
 			_tableView.Root.Remove(view);
 		}
 
-		void AddSection(TableSectionViewModel obj, int sectionIndex)
+        private void AddSection(TableSectionViewModel obj, int sectionIndex)
 		{
 			if (obj == null) throw new ArgumentNullException(nameof(obj));
 

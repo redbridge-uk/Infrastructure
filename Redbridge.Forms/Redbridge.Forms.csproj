@@ -13,7 +13,6 @@
     <Folder Include="Controls\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Factories\" />
-    <Folder Include="Navigation\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
     <Folder Include="Markup\" />

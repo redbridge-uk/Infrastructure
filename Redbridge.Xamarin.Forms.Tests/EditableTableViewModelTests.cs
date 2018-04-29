@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
 using Redbridge.Forms;
 using Moq;
-using Redbridge.SDK;
+using Redbridge.Xamarin.Forms.Tests.Mocks;
 
 namespace Redbridge.Xamarin.Forms.Tests
 {
@@ -13,9 +12,9 @@ namespace Redbridge.Xamarin.Forms.Tests
         public void CreateEditableTableViewModelExpectNotInEditMode()
         {
             var navService = new Mock<INavigationService>();
-            var scheduleService = new Mock<ISchedulerService>();
+            var scheduleService = new MockSchedulerService();
             var alerts = new Mock<IAlertController>();
-            var model = new EditableTableViewModel(alerts.Object, navService.Object, scheduleService.Object);
+            var model = new EditableTableViewModel(alerts.Object, navService.Object, scheduleService);
             Assert.IsFalse(model.EditMode);
         }
     }

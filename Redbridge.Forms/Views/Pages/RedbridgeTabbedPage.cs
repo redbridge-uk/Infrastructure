@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace Redbridge.Forms
 {
-    public class RedbridgeTabbedPage : TabbedPage, IView
+    public class RedbridgeTabbedPage : TabbedPage, IView, IHardwareNavigationAware
     {
 		private ITabbedNavigationControllerViewModel _viewModel;
 		private readonly IViewFactory _viewFactory;
@@ -16,6 +16,24 @@ namespace Redbridge.Forms
 			if (viewFactory == null) throw new ArgumentNullException(nameof(viewFactory));
 			_viewFactory = viewFactory;
 		}
+
+        public event EventHandler<Page> OnHardwareBackButtonPressed;
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (BindingContext is IPageViewModel model)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (await model.NavigateBack())
+                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                });
+
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
+        }
 
         protected override void OnCurrentPageChanged()
         {
@@ -28,15 +46,14 @@ namespace Redbridge.Forms
 		{
 			base.OnBindingContextChanged();
 
-			var context = this.BindingContext as ITabbedNavigationControllerViewModel;
-			if (context != null)
-			{
-				if (_viewModel != null)
-					DisconnectCurrentModel();
+            if (this.BindingContext is ITabbedNavigationControllerViewModel context)
+            {
+                if (_viewModel != null)
+                    DisconnectCurrentModel();
 
-				ConnectMasterViewModel(context);
-			}
-		}
+                ConnectMasterViewModel(context);
+            }
+        }
 
 		private void DisconnectCurrentModel()
 		{

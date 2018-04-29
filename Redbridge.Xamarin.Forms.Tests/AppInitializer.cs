@@ -1,12 +1,8 @@
-using System;
-using System.IO;
-using System.Linq;
 using Xamarin.UITest;
-using Xamarin.UITest.Queries;
 
 namespace Redbridge.Forms.Tests
 {
-	public class AppInitializer
+    public class AppInitializer
 	{
 		public static IApp StartApp(Platform platform)
 		{
@@ -25,10 +21,10 @@ namespace Redbridge.Forms.Tests
 			{
 				return ConfigureApp
 					.Android
-					// TODO: Update this path to point to your Android app and uncomment the
-					// code if the app is not included in the solution.
-					//.ApkFile ("../../../Droid/bin/Debug/xamarinforms.apk")
-					.StartApp();
+                    // TODO: Update this path to point to your Android app and uncomment the
+                    // code if the app is not included in the solution.
+                    .ApkFile("../../../Droid/bin/Debug/xamarinforms.apk")
+                    .StartApp();
 			}
 
 			return ConfigureApp

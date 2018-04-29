@@ -42,10 +42,7 @@ namespace Redbridge.Console
         /// <param name="propertyInfo"></param>
         internal void Configure(PropertyInfo propertyInfo)
         {
-            if (propertyInfo == null)
-                throw new CommandLineParseException("The property info instance is not permitted to be null.");
-
-            Property = propertyInfo;
+            Property = propertyInfo ?? throw new CommandLineParseException("The property info instance is not permitted to be null.");
             OnConfigure(propertyInfo);
         }
         

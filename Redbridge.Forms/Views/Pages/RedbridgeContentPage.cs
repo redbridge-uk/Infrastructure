@@ -3,12 +3,13 @@ using Xamarin.Forms;
 
 namespace Redbridge.Forms
 {
-	public class RedbridgeContentPage : ContentPage, IView
+	public class RedbridgeContentPage : ContentPage, IView, IHardwareNavigationAware
 	{
+        public event EventHandler<Page> OnHardwareBackButtonPressed;
 		private IPageViewModel _currentViewModel;
 		private PageConfigurationManager<IPageViewModel> _pageManager;
 
-		public RedbridgeContentPage()
+        public RedbridgeContentPage()
 		{
 			_pageManager = new PageConfigurationManager<IPageViewModel>(this);
 		}
@@ -17,13 +18,11 @@ namespace Redbridge.Forms
 		{
 			base.OnBindingContextChanged();
 
-			var context = this.BindingContext as IPageViewModel;
-
-			if (context != null)
-			{
-				ConnectViewModel(context);
-			}
-		}
+            if (this.BindingContext is IPageViewModel context)
+            {
+                ConnectViewModel(context);
+            }
+        }
 
 		private void DisconnectCurrentModel()
 		{
@@ -57,6 +56,22 @@ namespace Redbridge.Forms
 		{
 			_currentViewModel?.OnDisappearing();
 			base.OnDisappearing();
-		}
-	}
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (CurrentModel != null)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (await CurrentModel.NavigateBack())
+                        OnHardwareBackButtonPressed?.Invoke(this, this);
+                });
+
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
+        }
+    }
 }

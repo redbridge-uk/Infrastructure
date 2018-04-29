@@ -8,6 +8,7 @@ using Redbridge.Diagnostics;
 using System.Threading;
 using Redbridge.Forms.Markup;
 using System.Collections.Generic;
+using Redbridge.Forms.Navigation;
 
 public abstract class ContainerConfiguration
 {
@@ -58,6 +59,7 @@ public abstract class ContainerConfiguration
         container.RegisterInstance(container);
         container.RegisterType<IViewModelFactory, ViewModelFactory>(LifeTime.Container);
         container.RegisterType<IViewFactory, ViewFactory>(LifeTime.Container);
+        container.RegisterType<ICurrentPageService, XamarinAppCurrentPageService>(LifeTime.Container);
         container.RegisterType<INavigationService, NavigationService>(LifeTime.Container);
         container.RegisterType<IAlertController, AlertController>(LifeTime.Container);
         container.RegisterType<IIconResourceMapper, DefaultIconMapper>(LifeTime.Container);
