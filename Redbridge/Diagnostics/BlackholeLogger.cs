@@ -1,6 +1,8 @@
 ﻿using System;
+
 namespace Redbridge.Diagnostics
 {
+
 	public class BlackholeLogger : ILogger
 	{
 		public void WriteDebug(string message)

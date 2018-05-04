@@ -67,7 +67,7 @@ namespace Redbridge.Forms
 		{
 			var model = _viewModelFactory.CreateModel<T>();
 			var view = _viewFactory.CreatePage(model);
-            await InitialisePage(view, model);
+            await OnPushPage(view, model);
         }
 
         public async Task PushAsync(IPageViewModel model)
@@ -75,15 +75,14 @@ namespace Redbridge.Forms
 			_logger.WriteInfo($"Pushing navigation page {model.Title} onto stack...");
 			if (model == null) throw new ArgumentNullException(nameof(model));
 			var view = _viewFactory.CreatePage(model);
-            await InitialisePage(view, model);
+            await OnPushPage(view, model);
         }
 
         public async Task PushModalAsync<T>() where T : INavigationPageModel
 		{
 			var navigationmodel = _viewModelFactory.CreateModel<ModalPageControllerViewModel<T>>();
 			var page = _viewFactory.CreatePage(navigationmodel, true);
-			await Navigation.PushModalAsync(page);
-            await InitialiseModalPage(page, navigationmodel);
+            await OnPushModalPage(page, navigationmodel);
 		}
 
 		public async Task PushModalAsync(INavigationPageModel model)
@@ -91,10 +90,10 @@ namespace Redbridge.Forms
 			if (model == null) throw new ArgumentNullException(nameof(model));
 			var navigationmodel = new ModalPageControllerViewModel(model);
 			var page = _viewFactory.CreatePage(navigationmodel, true);
-            await InitialiseModalPage(page, model);
+            await OnPushModalPage(page, model);
         }
 
-        protected async Task InitialisePage(Page page, IPageViewModel model)
+        protected async Task OnPushPage(Page page, IPageViewModel model)
         {
             if (page is IHardwareNavigationAware view)
                 view.BackButtonPressed += ViewOnBackButtonPressed;
@@ -103,7 +102,7 @@ namespace Redbridge.Forms
             _pageViewModelMap.Add(page, model);
         }
 
-        protected async Task InitialiseModalPage(Page page, IPageViewModel model)
+        protected async Task OnPushModalPage(Page page, IPageViewModel model)
         {
             if (page is IHardwareNavigationAware view)
                 view.BackButtonPressed += ViewOnBackButtonPressed;

@@ -7,180 +7,187 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Redbridge.Linq;
 
 namespace Redbridge.EntityFramework
 {
-public class InMemoryDbSet<TEntity> : DbSet<TEntity>, IQueryable, IEnumerable<TEntity>, IDbAsyncEnumerable<TEntity>
-	where TEntity : class
-{
-	private readonly ObservableCollection<TEntity> _data;
-	private readonly IQueryable _query;
+    public class InMemoryDbSet<TEntity> : DbSet<TEntity>, IQueryable, IEnumerable<TEntity>, IDbAsyncEnumerable<TEntity>
+        where TEntity : class
+    {
+        private readonly ObservableCollection<TEntity> _data;
+        private readonly IQueryable _query;
 
-	public InMemoryDbSet()
-	{
-		_data = new ObservableCollection<TEntity>();
-		_query = _data.AsQueryable();
-	}
+        public InMemoryDbSet()
+        {
+            _data = new ObservableCollection<TEntity>();
+            _query = _data.AsQueryable();
+        }
 
-	public override TEntity Add(TEntity entity)
-	{
-		_data.Add(entity);
-		return entity;
-	}
+        public override TEntity Add(TEntity entity)
+        {
+            _data.Add(entity);
+            return entity;
+        }
 
-	public override TEntity Remove(TEntity entity)
-	{
-		_data.Remove(entity);
-		return entity;
-	}
+        public override IEnumerable<TEntity> AddRange(IEnumerable<TEntity> entities)
+        {
+            entities.ForEach(e => Add(e));
+            return entities;
+        }
 
-	public override TEntity Attach(TEntity entity)
-	{
-		_data.Add(entity);
-		return entity;
-	}
+        public override TEntity Remove(TEntity entity)
+        {
+            _data.Remove(entity);
+            return entity;
+        }
 
-	public override TEntity Create()
-	{
-		return Activator.CreateInstance<TEntity>();
-	}
+        public override TEntity Attach(TEntity entity)
+        {
+            _data.Add(entity);
+            return entity;
+        }
 
-	public override TDerivedEntity Create<TDerivedEntity>()
-	{
-		return Activator.CreateInstance<TDerivedEntity>();
-	}
+        public override TEntity Create()
+        {
+            return Activator.CreateInstance<TEntity>();
+        }
 
-	public override ObservableCollection<TEntity> Local
-	{
-		get { return _data; }
-	}
+        public override TDerivedEntity Create<TDerivedEntity>()
+        {
+            return Activator.CreateInstance<TDerivedEntity>();
+        }
 
-	Type IQueryable.ElementType
-	{
-		get { return _query.ElementType; }
-	}
+        public override ObservableCollection<TEntity> Local
+        {
+            get { return _data; }
+        }
 
-	Expression IQueryable.Expression
-	{
-		get { return _query.Expression; }
-	}
+        Type IQueryable.ElementType
+        {
+            get { return _query.ElementType; }
+        }
 
-	IQueryProvider IQueryable.Provider
-	{
-		get { return new TestDbAsyncQueryProvider<TEntity>(_query.Provider); }
-	}
+        Expression IQueryable.Expression
+        {
+            get { return _query.Expression; }
+        }
 
-	System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-	{
-		return _data.GetEnumerator();
-	}
+        IQueryProvider IQueryable.Provider
+        {
+            get { return new TestDbAsyncQueryProvider<TEntity>(_query.Provider); }
+        }
 
-	IEnumerator<TEntity> IEnumerable<TEntity>.GetEnumerator()
-	{
-		return _data.GetEnumerator();
-	}
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return _data.GetEnumerator();
+        }
 
-	IDbAsyncEnumerator<TEntity> IDbAsyncEnumerable<TEntity>.GetAsyncEnumerator()
-	{
-		return new TestDbAsyncEnumerator<TEntity>(_data.GetEnumerator());
-	}
-}
+        IEnumerator<TEntity> IEnumerable<TEntity>.GetEnumerator()
+        {
+            return _data.GetEnumerator();
+        }
 
-public class InMemoryDbSet
-{
-	public static InMemoryDbSet<T> Empty<T>() where T : class
-	{
-		return new InMemoryDbSet<T>();
-	}
-}
+        IDbAsyncEnumerator<TEntity> IDbAsyncEnumerable<TEntity>.GetAsyncEnumerator()
+        {
+            return new TestDbAsyncEnumerator<TEntity>(_data.GetEnumerator());
+        }
+    }
 
-internal class TestDbAsyncQueryProvider<TEntity> : IDbAsyncQueryProvider
-{
-	private readonly IQueryProvider _inner;
+    public class InMemoryDbSet
+    {
+        public static InMemoryDbSet<T> Empty<T>() where T : class
+        {
+            return new InMemoryDbSet<T>();
+        }
+    }
 
-	internal TestDbAsyncQueryProvider(IQueryProvider inner)
-	{
-		_inner = inner;
-	}
+    internal class TestDbAsyncQueryProvider<TEntity> : IDbAsyncQueryProvider
+    {
+        private readonly IQueryProvider _inner;
 
-	public IQueryable CreateQuery(Expression expression)
-	{
-		return new TestDbAsyncEnumerable<TEntity>(expression);
-	}
+        internal TestDbAsyncQueryProvider(IQueryProvider inner)
+        {
+            _inner = inner;
+        }
 
-	public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
-	{
-		return new TestDbAsyncEnumerable<TElement>(expression);
-	}
+        public IQueryable CreateQuery(Expression expression)
+        {
+            return new TestDbAsyncEnumerable<TEntity>(expression);
+        }
 
-	public object Execute(Expression expression)
-	{
-		return _inner.Execute(expression);
-	}
+        public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
+        {
+            return new TestDbAsyncEnumerable<TElement>(expression);
+        }
 
-	public TResult Execute<TResult>(Expression expression)
-	{
-		return _inner.Execute<TResult>(expression);
-	}
+        public object Execute(Expression expression)
+        {
+            return _inner.Execute(expression);
+        }
 
-	public Task<object> ExecuteAsync(Expression expression, CancellationToken cancellationToken)
-	{
-		return Task.FromResult(Execute(expression));
-	}
+        public TResult Execute<TResult>(Expression expression)
+        {
+            return _inner.Execute<TResult>(expression);
+        }
 
-	public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
-	{
-		return Task.FromResult(Execute<TResult>(expression));
-	}
-}
+        public Task<object> ExecuteAsync(Expression expression, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(Execute(expression));
+        }
 
-internal class TestDbAsyncEnumerable<T> : EnumerableQuery<T>, IDbAsyncEnumerable<T>, IQueryable<T>
-{
-	public TestDbAsyncEnumerable(IEnumerable<T> enumerable)
-		: base(enumerable)
-	{ }
+        public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(Execute<TResult>(expression));
+        }
+    }
 
-	public TestDbAsyncEnumerable(Expression expression)
-		: base(expression)
-	{ }
+    internal class TestDbAsyncEnumerable<T> : EnumerableQuery<T>, IDbAsyncEnumerable<T>, IQueryable<T>
+    {
+        public TestDbAsyncEnumerable(IEnumerable<T> enumerable)
+            : base(enumerable)
+        { }
 
-	public IDbAsyncEnumerator<T> GetAsyncEnumerator()
-	{
-		return new TestDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
-	}
+        public TestDbAsyncEnumerable(Expression expression)
+            : base(expression)
+        { }
 
-	IDbAsyncEnumerator IDbAsyncEnumerable.GetAsyncEnumerator()
-	{
-		return GetAsyncEnumerator();
-	}
+        public IDbAsyncEnumerator<T> GetAsyncEnumerator()
+        {
+            return new TestDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
+        }
 
-	IQueryProvider IQueryable.Provider
-	{
-		get { return new TestDbAsyncQueryProvider<T>(this); }
-	}
-}
+        IDbAsyncEnumerator IDbAsyncEnumerable.GetAsyncEnumerator()
+        {
+            return GetAsyncEnumerator();
+        }
 
-internal class TestDbAsyncEnumerator<T> : IDbAsyncEnumerator<T>
-{
-	private readonly IEnumerator<T> _inner;
+        IQueryProvider IQueryable.Provider
+        {
+            get { return new TestDbAsyncQueryProvider<T>(this); }
+        }
+    }
 
-	public TestDbAsyncEnumerator(IEnumerator<T> inner)
-	{
-		_inner = inner;
-	}
+    internal class TestDbAsyncEnumerator<T> : IDbAsyncEnumerator<T>
+    {
+        private readonly IEnumerator<T> _inner;
 
-	public void Dispose()
-	{
-		_inner.Dispose();
-	}
+        public TestDbAsyncEnumerator(IEnumerator<T> inner)
+        {
+            _inner = inner;
+        }
 
-	public Task<bool> MoveNextAsync(CancellationToken cancellationToken)
-	{
-		return Task.FromResult(_inner.MoveNext());
-	}
+        public void Dispose()
+        {
+            _inner.Dispose();
+        }
 
-	public T Current => _inner.Current;
+        public Task<bool> MoveNextAsync(CancellationToken cancellationToken)
+        {
+            return Task.FromResult(_inner.MoveNext());
+        }
 
-	object IDbAsyncEnumerator.Current => Current;
-} 
+        public T Current => _inner.Current;
+
+        object IDbAsyncEnumerator.Current => Current;
+    }
 }

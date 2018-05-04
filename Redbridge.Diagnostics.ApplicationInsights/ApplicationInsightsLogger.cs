@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 
 namespace Redbridge.Diagnostics.ApplicationInsights
 {
-	public class ApplicationInsightsLogger : ILogger
+	public class ApplicationInsightsLogger : ILogger, IEventTracker
 	{
 		private readonly TelemetryClient _telemetryClient;
 
@@ -42,5 +43,10 @@ namespace Redbridge.Diagnostics.ApplicationInsights
             Console.WriteLine($"WARNING: {format}");
 			_telemetryClient.TrackTrace(format, SeverityLevel.Warning);
 		}
+
+        public void WriteEvent (string eventName, IDictionary<string, string> properties = null)
+        {
+            _telemetryClient.TrackEvent(eventName, properties);
+        }
 	}
 }
