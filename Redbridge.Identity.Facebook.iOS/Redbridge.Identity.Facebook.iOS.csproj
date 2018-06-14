@@ -47,7 +47,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="Facebook">
-      <HintPath>..\packages\Xamarin.Facebook.iOS.4.30.0\lib\Xamarin.iOS10\Facebook.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Facebook.iOS.4.33.0\lib\Xamarin.iOS10\Facebook.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -58,13 +58,13 @@
     <Compile Include="iOSFacebookAuthenticationClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Redbridge\Redbridge.csproj">
       <Project>{FA042554-BC38-4B47-B6EF-A10AC76CB200}</Project>
       <Name>Redbridge</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

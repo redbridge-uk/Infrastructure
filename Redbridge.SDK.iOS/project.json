@@ -1,9 +1,9 @@
 ﻿{
   "dependencies": {
-    "NETStandard.Library": "2.0.1",
-    "Newtonsoft.Json": "11.0.1",
+    "NETStandard.Library": "2.0.3",
+    "Newtonsoft.Json": "11.0.2",
     "System.Linq.Queryable": "4.3.0",
-    "System.Reactive": "3.1.1",
+    "System.Reactive": "4.0.0",
     "System.Security.Principal": "4.3.0"
   },
   "frameworks": {
