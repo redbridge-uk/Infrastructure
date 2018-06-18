@@ -15,7 +15,7 @@ namespace Redbridge.Xamarin.Forms.iOS
 
 		protected override IApplicationSettingsRepository CreateAppSettingsRepository()
 		{
-			return new iOSApplicationSettingsRepository(); 
+			return new iOSApplicationSettingsRepository(Logger); 
 		}
 
         protected override void OnRegisterTypes(DependencyInjection.IContainer container)

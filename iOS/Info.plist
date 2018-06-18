@@ -40,5 +40,26 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.469587141175-4lhsihnumetjplrkea5uhci5g6i6o018</string>
+			</array>
+			<key>CFBundleURLTypes</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1498903480424752</string>
+			</array>
+			<key>CFBundleURLTypes</key>
+			<string>Editor</string>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1498903480424752</string>
 </dict>
 </plist>

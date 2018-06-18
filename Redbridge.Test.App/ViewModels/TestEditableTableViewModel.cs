@@ -12,6 +12,7 @@ namespace TesterApp
         private readonly IAuthenticationClientFactory _signInFactory;
         private UserProfileExample _userProfile;
         private Command _loginGoogle;
+        private Command _loginFacebook;
 
 		public TestEditableTableViewModel(IAuthenticationClientFactory signInFactory, IAlertController alerts, INavigationService navigationService, ISchedulerService scheduler) 
             : base(alerts, navigationService, scheduler) 
@@ -27,6 +28,12 @@ namespace TesterApp
             _loginGoogle = new Command(() => 
             {
                 var signin = _signInFactory.Create("Google");
+                signin.BeginLoginAsync();
+            });
+
+            _loginFacebook = new Command(() =>
+            {
+                var signin = _signInFactory.Create("Facebook");
                 signin.BeginLoginAsync();
             });
 
@@ -49,6 +56,7 @@ namespace TesterApp
 
             var logins = AddSection("Logins");
             logins.AddCell(new TextCellViewModel() { Command = _loginGoogle, Text = "Google me" });
+            logins.AddCell(new TextCellViewModel() { Command = _loginFacebook, Text = "Facebook me" });
 
             var list = AddSection("List");
 

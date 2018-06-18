@@ -12,7 +12,7 @@ using Redbridge.Forms.Navigation;
 
 public abstract class ContainerConfiguration
 {
-    public readonly ILogger Logger;
+    private ILogger _logger;
     public readonly IApplicationSettingsRepository ApplicationSettings;
     private readonly Lazy<IContainer> _container;
     private List<Assembly> _assemblies = new List<Assembly>();
@@ -39,6 +39,8 @@ public abstract class ContainerConfiguration
         _assemblies.Add(assembly);
     }
 
+    public ILogger Logger => _logger;
+
     protected abstract ILogger CreateLogger();
     protected abstract IApplicationSettingsRepository CreateAppSettingsRepository();
 
@@ -46,7 +48,8 @@ public abstract class ContainerConfiguration
 
     protected virtual void OnRegisterLogger(IContainer container)
     {
-        container.RegisterInstance(CreateLogger());
+        _logger = CreateLogger();
+        container.RegisterInstance(_logger);
     }
 
     protected virtual void OnRegisterApplicationSettings(IContainer container)

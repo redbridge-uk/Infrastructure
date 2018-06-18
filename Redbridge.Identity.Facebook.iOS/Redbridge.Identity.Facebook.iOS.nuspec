@@ -1,19 +1,19 @@
 ﻿<package>
 	<metadata>
-		<id>Redbridge.Identity.Google.iOS</id>
+		<id>Redbridge.Identity.Facebook.iOS</id>
 		<version>2.0.23</version>
-		<title>Redbridge Google Integration Library for iOS</title>
+		<title>Redbridge Facebook Integration Library for iOS</title>
 		<authors>Redbridge</authors>
 		<owners>Redbridge</owners>
 		<projectUrl>https://github.com/redbridge-uk/resources/wiki</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Redbridge C# iOS Identity Library for Google integration.</description>
+		<description>Redbridge C# iOS Identity Library for Facebook integration</description>
 		<copyright>Copyright Redbridge 2018</copyright>
-		<tags>Redbridge, C#, Identity, Google, iOS</tags>
+		<tags>Redbridge, C#, Identity, Facebook, iOS</tags>
 	</metadata>
 	<files>
-		<file src="bin/Release/Redbridge.Identity.Google.iOS.dll" target="lib/xamarinios10/"/>
-    	<file src="bin/Release/Redbridge.Identity.Google.iOS.dll" target="lib/MonoTouch10/"/>
+		<file src="bin/Release/Redbridge.Identity.Facebook.iOS.dll" target="lib/xamarinios10/"/>
+    	<file src="bin/Release/Redbridge.Identity.Facebook.iOS.dll" target="lib/MonoTouch10/"/>
 	</files>
 </package>

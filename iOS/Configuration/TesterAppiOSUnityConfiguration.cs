@@ -4,6 +4,7 @@ using Redbridge.DependencyInjection;
 using Redbridge.Unity;
 using Redbridge.Identity;
 using Easilog.iOS;
+using Redbridge.Identity.Facebook.iOS;
 
 namespace TesterApp.iOS
 {
@@ -26,6 +27,7 @@ namespace TesterApp.iOS
             base.OnRegisterTypes(container);
             container.RegisterType<IAuthenticationClientFactory, ContainerAuthenticationClientFactory>();
             container.RegisterType<IAuthenticationClient, iOSGoogleAuthenticationClient>("Google");
+            container.RegisterType<IAuthenticationClient, iOSFacebookAuthenticationClient>("Facebook");
 		}
     }
 }

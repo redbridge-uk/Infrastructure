@@ -26,12 +26,16 @@ namespace Easilog.iOS
 
             _settings = settings;
             _logger = logger;
+
+            _logger.WriteDebug("Created instance of iOS Google Authentication client.");
         }
 
         public Task BeginLoginAsync ()
         {
+            _logger.WriteDebug("Beginning login for iOS Google Authentication client...");
             _status.OnNext(ClientConnectionStatus.Connecting);
 
+            SignIn.SharedInstance.ClientID = "469587141175-4lhsihnumetjplrkea5uhci5g6i6o018.apps.googleusercontent.com";
             SignIn.SharedInstance.Delegate = this;
             SignIn.SharedInstance.UIDelegate = this;
             SignIn.SharedInstance.SignInUser();
@@ -41,6 +45,7 @@ namespace Easilog.iOS
 
         public Task LogoutAsync()
         {
+            _logger.WriteDebug("Signing out iOS Google Authentication client...");
             SignIn.SharedInstance.DisconnectUser();
             return Task.CompletedTask;
         }

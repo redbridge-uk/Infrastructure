@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Ben Rose (82L2PBFP3L)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
     <IOSDebuggerPort>30381</IOSDebuggerPort>
@@ -29,7 +29,7 @@
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
-    <CodesignEntitlements></CodesignEntitlements>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignResourceRules></CodesignResourceRules>
     <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
   </PropertyGroup>
@@ -60,6 +60,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -215,6 +216,7 @@
     <BundleResource Include="schedule.png" />
     <BundleResource Include="schedule%402x.png" />
     <BundleResource Include="schedule%403x.png" />
+    <BundleResource Include="Resources\GoogleServices-Info.plist" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Redbridge.SDK.iOS\Redbridge.SDK.iOS.csproj">
@@ -248,6 +250,10 @@
     <ProjectReference Include="..\Redbridge.Identity.Google.iOS\Redbridge.Identity.Google.iOS.csproj">
       <Project>{E15856E0-ED0B-4872-B10D-B85292A7FC2C}</Project>
       <Name>Redbridge.Identity.Google.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Redbridge.Identity.Facebook.iOS\Redbridge.Identity.Facebook.iOS.csproj">
+      <Project>{25EE74B7-896F-400B-B375-53901C605745}</Project>
+      <Name>Redbridge.Identity.Facebook.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
