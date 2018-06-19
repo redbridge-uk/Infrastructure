@@ -44,17 +44,13 @@
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.469587141175-4lhsihnumetjplrkea5uhci5g6i6o018</string>
-			</array>
+			<array/>
 			<key>CFBundleURLTypes</key>
 			<string>Editor</string>
 		</dict>
 		<dict>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb1498903480424752</string>
-			</array>
+			<array/>
 			<key>CFBundleURLTypes</key>
 			<string>Editor</string>
 		</dict>
