@@ -57,6 +57,17 @@ namespace Redbridge.Configuration
 			return stringValue;
 		}
 
+        public string GetStringValueOrDefault(string key, string defaultValue)
+        {
+            ValidateKey(key);
+
+            var stringValue = ConfigurationManager.AppSettings[key];
+            if ( stringValue != null )
+                return stringValue;
+
+            return defaultValue;
+        }
+
 		public Uri GetUrl(string key)
 		{
 			ValidateKey(key);
@@ -64,6 +75,17 @@ namespace Redbridge.Configuration
 			var stringValue = ConfigurationManager.AppSettings[key];
 			return new Uri(stringValue);
 		}
+
+        public Uri GetUrlOrDefault(string key, Uri defaultUri)
+        {
+            ValidateKey(key);
+
+            var stringValue = ConfigurationManager.AppSettings[key];
+            if ( stringValue != null )
+                return new Uri(stringValue);
+
+            return defaultUri;
+        }
 
 		public T GetSection<T>(string name) where T : class
 		{

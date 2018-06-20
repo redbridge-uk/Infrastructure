@@ -12,8 +12,12 @@ namespace Redbridge.Configuration
 
 		string GetStringValue(string key);
 
+        string GetStringValueOrDefault(string key, string defaultValue);
+
 		T GetSection<T>(string name) where T : class;
 
 		Uri GetUrl(string key);
+
+        Uri GetUrlOrDefault(string key, Uri defaultUri);
 	}
 }

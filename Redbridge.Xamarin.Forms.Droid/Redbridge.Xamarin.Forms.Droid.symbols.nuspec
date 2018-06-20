@@ -12,8 +12,8 @@
     <copyright>Copyright Redbridge 2018</copyright>
     <tags>Redbridge, MVVM, Forms, Portable, Xamarin, Android, Library</tags>
     <dependencies>
-    	<dependency id="Redbridge.SDK.Droid" version="2.0.25"/>
-    	<dependency id="Redbridge.Xamarin.Forms" version="2.0.25"/>
+    	<dependency id="Redbridge.SDK.Droid" version="2.0.26"/>
+    	<dependency id="Redbridge.Xamarin.Forms" version="2.0.26"/>
     </dependencies>
   </metadata>
  

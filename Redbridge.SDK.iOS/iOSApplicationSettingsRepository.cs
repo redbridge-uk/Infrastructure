@@ -50,10 +50,34 @@ namespace Redbridge.SDK.iOS
 			return stringValue;
 		}
 
+        public string GetStringValueOrDefault(string key, string defaultValue)
+        {
+            _logger.WriteDebug($"Attempting to recall configuration value for key {key}...");
+            var stringValue = Settings[key];
+            if (stringValue != null)
+            {
+                _logger.WriteDebug($"Configuration value for key {key} returned as '{stringValue}'...");
+                return stringValue.ToString();
+            }
+
+            _logger.WriteDebug($"Configuration value for key {key} not found returning default '{defaultValue}'...");
+            return defaultValue;
+        }
+
 		public Uri GetUrl(string key)
 		{
 			var stringValue = Settings[key].ToString();
 			return new Uri(stringValue);
 		}
+
+        public Uri GetUrlOrDefault(string key, Uri defaultUri)
+        {
+            var stringValue = Settings[key];
+
+            if ( stringValue != null )
+                return new Uri(stringValue.ToString());
+
+            return defaultUri;
+        }
 	}
 }
