@@ -17,6 +17,7 @@
     <Folder Include="Views\" />
     <Folder Include="Markup\" />
     <Folder Include="Views\Managers\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Redbridge\Redbridge.csproj" />

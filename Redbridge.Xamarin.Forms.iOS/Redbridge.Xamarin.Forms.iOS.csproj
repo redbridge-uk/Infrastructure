@@ -66,6 +66,7 @@
     <Folder Include="Renderers\" />
     <Folder Include="Cells\" />
     <Folder Include="Constraints\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Renderers\IconCellRenderer.cs" />
     <Compile Include="Constraints\UIViewExtensions.cs" />
     <Compile Include="Renderers\RedbridgeEntryRenderer.cs" />
+    <Compile Include="Services\VibratorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Redbridge.SDK.iOS\Redbridge.SDK.iOS.csproj">

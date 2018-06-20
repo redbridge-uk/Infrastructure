@@ -9,11 +9,11 @@
     <iconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Redbridge Xamarin Forms MVVM portable client SDK library for Android</description>
-    <copyright>Copyright Redbridge 2017</copyright>
+    <copyright>Copyright Redbridge 2018</copyright>
     <tags>Redbridge, MVVM, Forms, Portable, Xamarin, Android, Library</tags>
     <dependencies>
-    	<dependency id="Redbridge.SDK.Droid" version="2.0.16"/>
-    	<dependency id="Redbridge.Xamarin.Forms" version="2.0.16"/>
+    	<dependency id="Redbridge.SDK.Droid" version="2.0.25"/>
+    	<dependency id="Redbridge.Xamarin.Forms" version="2.0.25"/>
     </dependencies>
   </metadata>
  

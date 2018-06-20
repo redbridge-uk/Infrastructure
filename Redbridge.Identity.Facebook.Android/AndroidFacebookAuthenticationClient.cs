@@ -2,36 +2,35 @@
 using System.IO;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using Facebook.CoreKit;
-using Facebook.LoginKit;
 using Redbridge.Configuration;
 using Redbridge.Diagnostics;
 using Redbridge.Security;
-using UIKit;
+using Xamarin.Facebook;
+using Xamarin.Facebook.Login;
 
 namespace Redbridge.Identity.Facebook.iOS
 {
-    public class iOSFacebookAuthenticationClient : IAuthenticationClient
+    public class AndroidFacebookAuthenticationClient : IAuthenticationClient
     {
         private readonly IApplicationSettingsRepository _settings;
         private readonly ILogger _logger;
         private readonly BehaviorSubject<ClientConnectionStatus> _status = new BehaviorSubject<ClientConnectionStatus>(ClientConnectionStatus.Disconnected);
         private AccessToken _accessToken;
-        private LoginManager _manager = new LoginManager();
+        private LoginManager _manager = LoginManager.Instance;
 
-        public iOSFacebookAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger)
+        public AndroidFacebookAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger)
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _logger.WriteDebug("Created instance of iOS Facebook Authentication client.");
+            _logger.WriteDebug("Created instance of Android Facebook Authentication client.");
         }
 
 
         public bool IsConnected => _accessToken != null && !_accessToken.IsExpired;
 
-        public string Username => _accessToken.UserID;
+        public string Username => _accessToken.UserId;
 
-        public string AccessToken => _accessToken.TokenString;
+        public string AccessToken => _accessToken.Token;
 
 
         public IObservable<ClientConnectionStatus> ConnectionStatus => _status;
@@ -43,7 +42,7 @@ namespace Redbridge.Identity.Facebook.iOS
             _logger.WriteDebug("Beginning login for iOS Facebook Authentication client...");
             _status.OnNext(ClientConnectionStatus.Connecting);
 
-            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            //var vc = Android.App.SharedApplication.KeyWindow.RootViewController; TODO: get this for android.
             _manager.LogInWithReadPermissions(new string[] { "public_profile" },
                                                  vc,
                                                  (result, error) =>

@@ -8,15 +8,11 @@
 		<projectUrl>https://github.com/redbridge-uk/resources/wiki</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Redbridge C# iOS Identity Library for Facebook integration.</description>
+		<description>Redbridge C# iOS Identity Library for Facebook integration</description>
 		<copyright>Copyright Redbridge 2018</copyright>
 		<tags>Redbridge, C#, Identity, Facebook, iOS</tags>
 	</metadata>
 	<files>
-		<file src="bin/Debug/Redbridge.Identity.Facebook.iOS.dll" target="lib/xamarinios10/"/>
-    	<file src="bin/Debug/Redbridge.Identity.Facebook.iOS.dll" target="lib/MonoTouch10/"/>
-        <file src="bin/Debug/Redbridge.Identity.Facebook.iOS.pdb" target="lib/xamarinios10/"/>
-        <file src="bin/Debug/Redbridge.Identity.Facebook.iOS.pdb" target="lib/MonoTouch10/"/>
-        <file src="**\*.cs" target="src" />
+		<file src="bin/Release/Redbridge.Identity.Facebook.Android.dll" target="lib/MonoAndroid/"/>
 	</files>
 </package>

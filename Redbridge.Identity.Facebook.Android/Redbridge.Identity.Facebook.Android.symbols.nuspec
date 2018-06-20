@@ -13,10 +13,7 @@
 		<tags>Redbridge, C#, Identity, Facebook, iOS</tags>
 	</metadata>
 	<files>
-		<file src="bin/Debug/Redbridge.Identity.Facebook.iOS.dll" target="lib/xamarinios10/"/>
-    	<file src="bin/Debug/Redbridge.Identity.Facebook.iOS.dll" target="lib/MonoTouch10/"/>
-        <file src="bin/Debug/Redbridge.Identity.Facebook.iOS.pdb" target="lib/xamarinios10/"/>
-        <file src="bin/Debug/Redbridge.Identity.Facebook.iOS.pdb" target="lib/MonoTouch10/"/>
+		<file src="bin/Debug/Redbridge.Identity.Facebook.Android.dll" target="lib/MonoAndroid/"/>
         <file src="**\*.cs" target="src" />
 	</files>
 </package>

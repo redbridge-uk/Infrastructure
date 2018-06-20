@@ -1,7 +1,7 @@
 ﻿<package>
 	<metadata>
 		<id>Redbridge.Diagnostics.ApplicationInsights</id>
-		<version>2.0.24</version>
+		<version>2.0.25</version>
 		<title>Redbridge Diagnostics ApplicationInsights Library</title>
 		<authors>Redbridge</authors>
 		<owners>Redbridge</owners>
@@ -12,7 +12,7 @@
 		<copyright>Copyright Redbridge 2018</copyright>
 		<tags>Redbridge, C#, WebApi, Application Insights, Diagnostics</tags>
 		<dependencies>
-    		<dependency id="Redbridge.SDK" version="2.0.24"/>
+    		<dependency id="Redbridge.SDK" version="2.0.25"/>
     	</dependencies>
 	</metadata>
 	<files>
