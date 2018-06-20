@@ -1,16 +1,16 @@
 ﻿<package>
 	<metadata>
-		<id>Redbridge.Identity.Facebook.iOS</id>
+		<id>Redbridge.Identity.Facebook.Android</id>
 		<version>2.0.25</version>
-		<title>Redbridge Facebook Integration Library for iOS</title>
+		<title>Redbridge Facebook Integration Library for Android</title>
 		<authors>Redbridge</authors>
 		<owners>Redbridge</owners>
 		<projectUrl>https://github.com/redbridge-uk/resources/wiki</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Redbridge C# iOS Identity Library for Facebook integration.</description>
+		<description>Redbridge C# Android Identity Library for Facebook integration.</description>
 		<copyright>Copyright Redbridge 2018</copyright>
-		<tags>Redbridge, C#, Identity, Facebook, iOS</tags>
+		<tags>Redbridge, C#, Identity, Facebook, Android</tags>
 	</metadata>
 	<files>
 		<file src="bin/Debug/Redbridge.Identity.Facebook.Android.dll" target="lib/MonoAndroid/"/>

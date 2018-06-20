@@ -43,17 +43,9 @@ namespace Redbridge.Identity.Facebook.iOS
             _status.OnNext(ClientConnectionStatus.Connecting);
 
             //var vc = Android.App.SharedApplication.KeyWindow.RootViewController; TODO: get this for android.
-            _manager.LogInWithReadPermissions(new string[] { "public_profile" },
-                                                 vc,
-                                                 (result, error) =>
-                                                 {
-                                                     if (error == null && !result.IsCancelled)
-                                                     {
-                    
-                                                         _accessToken = result.Token;
-                                                         _status.OnNext(ClientConnectionStatus.Connected);
-                                                     }
-                                                 });
+
+            //_manager.LogInWithReadPermissions(null, new string[] { "public_profile" });
+
             return System.Threading.Tasks.Task.CompletedTask;
         }
 
