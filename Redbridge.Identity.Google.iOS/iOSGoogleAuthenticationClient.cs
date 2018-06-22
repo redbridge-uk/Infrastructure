@@ -35,7 +35,7 @@ namespace Easilog.iOS
             _logger.WriteDebug("Beginning login for iOS Google Authentication client...");
             _status.OnNext(ClientConnectionStatus.Connecting);
 
-            SignIn.SharedInstance.ClientID = "469587141175-4lhsihnumetjplrkea5uhci5g6i6o018.apps.googleusercontent.com";
+            SignIn.SharedInstance.ClientID = _settings.GetStringValue("Google:ClientId");
             SignIn.SharedInstance.Delegate = this;
             SignIn.SharedInstance.UIDelegate = this;
             SignIn.SharedInstance.SignInUser();
