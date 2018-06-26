@@ -12,7 +12,7 @@ using UIKit;
 
 namespace Redbridge.Identity.Facebook.iOS
 {
-    public class iOSFacebookAuthenticationClient : IAuthenticationClient
+    public class iOSFacebookAuthenticationClient : IAuthenticationClient, IExternalAuthenticationProvider
     {
         private readonly IApplicationSettingsRepository _settings;
         private readonly ILogger _logger;
@@ -91,7 +91,7 @@ namespace Redbridge.Identity.Facebook.iOS
         }
 
         public string ClientType => ClientTypeId;
-
+        public string ProviderName => "Facebook";
         public static string ClientTypeId = "Facebook";
     }
 }

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Redbridge.SDK
 {
-	[DataContract]
+    [DataContract]
 	public class OAuthTokenResponse
 	{
 		[DataMember(Name = "access_token")]

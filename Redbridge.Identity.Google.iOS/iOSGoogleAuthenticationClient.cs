@@ -12,7 +12,7 @@ using UIKit;
 
 namespace Easilog.iOS
 {
-    public class iOSGoogleAuthenticationClient : SignInUIDelegate, ISignInDelegate, IAuthenticationClient
+    public class iOSGoogleAuthenticationClient : SignInUIDelegate, ISignInDelegate, IAuthenticationClient, IExternalAuthenticationProvider
     {
         private readonly IApplicationSettingsRepository _settings;
         private GoogleUser _currentUser;
@@ -47,9 +47,9 @@ namespace Easilog.iOS
         }
 
         public bool IsConnected => _currentUser != null;
-        public string BearerToken => _currentUser?.Authentication.IdToken;
-        public string AccessToken => _currentUser?.Authentication.AccessToken;
-        public string Username => _currentUser?.Profile.Email;
+        public virtual string BearerToken => _currentUser?.Authentication.IdToken;
+        public virtual string AccessToken => _currentUser?.Authentication.AccessToken;
+        public virtual string Username => _currentUser?.Profile.Email;
 
         public IObservable<ClientConnectionStatus> ConnectionStatus => _status;
 
@@ -125,9 +125,10 @@ namespace Easilog.iOS
         {
             throw new NotSupportedException("You cannot directly set credentials on the google oauth client.");
         }
-
 		public string ClientType => ClientTypeId;
 
-		public static string ClientTypeId = "Google";
+        public string ProviderName => "Google";
+
+        public static string ClientTypeId = "Google";
     }
 }

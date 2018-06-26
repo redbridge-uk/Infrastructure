@@ -10,7 +10,7 @@ using Xamarin.Facebook.Login;
 
 namespace Redbridge.Identity.Facebook.iOS
 {
-    public class AndroidFacebookAuthenticationClient : IAuthenticationClient
+    public class AndroidFacebookAuthenticationClient : IAuthenticationClient, IExternalAuthenticationProvider
     {
         private readonly IApplicationSettingsRepository _settings;
         private readonly ILogger _logger;
@@ -71,6 +71,8 @@ namespace Redbridge.Identity.Facebook.iOS
         }
 
         public string ClientType => ClientTypeId;
+
+        public string ProviderName => "Facebook";
 
         public static string ClientTypeId = "Facebook";
     }
