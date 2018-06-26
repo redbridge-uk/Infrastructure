@@ -4,6 +4,7 @@ using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Facebook.CoreKit;
 using Facebook.LoginKit;
+using Foundation;
 using Redbridge.Configuration;
 using Redbridge.Diagnostics;
 using Redbridge.Security;
@@ -29,9 +30,9 @@ namespace Redbridge.Identity.Facebook.iOS
 
         public bool IsConnected => _accessToken != null && !_accessToken.IsExpired;
 
-        public string Username => _accessToken.UserID;
+        public virtual string Username => _accessToken.UserID;
 
-        public string AccessToken => _accessToken.TokenString;
+        public virtual string AccessToken => _accessToken.TokenString;
 
 
         public IObservable<ClientConnectionStatus> ConnectionStatus => _status;
@@ -52,29 +53,39 @@ namespace Redbridge.Identity.Facebook.iOS
                                                      {
                     
                                                          _accessToken = result.Token;
+                                                         OnProcessSignIn(result, error);
                                                          _status.OnNext(ClientConnectionStatus.Connected);
                                                      }
                                                  });
             return System.Threading.Tasks.Task.CompletedTask;
         }
 
+        protected virtual void OnProcessSignIn(LoginManagerLoginResult result, NSError error)
+        {
+        }
+
         public System.Threading.Tasks.Task LogoutAsync()
         {
             _manager.LogOut();
+            OnProcessLogOut();
             return System.Threading.Tasks.Task.CompletedTask;
         }
 
-        public Task<Stream> SaveAsync()
+        protected virtual void OnProcessLogOut()
+        {
+        }
+
+        public virtual Task<Stream> SaveAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<UserCredentials> LoadAsync(Stream stream)
+        public virtual Task<UserCredentials> LoadAsync(Stream stream)
         {
             throw new NotImplementedException();
         }
 
-        public void SetCredentials(UserCredentials credentials)
+        public virtual void SetCredentials(UserCredentials credentials)
         {
             throw new NotSupportedException("You cannot directly set credentials on the facebook oauth client.");
         }

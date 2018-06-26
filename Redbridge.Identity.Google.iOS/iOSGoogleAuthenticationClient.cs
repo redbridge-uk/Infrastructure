@@ -21,12 +21,8 @@ namespace Easilog.iOS
 
         public iOSGoogleAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger)
         {
-            if (settings == null) throw new ArgumentNullException(nameof(settings));
-            if (logger == null) throw new ArgumentNullException(nameof(logger));
-
-            _settings = settings;
-            _logger = logger;
-
+            _settings = settings ?? throw new ArgumentNullException(nameof(settings));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _logger.WriteDebug("Created instance of iOS Google Authentication client.");
         }
 
@@ -62,8 +58,11 @@ namespace Easilog.iOS
         public void SignOut()
         {
             _currentUser = null;
+            OnSignOut();
             _status.OnNext(ClientConnectionStatus.Disconnected);
         }
+
+        protected virtual void OnSignOut() {}
 
         public void DidSignIn(SignIn signIn, GoogleUser user, NSError error)
         {
@@ -74,9 +73,25 @@ namespace Easilog.iOS
                 _logger.WriteError($"Google Signin failed: {error.ToString()}");
 
             if (error == null && user != null)
+            {
+                OnProcessSignIn(signIn, user);
                 _status.OnNext(ClientConnectionStatus.Connected);
+            }
             else
+            {
+                OnProcessDisconnect(signIn, user, error);
                 _status.OnNext(ClientConnectionStatus.Disconnected);
+            }
+        }
+
+        protected virtual void OnProcessDisconnect(SignIn signIn, GoogleUser user, NSError error)
+        {
+            
+        }
+
+        protected virtual void OnProcessSignIn(SignIn signIn, GoogleUser user)
+        {
+            
         }
 
         [Export("signInWillDispatch:error:")]
@@ -96,17 +111,17 @@ namespace Easilog.iOS
             UIApplication.SharedApplication.KeyWindow.RootViewController.DismissViewController(true, null);
         }
 
-        public Task<Stream> SaveAsync()
+        public virtual Task<Stream> SaveAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<UserCredentials> LoadAsync(Stream stream)
+        public virtual Task<UserCredentials> LoadAsync(Stream stream)
         {
             throw new NotImplementedException();
         }
 
-        public void SetCredentials(UserCredentials credentials)
+        public virtual void SetCredentials(UserCredentials credentials)
         {
             throw new NotSupportedException("You cannot directly set credentials on the google oauth client.");
         }
