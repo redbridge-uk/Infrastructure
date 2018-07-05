@@ -27,13 +27,13 @@ namespace Redbridge.Identity.Facebook.iOS
             _logger.WriteDebug("Created instance of iOS Facebook Authentication client.");
         }
 
+        protected IApplicationSettingsRepository Settings => _settings;
 
-        public bool IsConnected => _accessToken != null && !_accessToken.IsExpired;
+        public virtual bool IsConnected => _accessToken != null && !_accessToken.IsExpired;
 
         public virtual string Username => _accessToken.UserID;
 
         public virtual string AccessToken => _accessToken.TokenString;
-
 
         public IObservable<ClientConnectionStatus> ConnectionStatus => _status;
 
@@ -53,15 +53,16 @@ namespace Redbridge.Identity.Facebook.iOS
                                                      {
                     
                                                          _accessToken = result.Token;
-                                                         OnProcessSignIn(result, error);
+                                                          OnProcessSignInAsync(result, error);
                                                          _status.OnNext(ClientConnectionStatus.Connected);
                                                      }
                                                  });
             return System.Threading.Tasks.Task.CompletedTask;
         }
 
-        protected virtual void OnProcessSignIn(LoginManagerLoginResult result, NSError error)
+        protected virtual System.Threading.Tasks.Task OnProcessSignInAsync(LoginManagerLoginResult result, NSError error) 
         {
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         public System.Threading.Tasks.Task LogoutAsync()
@@ -71,8 +72,9 @@ namespace Redbridge.Identity.Facebook.iOS
             return System.Threading.Tasks.Task.CompletedTask;
         }
 
-        protected virtual void OnProcessLogOut()
+        protected virtual System.Threading.Tasks.Task OnProcessLogOut() 
         {
+            return System.Threading.Tasks.Task.CompletedTask;            
         }
 
         public virtual Task<Stream> SaveAsync()

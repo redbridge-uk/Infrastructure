@@ -26,6 +26,8 @@ namespace Easilog.iOS
             _logger.WriteDebug("Created instance of iOS Google Authentication client.");
         }
 
+        protected IApplicationSettingsRepository Settings => _settings;
+
         public Task BeginLoginAsync ()
         {
             _logger.WriteDebug("Beginning login for iOS Google Authentication client...");
@@ -55,14 +57,17 @@ namespace Easilog.iOS
 
         public ClientConnectionStatus CurrentConnectionStatus => _status.Value;
 
-        public void SignOut()
+        public async Task SignOut()
         {
             _currentUser = null;
-            OnSignOut();
+            await OnSignOut();
             _status.OnNext(ClientConnectionStatus.Disconnected);
         }
 
-        protected virtual void OnSignOut() {}
+        protected virtual Task OnSignOut() 
+        {
+            return Task.CompletedTask;
+        }
 
         public void DidSignIn(SignIn signIn, GoogleUser user, NSError error)
         {

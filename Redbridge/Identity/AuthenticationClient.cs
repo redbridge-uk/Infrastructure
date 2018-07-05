@@ -8,6 +8,7 @@ using Redbridge.Security;
 
 namespace Redbridge.Identity
 {
+
     public abstract class AuthenticationClient : IAuthenticationClient
     {
 		private readonly BehaviorSubject<ClientConnectionStatus> _status = new BehaviorSubject<ClientConnectionStatus>(ClientConnectionStatus.Disconnected);

@@ -1,7 +1,7 @@
 ﻿<package>
   <metadata>
     <id>Redbridge.Xamarin.Forms.iOS</id>
-    <version>2.0.27</version>
+    <version>2.0.29</version>
     <title>Redbridge MVVM Xamarin Forms iOS Library</title>
     <authors>Redbridge</authors>
     <owners>Redbridge</owners>
@@ -12,8 +12,8 @@
     <copyright>Copyright Redbridge 2018</copyright>
     <tags>Redbridge, MVVM, Forms, Portable, Xamarin, iOS, Library</tags>
     <dependencies>
-    	<dependency id="Redbridge.SDK.iOS" version="2.0.27"/>
-    	<dependency id="Redbridge.Xamarin.Forms" version="2.0.27"/>
+    	<dependency id="Redbridge.SDK.iOS" version="2.0.29"/>
+    	<dependency id="Redbridge.Xamarin.Forms" version="2.0.29"/>
     </dependencies>
   </metadata>
  
