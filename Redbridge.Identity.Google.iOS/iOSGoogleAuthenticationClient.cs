@@ -79,24 +79,24 @@ namespace Easilog.iOS
 
             if (error == null && user != null)
             {
-                OnProcessSignIn(signIn, user);
+                OnProcessSignIn(signIn, user).RunSynchronously();
                 _status.OnNext(ClientConnectionStatus.Connected);
             }
             else
             {
-                OnProcessDisconnect(signIn, user, error);
+                OnProcessDisconnect(signIn, user, error).RunSynchronously();
                 _status.OnNext(ClientConnectionStatus.Disconnected);
             }
         }
 
-        protected virtual void OnProcessDisconnect(SignIn signIn, GoogleUser user, NSError error)
+        protected virtual Task OnProcessDisconnect(SignIn signIn, GoogleUser user, NSError error)
         {
-            
+            return Task.CompletedTask;
         }
 
-        protected virtual void OnProcessSignIn(SignIn signIn, GoogleUser user)
+        protected virtual Task OnProcessSignIn(SignIn signIn, GoogleUser user)
         {
-            
+            return Task.CompletedTask;
         }
 
         [Export("signInWillDispatch:error:")]
