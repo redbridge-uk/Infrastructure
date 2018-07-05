@@ -1,22 +1,50 @@
-﻿using System.Threading.Tasks;
-using Redbridge.Configuration;
-using Redbridge.Diagnostics;
+﻿using System;
+using System.IO;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using Redbridge.Security;
 
 namespace Redbridge.Identity
 {
-    public class AnonymousAuthenticationClient : AuthenticationClient
+    public class AnonymousAuthenticationClient : IAuthenticationClient
     {
-        protected AnonymousAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger) : base(settings, logger) { }
+        public string AuthenticationMethod => "None";
 
-        public override string AuthenticationMethod => "None";
+        public string Username => string.Empty;
 
-        public override string Username => string.Empty;
+        public string AccessToken => string.Empty;
 
-        public override string AccessToken => string.Empty;
+        public string ClientType => "Anonymous";
 
-        public override string ClientType => "Anonymous";
+        public bool IsConnected => true;
 
-        protected override Task OnBeginLoginAsync()
+        public IObservable<ClientConnectionStatus> ConnectionStatus => Observable.Return(ClientConnectionStatus.Connected);
+
+        public ClientConnectionStatus CurrentConnectionStatus => ClientConnectionStatus.Connected;
+
+        public Task BeginLoginAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<UserCredentials> LoadAsync(Stream stream)
+        {
+            return Task.FromResult<UserCredentials>(UserCredentials.Empty(AuthenticationMethod));
+        }
+
+        public Task LogoutAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<Stream> SaveAsync()
+        {
+            return Task.FromResult((Stream)new MemoryStream());
+        }
+
+        public void SetCredentials(UserCredentials credentials) { }
+
+        protected Task OnBeginLoginAsync()
         {
             return Task.CompletedTask;
         }

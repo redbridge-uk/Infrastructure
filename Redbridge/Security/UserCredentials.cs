@@ -50,12 +50,12 @@ namespace Redbridge.Security
             }
         }
 
-        internal static UserCredentials Empty(string authenticationMethod)
+        public static UserCredentials Empty(string authenticationMethod)
         {
             return new UserCredentials() { AuthenticationMethod = authenticationMethod };
         }
 
-        internal static UserCredentials New()
+        public static UserCredentials New()
         {
             return new UserCredentials();
         }

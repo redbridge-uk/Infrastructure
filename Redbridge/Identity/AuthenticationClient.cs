@@ -16,12 +16,12 @@ namespace Redbridge.Identity
 
         protected ILogger Logger { get; set; }
 
+        public static IAuthenticationClient Anonymous => new AnonymousAuthenticationClient();
+
         protected AuthenticationClient(IApplicationSettingsRepository settings, ILogger logger)
         {
-            if (logger == null) throw new ArgumentNullException(nameof(logger));
-            if (settings == null) throw new ArgumentNullException(nameof(settings));
-            Logger = logger;
-			_settings = settings;
+            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+			_settings = settings ?? throw new ArgumentNullException(nameof(settings));
 		}
 
         public void SetCredentials (UserCredentials credentials)

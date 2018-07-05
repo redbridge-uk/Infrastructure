@@ -1,7 +1,7 @@
 ﻿<package>
   <metadata>
     <id>Redbridge.Xamarin.Forms.Droid</id>
-    <version>2.0.29</version>
+    <version>2.0.31</version>
     <title>Redbridge MVVM Xamarin Forms Android Library</title>
     <authors>Redbridge</authors>
     <owners>Redbridge</owners>
@@ -12,8 +12,8 @@
     <copyright>Copyright Redbridge 2017</copyright>
     <tags>Redbridge, MVVM, Forms, Portable, Xamarin, Android, Library</tags>
     <dependencies>
-    	<dependency id="Redbridge.SDK.Droid" version="2.0.29"/>
-    	<dependency id="Redbridge.Xamarin.Forms" version="2.0.29"/>
+    	<dependency id="Redbridge.SDK.Droid" version="2.0.31"/>
+    	<dependency id="Redbridge.Xamarin.Forms" version="2.0.31"/>
     </dependencies>
   </metadata>
  

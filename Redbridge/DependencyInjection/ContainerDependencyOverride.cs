@@ -21,4 +21,16 @@ namespace Redbridge.DependencyInjection
             if (instance.Equals(default(T))) throw new ArgumentNullException(nameof(instance));
         }
     }
+
+    public class ContainerInjectionMember
+    {
+        public Type Type { get; private set; }
+        public Func<object> InstanceFactory { get; private set; }
+
+        public ContainerInjectionMember (Type type, Func<object> instanceFactory)
+        {
+            Type = type;
+            InstanceFactory = instanceFactory ?? throw new ArgumentNullException(nameof(instanceFactory));
+        }
+    }
 }

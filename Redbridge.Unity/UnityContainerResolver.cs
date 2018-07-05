@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Redbridge.DependencyInjection;
 using Unity;
+using Unity.Injection;
 using Unity.Lifetime;
+using Unity.Registration;
 using Unity.Resolution;
 
 namespace Redbridge.Unity
@@ -45,6 +47,12 @@ namespace Redbridge.Unity
 		{
 			_container.RegisterType<T, T1>();
 		}
+
+        public void RegisterType<T, T1>(ContainerInjectionMember injectionMember) where T1 : T
+        {
+            var injectionFactory = new InjectionFactory((arg) => injectionMember.InstanceFactory);
+            _container.RegisterType<T, T1>(injectionFactory);
+        }
 
 		public void RegisterType<T, T1>(LifeTime lifeTime = LifeTime.Transient) where T1 : T
 		{
