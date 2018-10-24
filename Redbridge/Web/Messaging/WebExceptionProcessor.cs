@@ -46,6 +46,8 @@ namespace Redbridge.SDK
 			{
 				throw new UserNotAuthorizedException(httpWebResponse.ReasonPhrase);
 			}
+
+            throw new UnhandledWebException(httpWebResponse.StatusCode, httpWebResponse.ReasonPhrase);
 		}
 	}
 }

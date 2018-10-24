@@ -10,10 +10,10 @@ using Redbridge.Security;
 
 namespace Redbridge.SDK.Tests
 {
-    //[TestFixture()]
+    [TestFixture()]
     public class OAuthUsernamePasswordAuthenticationClientTests
     {
-        //[Test()]
+        [Test()]
         public void CreateOAuthUserNamePasswordClientSetCredentialsKeepsRefreshTokenExpectSuccess()
 		{
 			var mockSettings = new Mock<IApplicationSettingsRepository>();

@@ -19,8 +19,7 @@ namespace Redbridge.SDK
 
 		protected JsonWebRequest(string requestUri, HttpVerb httpVerb)
 		{
-			if (requestUri == null) throw new ArgumentNullException(nameof(requestUri));
-			_requestUriString = requestUri;
+            _requestUriString = requestUri ?? throw new ArgumentNullException(nameof(requestUri));
 			_httpVerb = httpVerb;
 			AuthenticationMethod = AuthenticationMethod.Bearer;
 		}
@@ -48,6 +47,11 @@ namespace Redbridge.SDK
 				BaseAddress = OnCreateEndpointUri(),
 			};
 		}
+
+        protected virtual void OnHandleUnhandledWebException (UnhandledWebException uwe)
+        {
+            throw uwe;
+        }
 
 		protected virtual void OnApplySignature(HttpClient request)
 		{

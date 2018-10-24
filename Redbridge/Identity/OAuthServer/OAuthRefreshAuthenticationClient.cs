@@ -41,7 +41,7 @@ namespace Redbridge.Identity.OAuthServer
         protected override void OnSetCredentials(UserCredentials credentials)
         {
             if (credentials == null) throw new ArgumentNullException(nameof(credentials));
-            Logger.WriteDebug($"Setting credentials against OAuth base refresh client username:{credentials.Username}, refresh:{credentials.RefreshToken}");
+            Logger.WriteDebug($"Setting credentials against OAuth base refresh client username:{credentials.Username ?? "Anonymous"}, refresh:{credentials.RefreshToken}");
             CancelRefresh();
 			ClearTokens();
 			base.OnSetCredentials(credentials);
@@ -152,6 +152,15 @@ namespace Redbridge.Identity.OAuthServer
 				SetStatus(ClientConnectionStatus.Disconnected);
 			}
 		}
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            CancelRefresh();
+            _tokenExpiredObservable?.Dispose();
+            ClearTokens();
+
+        }
 
         private void CancelRefresh ()
         {

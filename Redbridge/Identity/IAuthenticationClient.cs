@@ -5,7 +5,7 @@ using Redbridge.Security;
 
 namespace Redbridge.Identity
 {
-	public interface IAuthenticationClient
+    public interface IAuthenticationClient : IDisposable
 	{
 		bool IsConnected { get; }
         string Username { get; }

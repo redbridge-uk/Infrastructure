@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Redbridge.SDK
 {
-	public class UserNotAuthorizedException : RedbridgeException
+    public class UserNotAuthorizedException : RedbridgeException
 	{
 		public UserNotAuthorizedException() { }
 

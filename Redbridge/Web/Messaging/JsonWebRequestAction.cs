@@ -10,8 +10,15 @@ namespace Redbridge.SDK
 		{
 			using (var response = await OnExecuteRequestAsync())
 			{
-				if (!response.IsSuccessStatusCode)
-					await response.ThrowResponseException();
+                try
+                {
+				    if (!response.IsSuccessStatusCode)
+					    await response.ThrowResponseException();
+                }
+                catch (UnhandledWebException uwe)
+                {
+                    OnHandleUnhandledWebException(uwe);
+                }
 			}
 		}
 	}
@@ -25,8 +32,15 @@ namespace Redbridge.SDK
 				OnExtractParameters(input1);
 				using (var response = await OnExecuteRequestAsync(input1))
 				{
-					if (!response.IsSuccessStatusCode)
-						await response.ThrowResponseException();
+                    try
+                    {
+                        if (!response.IsSuccessStatusCode)
+                            await response.ThrowResponseException();
+                    }
+                    catch (UnhandledWebException uwe)
+                    {
+                        OnHandleUnhandledWebException(uwe);
+                    }
 				}
 		}
 

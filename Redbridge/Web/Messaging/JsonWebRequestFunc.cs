@@ -16,8 +16,15 @@ namespace Redbridge.SDK
 			OnExtractParameters(input1);
 			using (var response = await OnExecuteRequestAsync(input1))
 			{
-				if (!response.IsSuccessStatusCode)
-					await response.ThrowResponseException();
+                try
+                {
+				    if (!response.IsSuccessStatusCode)
+					    await response.ThrowResponseException();
+                }
+                catch (UnhandledWebException uwe)
+                {
+                    OnHandleUnhandledWebException(uwe);
+                }
 
 				return await OnReadResultBody(response);
 			}
@@ -58,8 +65,7 @@ namespace Redbridge.SDK
 		public JsonWebRequestFunc(Uri baseUri, string requestUri, HttpVerb httpVerb)
 			: this(requestUri, httpVerb)
 		{
-			if (baseUri == null) throw new ArgumentNullException(nameof(baseUri));
-			RootUri = baseUri;
+            RootUri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
 		}
 
 		public JsonWebRequestFunc(string requestUri, HttpVerb httpVerb)
@@ -69,9 +75,16 @@ namespace Redbridge.SDK
 		{
 			using (var response = await OnExecuteRequestAsync())
 			{
-				if (!response.IsSuccessStatusCode)
-					await response.ThrowResponseException();
-				
+                try
+                {
+                    if (!response.IsSuccessStatusCode)
+                        await response.ThrowResponseException();
+                }
+                catch (UnhandledWebException uwe)
+                {
+                    OnHandleUnhandledWebException(uwe);
+                }
+
 				return await OnReadResultBody(response);
 			}
 		}

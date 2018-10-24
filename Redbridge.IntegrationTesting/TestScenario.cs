@@ -52,7 +52,7 @@ namespace Redbridge.IntegrationTesting
 
 		public void Dispose()
 		{
-			_sessionCollection.Dispose();
+			_sessionCollection?.Dispose();
 		}
 
 		protected abstract string DomainName { get; }
