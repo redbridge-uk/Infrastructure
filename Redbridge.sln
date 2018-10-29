@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Identity.Facebook
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Tests", "Redbridge\Tests\Redbridge.Tests.csproj", "{ED326C80-ECCB-4394-B04E-91B4A0B2DB88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Services.WebApi.Tests", "Redbridge.Services.WebApi\Tests\Redbridge.Services.WebApi.Tests.csproj", "{298780F8-5085-4DC9-8D20-22A74DBE003F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -368,6 +370,18 @@ Global
 		{ED326C80-ECCB-4394-B04E-91B4A0B2DB88}.Release|iPhone.Build.0 = Release|Any CPU
 		{ED326C80-ECCB-4394-B04E-91B4A0B2DB88}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{ED326C80-ECCB-4394-B04E-91B4A0B2DB88}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Release|iPhone.Build.0 = Release|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{298780F8-5085-4DC9-8D20-22A74DBE003F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

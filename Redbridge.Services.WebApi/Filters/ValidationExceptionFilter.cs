@@ -32,7 +32,7 @@ namespace Redbridge.Services.WebApi.Filters
 
 			if (validationResultsException != null)
 			{
-                _logger.WriteDebug("Validation exception filtering being applied to a multi-results exception...");
+                _logger.WriteInfo("Validation exception filtering being applied to a multi-results exception...");
 				if (validationResultsException.Results?.Results != null)
 					results = validationResultsException.Results.Results.ToArray();
 				else
@@ -40,7 +40,7 @@ namespace Redbridge.Services.WebApi.Filters
 			}
 			else if (validationException != null)
 			{
-                _logger.WriteDebug("Validation exception filtering being applied to a single result validation exception...");
+                _logger.WriteInfo("Validation exception filtering being applied to a single result validation exception...");
 				results = new[] { new ValidationResult(false, validationException.Message) };
 			}
 			else
@@ -49,7 +49,7 @@ namespace Redbridge.Services.WebApi.Filters
 				return;
 			}
 
-            _logger.WriteDebug("Serializing results into JSON for transmission...");
+            _logger.WriteInfo("Serializing results into JSON for transmission...");
 			var rawJson = JsonConvert.SerializeObject(results, new JsonSerializerSettings()
 			{
 				ContractResolver = new CamelCasePropertyNamesContractResolver()
