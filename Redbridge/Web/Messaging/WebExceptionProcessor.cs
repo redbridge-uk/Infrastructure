@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Redbridge.IO;
+using Redbridge.Validation;
 
 namespace Redbridge.SDK
 {
@@ -21,21 +22,24 @@ namespace Redbridge.SDK
 
 				// For your future self, this makes no sense at all.
 				// Depending on implementation, you may get back an array here.
-				var message = "No validation message supplied.";
+				var message = httpWebResponse.ReasonPhrase;
 
-				if (body is JArray)
-				{
-					var bodyItem = body[0]["message"];
-					message = bodyItem.Value;
-				}
-				else
-					message = body["message"].Value;
+                if (body is JArray)
+                {
+                    var results = new ValidationResultCollection(message);
+                    foreach (var bodyItem in body)
+                    {
+                        string itemMessage = bodyItem["message"];
+                        string propertyName = bodyItem["propertyName"];
+                        bool success = bodyItem["success"];
+                        results.AddResult(new ValidationResult(success, itemMessage) { PropertyName = propertyName });
+                    }
 
-				if (message != null)
-					throw new ValidationException(message);
-				else
-					throw new ValidationException();
-			}
+                    throw new ValidationResultsException(message, results);
+                }
+
+                throw new ValidationException(message);
+            }
 
 			if (httpWebResponse.StatusCode == HttpStatusCode.Unauthorized)
 			{

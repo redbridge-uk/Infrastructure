@@ -18,7 +18,12 @@ namespace Redbridge.Validation
 			}
 		}
 
-		public ValidationResultCollection(IEnumerable<ValidationResult> results, string message = "") : this(true)
+        public ValidationResultCollection(string message) : this(true)
+        {
+            Message = message;
+        }
+
+        public ValidationResultCollection(IEnumerable<ValidationResult> results, string message = "") : this(true)
 		{
 			if (results == null) throw new ArgumentNullException(nameof(results));
 			AddRange(results);
