@@ -6,7 +6,6 @@ using Redbridge.Services.WebApi.Filters;
 using System;
 using System.Net.Http;
 using System.Text;
-using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
@@ -54,6 +53,7 @@ namespace Redbridge.Services.WebApi.Tests
             filter.OnException(context);
             Assert.IsNotNull(context.Exception);
             Assert.IsNotNull(context.Response);
+            Assert.AreEqual("Unknown/invalid some sort of message:Link ID: abc,Link ID: def", context.Response.ReasonPhrase);
         }
     }
 }

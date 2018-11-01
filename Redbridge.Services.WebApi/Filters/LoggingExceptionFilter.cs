@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
@@ -22,7 +23,7 @@ namespace Redbridge.Services.WebApi.Filters
             {
                 _logger.WriteInfo($"Logging that an exception has occurred in LoggingExceptionFilter: {actionExecutedContext.Exception.Message}...");
                 var messagePhrase = actionExecutedContext.Exception.Message ?? "Internal server error - no additional detail supplied";
-                messagePhrase = messagePhrase.Replace(Environment.NewLine, ", "); // Cariage returns are not permitted in reason phrases.
+                messagePhrase = string.Join(",", messagePhrase.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Where(s => !string.IsNullOrWhiteSpace(s)) ); // Cariage returns are not permitted in reason phrases.
 
                 var response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
