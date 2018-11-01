@@ -94,16 +94,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppInitializer.cs" />
-    <Compile Include="ViewModelTests.cs" />
     <Compile Include="SwitchCellViewModelTests.cs" />
     <Compile Include="ActionSheetOptionTests.cs" />
     <Compile Include="Cells\TextEntryCellViewModelTests.cs" />
     <Compile Include="Cells\NumericEntryCellViewModelTests.cs" />
     <Compile Include="Cells\DateEntryCellViewModelTests.cs" />
-    <Compile Include="EditableTableViewModelTests.cs" />
     <Compile Include="TableSectionViewModelTests.cs" />
     <Compile Include="Mocks\MockSchedulerService.cs" />
-    <Compile Include="NavigationServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

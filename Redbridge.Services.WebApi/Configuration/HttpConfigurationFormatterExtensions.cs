@@ -13,7 +13,7 @@ namespace Redbridge.Services.WebApi.Configuration
         public static void InstallJsonFormatting (this HttpConfiguration configuration, bool disableXmlSupport = true)
         {
             configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-			configuration.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
+            configuration.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.None;
 			configuration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
 			configuration.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			configuration.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;

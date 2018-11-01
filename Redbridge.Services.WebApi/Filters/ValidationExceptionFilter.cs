@@ -25,7 +25,8 @@ namespace Redbridge.Services.WebApi.Filters
 		public override void OnException(HttpActionExecutedContext actionExecutedContext)
 		{
             // Convert ValidationResultsException results or a ValidationException into ValidationResults
-            _logger.WriteDebug("Checking exception for validation exception filtering....");
+            _logger.WriteInfo("Checking exception for validation exception filtering....");
+
 			ValidationResult[] results;
 			var validationResultsException = actionExecutedContext.Exception as ValidationResultsException;
 			var validationException = actionExecutedContext.Exception as ValidationException;
@@ -63,7 +64,7 @@ namespace Redbridge.Services.WebApi.Filters
             _logger.WriteDebug($"Setting JSON result on response message: {rawJson} with code 422.");
 			actionExecutedContext.Response = new HttpResponseMessage((HttpStatusCode)422)
 			{
-                ReasonPhrase = reasonPhrase.Replace(Environment.NewLine, ","),
+                ReasonPhrase = string.Join(",", reasonPhrase.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Where(s => !string.IsNullOrWhiteSpace(s))),
 				Content = new StringContent(rawJson, Encoding.UTF8, "application/json"),
 				RequestMessage = actionExecutedContext.Request
 			};

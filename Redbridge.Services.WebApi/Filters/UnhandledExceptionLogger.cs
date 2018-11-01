@@ -14,13 +14,12 @@ namespace Redbridge.Services.WebApi.Filters
 
 		public UnhandledExceptionLogger(ILogger logger)
 		{
-			if (logger == null) throw new ArgumentNullException(nameof(logger));
-			_logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 		}
 
 		public Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
 		{
-            _logger.WriteDebug("Handling unhandled exceptions...");
+
 
             if (context.Exception is DbEntityValidationException exception)
             {
@@ -32,6 +31,8 @@ namespace Redbridge.Services.WebApi.Filters
             }
             else
             {
+                _logger.WriteInfo("Logging (only) unhandled exceptions...");
+
                 if (context.Exception != null)
                     _logger.WriteException(context.Exception);
             }

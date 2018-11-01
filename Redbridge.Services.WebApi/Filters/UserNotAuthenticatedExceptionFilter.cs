@@ -18,7 +18,8 @@ namespace Redbridge.Services.WebApi.Filters
 
 		public override void OnException(HttpActionExecutedContext actionExecutedContext)
 		{
-            _logger.WriteDebug("Checking exception for user not authenticated exception filtering....");
+            _logger.WriteInfo("Checking exception for user not authenticated exception filtering....");
+
 			var exception = actionExecutedContext.Exception as UserNotAuthenticatedException;
 
 			if (exception != null)

@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="TestValidationExceptionFilter.cs" />
     <Compile Include="TestExceptionLoggerFilter.cs" />
+    <Compile Include="TestUnknownEntityException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Redbridge.Services.WebApi.csproj">

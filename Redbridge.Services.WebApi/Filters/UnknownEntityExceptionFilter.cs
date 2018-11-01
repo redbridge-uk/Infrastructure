@@ -20,7 +20,6 @@ namespace Redbridge.Services.WebApi.Filters
 
 		public override void OnException(HttpActionExecutedContext actionExecutedContext)
 		{
-            _logger.WriteDebug("Checking exception for unknown entity exception filtering....");
 			var unknownEntityException = actionExecutedContext.Exception as UnknownEntityException;
 
 			if (unknownEntityException != null)
@@ -29,7 +28,8 @@ namespace Redbridge.Services.WebApi.Filters
 
 				var errorMessageError = new HttpError(unknownEntityException.Message);
 				// Only a single result issue.
-				actionExecutedContext.Response = actionExecutedContext.Request.CreateErrorResponse((HttpStatusCode)422, errorMessageError);
+                actionExecutedContext.Response = actionExecutedContext.Request.CreateErrorResponse((HttpStatusCode)422, errorMessageError);
+                actionExecutedContext.Response.ReasonPhrase = string.Join(",", unknownEntityException.Message.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
                 actionExecutedContext.Exception = null;
 			}
 		}

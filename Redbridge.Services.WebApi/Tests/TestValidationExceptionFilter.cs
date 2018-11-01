@@ -48,9 +48,9 @@ namespace Redbridge.Services.WebApi.Tests
             catch (ValidationException ve)
             {
                 Assert.AreEqual("Something went wrong.", ve.Message);
-                //Assert.IsFalse(ve.Success);
             }
         }
+
 
         [Test()]
         public void FilterValidationExceptionMultiTypeViewValidateBodyJson()
