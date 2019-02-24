@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rbns:RedbridgeBusyContentPage 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    xmlns:rbns="clr-namespace:Redbridge.Forms;assembly=Redbridge.Forms"
-    x:Class="TesterApp.ThemeViewerContentPage">
-        <Label>My testing label</Label>
-</rbns:RedbridgeBusyContentPage>
