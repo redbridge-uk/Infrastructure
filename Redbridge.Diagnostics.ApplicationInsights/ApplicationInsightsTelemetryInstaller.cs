@@ -9,7 +9,7 @@ namespace Redbridge.Diagnostics.ApplicationInsights
 	{
 		public void Initialize(ITelemetry telemetry)
 		{
-			telemetry.Context.Properties["tags"] = ConfigurationManager.AppSettings["ApplicationInsights:Tags"];
+			telemetry.Context.GlobalProperties["tags"] = ConfigurationManager.AppSettings["ApplicationInsights:Tags"];
 		}
 	}
 

@@ -325,3 +325,4 @@ ASALocalRun/
 
 # Project specific files
 BuildPackages
+*.DotSettings
