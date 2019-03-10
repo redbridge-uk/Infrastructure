@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -124,22 +124,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Redbridge.SDK.Windows.nuspec" />
-    <None Include="Redbridge.SDK.Windows.symbols.nuspec" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Linq\" />
-    <Folder Include="Configuration\" />
-    <Folder Include="Diagnostics\" />
-    <Folder Include="Validation\" />
-    <Folder Include="Validation\Markup\" />
-    <Folder Include="Security\" />
-    <Folder Include="Notifications\" />
-    <Folder Include="Data\" />
-    <Folder Include="Data\Mapping\" />
-    <Folder Include="Web\" />
-    <Folder Include="Exceptions\" />
-    <Folder Include="Identity\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Redbridge\Redbridge.csproj">
       <Project>{FA042554-BC38-4B47-B6EF-A10AC76CB200}</Project>

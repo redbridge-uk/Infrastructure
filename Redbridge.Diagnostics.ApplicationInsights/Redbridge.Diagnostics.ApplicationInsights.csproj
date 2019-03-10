@@ -68,7 +68,6 @@
     <None Include="app.config" />
     <None Include="ApplicationInsights.config" />
     <None Include="Redbridge.Diagnostics.ApplicationInsights.nuspec" />
-    <None Include="Redbridge.Diagnostics.ApplicationInsights.symbols.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

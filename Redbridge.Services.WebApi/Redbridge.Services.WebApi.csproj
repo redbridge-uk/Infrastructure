@@ -111,7 +111,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Redbridge.Services.WebApi.nuspec" />
-    <None Include="Redbridge.Services.WebApi.symbols.nuspec" />
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>

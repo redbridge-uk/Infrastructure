@@ -72,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Redbridge.IntegrationTesting.nuspec" />
-    <None Include="Redbridge.IntegrationTesting.symbols.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
