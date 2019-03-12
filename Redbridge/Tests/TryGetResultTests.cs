@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
 using Redbridge.SDK;
 
-namespace Tests
+namespace Redbridge.Tests
 {
     [TestFixture()]
     public class TryGetResultTests

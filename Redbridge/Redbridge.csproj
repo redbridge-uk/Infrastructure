@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Tests\**" />
+    <EmbeddedResource Remove="Tests\**" />
+    <None Remove="Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ApiManagement\" />
     <Folder Include="Collections\" />
     <Folder Include="Configuration\" />
@@ -34,94 +40,6 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Tests\FieldMappingTests.cs" />
-    <Compile Remove="Tests\GZipStringCompressorTestClass.cs" />
-    <Compile Remove="Tests\MultiKeyedCollectionTest.cs" />
-    <Compile Remove="Tests\OAuthClientSecretAuthenticationClientTests.cs" />
-    <Compile Remove="Tests\OAuthUsernamePasswordAuthenticationClientTests.cs" />
-    <Compile Remove="Tests\StreamConversionTests.cs" />
-    <Compile Remove="Tests\StringMapTestClass.cs" />
-    <Compile Remove="Tests\TryGetResultTests.cs" />
-    <Compile Remove="Tests\ValidationExceptionDeserializationTests.cs" />
-    <Compile Remove="Tests\WebRequestFactoryTests.cs" />
-    <Compile Remove="Tests\WeightConverterTests.cs" />
-    <Compile Remove="Tests\Validation\DateTimeValidatorTests.cs" />
-    <Compile Remove="Tests\obj\Debug\.NETFramework,Version=v4.6.1.AssemblyAttribute.cs" />
-    <Compile Remove="Tests\obj\Release\.NETFramework,Version=v4.6.1.AssemblyAttribute.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Tests\packages.config" />
-    <None Remove="Tests\bin\Debug\Castle.Core.dll" />
-    <None Remove="Tests\bin\Debug\Castle.Core.xml" />
-    <None Remove="Tests\bin\Debug\Moq.dll" />
-    <None Remove="Tests\bin\Debug\Moq.pdb" />
-    <None Remove="Tests\bin\Debug\Moq.xml" />
-    <None Remove="Tests\bin\Debug\Newtonsoft.Json.dll" />
-    <None Remove="Tests\bin\Debug\Newtonsoft.Json.xml" />
-    <None Remove="Tests\bin\Debug\Redbridge.SDK.Tests.dll" />
-    <None Remove="Tests\bin\Debug\Redbridge.SDK.Tests.dll.config" />
-    <None Remove="Tests\bin\Debug\Redbridge.SDK.Tests.pdb" />
-    <None Remove="Tests\bin\Debug\Redbridge.SDK.dll" />
-    <None Remove="Tests\bin\Debug\Redbridge.SDK.pdb" />
-    <None Remove="Tests\bin\Debug\System.Net.Http.Extensions.dll" />
-    <None Remove="Tests\bin\Debug\System.Net.Http.Extensions.xml" />
-    <None Remove="Tests\bin\Debug\System.Net.Http.Primitives.dll" />
-    <None Remove="Tests\bin\Debug\System.Net.Http.Primitives.xml" />
-    <None Remove="Tests\bin\Debug\System.Reactive.Core.dll" />
-    <None Remove="Tests\bin\Debug\System.Reactive.Core.xml" />
-    <None Remove="Tests\bin\Debug\System.Reactive.Interfaces.dll" />
-    <None Remove="Tests\bin\Debug\System.Reactive.Interfaces.xml" />
-    <None Remove="Tests\bin\Debug\System.Reactive.Linq.dll" />
-    <None Remove="Tests\bin\Debug\System.Reactive.Linq.xml" />
-    <None Remove="Tests\bin\Debug\System.Reactive.PlatformServices.dll" />
-    <None Remove="Tests\bin\Debug\System.Reactive.PlatformServices.xml" />
-    <None Remove="Tests\bin\Debug\System.Reactive.Windows.Threading.dll" />
-    <None Remove="Tests\bin\Debug\System.Reactive.Windows.Threading.xml" />
-    <None Remove="Tests\bin\Debug\nunit.framework.dll" />
-    <None Remove="Tests\bin\Debug\nunit.framework.xml" />
-    <None Remove="Tests\bin\Release\Castle.Core.dll" />
-    <None Remove="Tests\bin\Release\Castle.Core.xml" />
-    <None Remove="Tests\bin\Release\Moq.dll" />
-    <None Remove="Tests\bin\Release\Moq.pdb" />
-    <None Remove="Tests\bin\Release\Moq.xml" />
-    <None Remove="Tests\bin\Release\Newtonsoft.Json.dll" />
-    <None Remove="Tests\bin\Release\Newtonsoft.Json.xml" />
-    <None Remove="Tests\bin\Release\Redbridge.SDK.Tests.dll" />
-    <None Remove="Tests\bin\Release\Redbridge.SDK.Tests.dll.config" />
-    <None Remove="Tests\bin\Release\Redbridge.SDK.dll" />
-    <None Remove="Tests\bin\Release\Redbridge.SDK.dll.mdb" />
-    <None Remove="Tests\bin\Release\Redbridge.SDK.pdb" />
-    <None Remove="Tests\bin\Release\System.Net.Http.Extensions.dll" />
-    <None Remove="Tests\bin\Release\System.Net.Http.Extensions.xml" />
-    <None Remove="Tests\bin\Release\System.Net.Http.Primitives.dll" />
-    <None Remove="Tests\bin\Release\System.Net.Http.Primitives.xml" />
-    <None Remove="Tests\bin\Release\System.Reactive.Core.dll" />
-    <None Remove="Tests\bin\Release\System.Reactive.Core.xml" />
-    <None Remove="Tests\bin\Release\System.Reactive.Interfaces.dll" />
-    <None Remove="Tests\bin\Release\System.Reactive.Interfaces.xml" />
-    <None Remove="Tests\bin\Release\System.Reactive.Linq.dll" />
-    <None Remove="Tests\bin\Release\System.Reactive.Linq.xml" />
-    <None Remove="Tests\bin\Release\System.Reactive.PlatformServices.dll" />
-    <None Remove="Tests\bin\Release\System.Reactive.PlatformServices.xml" />
-    <None Remove="Tests\bin\Release\System.Reactive.Windows.Threading.dll" />
-    <None Remove="Tests\bin\Release\System.Reactive.Windows.Threading.xml" />
-    <None Remove="Tests\bin\Release\nunit.framework.dll" />
-    <None Remove="Tests\bin\Release\nunit.framework.xml" />
-    <None Remove="Tests\obj\Debug\Redbridge.SDK.Tests.csproj.App.config" />
-    <None Remove="Tests\obj\Debug\Redbridge.SDK.Tests.csproj.CopyComplete" />
-    <None Remove="Tests\obj\Debug\Redbridge.SDK.Tests.csproj.CoreCompileInputs.cache" />
-    <None Remove="Tests\obj\Debug\Redbridge.SDK.Tests.csproj.FileListAbsolute.txt" />
-    <None Remove="Tests\obj\Debug\Redbridge.SDK.Tests.csproj.FilesWrittenAbsolute.txt" />
-    <None Remove="Tests\obj\Debug\Redbridge.SDK.Tests.csprojResolveAssemblyReference.cache" />
-    <None Remove="Tests\obj\Debug\Redbridge.SDK.Tests.dll" />
-    <None Remove="Tests\obj\Debug\Redbridge.SDK.Tests.pdb" />
-    <None Remove="Tests\obj\Release\Redbridge.SDK.Tests.csproj.App.config" />
-    <None Remove="Tests\obj\Release\Redbridge.SDK.Tests.csproj.CopyComplete" />
-    <None Remove="Tests\obj\Release\Redbridge.SDK.Tests.csproj.CoreCompileInputs.cache" />
-    <None Remove="Tests\obj\Release\Redbridge.SDK.Tests.csproj.FileListAbsolute.txt" />
-    <None Remove="Tests\obj\Release\Redbridge.SDK.Tests.csproj.FilesWrittenAbsolute.txt" />
-    <None Remove="Tests\obj\Release\Redbridge.SDK.Tests.csprojResolveAssemblyReference.cache" />
-    <None Remove="Tests\obj\Release\Redbridge.SDK.Tests.dll" />
     <None Remove="Redbridge.SDK.2.0.8.nupkg" />
     <None Remove="Redbridge.SDK.2.0.8.symbols.nupkg" />
     <None Remove="Redbridge.SDK.2.0.15.nupkg" />

@@ -1,13 +1,14 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using Moq;
-using Redbridge.Diagnostics;
+using NUnit.Framework;
 using Redbridge.Configuration;
-using Redbridge.Identity.OAuthServer;
-using Redbridge.Security;
+using Redbridge.Diagnostics;
 using Redbridge.Identity;
+using Redbridge.Identity.OAuthServer;
+using Redbridge.SDK;
+using Redbridge.Security;
 
-namespace Redbridge.SDK.Tests
+namespace Redbridge.Tests
 {
     [TestFixture()]
     public class OAuthClientSecretAuthenticationClientTests

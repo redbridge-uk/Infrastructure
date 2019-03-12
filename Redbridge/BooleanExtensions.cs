@@ -1,7 +1,6 @@
-﻿using System;
-namespace Redbridge.SDK
+﻿namespace Redbridge.SDK
 {
-	public static class BooleanExtensions
+    public static class BooleanExtensions
 	{
 		public static string ToYesNo(this bool value)
 		{

@@ -9,6 +9,7 @@
     <RootNamespace>Redbridge.Console.Test</RootNamespace>
     <AssemblyName>Redbridge.Console.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
