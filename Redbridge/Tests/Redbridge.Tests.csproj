@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{ED326C80-ECCB-4394-B04E-91B4A0B2DB88}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Redbridge.SDK.Tests</RootNamespace>
-    <AssemblyName>Redbridge.SDK.Tests</AssemblyName>
+    <RootNamespace>Redbridge.Tests</RootNamespace>
+    <AssemblyName>Redbridge.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -84,6 +84,22 @@
     <Reference Include="mscorlib" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeExtensionTests.cs" />
+    <Compile Include="DateTimeFormatTests.cs" />
+    <Compile Include="DecimalValidatorTest.cs" />
+    <Compile Include="ExpressionExtensionsTest.cs" />
+    <Compile Include="Int32ValidatorTest.cs" />
+    <Compile Include="PagedResultSetTests.cs" />
+    <Compile Include="PageRequestParserTests.cs" />
+    <Compile Include="SearchParameterTests.cs" />
+    <Compile Include="SearchQueryTests.cs" />
+    <Compile Include="StringExtensionsTest.cs" />
+    <Compile Include="StringValidatorTest.cs" />
+    <Compile Include="TestDebugEventArgs.cs" />
+    <Compile Include="TestStringExtensions.cs" />
+    <Compile Include="UniqueDateComparerTests.cs" />
+    <Compile Include="ValidationCollectionTest.cs" />
+    <Compile Include="ValidationResultsExceptionTest.cs" />
     <Compile Include="WebRequestFactoryTests.cs" />
     <Compile Include="MultiKeyedCollectionTest.cs" />
     <Compile Include="ValidationExceptionDeserializationTests.cs" />
@@ -107,7 +123,6 @@
       <Name>Redbridge</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
 </Project>

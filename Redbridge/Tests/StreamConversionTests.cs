@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Redbridge.IO;
 
-namespace Tests
+namespace Redbridge.Tests
 {
 	[TestFixture()]
 	public class StreamConversionTests

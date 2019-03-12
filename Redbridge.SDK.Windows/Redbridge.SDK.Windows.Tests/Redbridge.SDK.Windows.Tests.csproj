@@ -37,6 +37,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Redbridge.SDK.Windows.csproj">
@@ -54,12 +55,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MethodInfoExtensionsTest.cs" />
+    <Compile Include="ObjectInstanceValidatorTests.cs" />
+    <Compile Include="PropertyValidationResultTest.cs" />
+    <Compile Include="ResourceReaderTest.cs" />
+    <Compile Include="StringValidatorAttributeTest.cs" />
     <Compile Include="SystemNotificationConfigurationSectionTests.cs" />
     <Compile Include="ApiCallContextExampleTests.cs" />
     <Compile Include="Sha256CryptoServiceHashingServiceTests.cs" />
+    <Compile Include="TestClasses\ClassWithStringValidator.cs" />
+    <Compile Include="TestGenericSerializer.cs" />
+    <Compile Include="TestQueryableExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AUD.gif" />
+    <EmbeddedResource Include="Resources\EmbeddedTextFile_1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
