@@ -1,16 +1,10 @@
 ﻿using System;
-namespace Redbridge.SDK
+
+namespace Redbridge
 {
     public static class RelativeDateTime
     {
-        public static DateTime Today
-        {
-            get
-            {
-                var now = DateTime.UtcNow;
-                return new DateTime(now.Year, now.Month, now.Day);
-            }
-        }
+        public static DateTime Today => DateTime.UtcNow.Date;
 
         public static DateTime Tomorrow
         {
@@ -76,6 +70,8 @@ namespace Redbridge.SDK
                 return new DateTime(now.Year, now.Month, 1);
             }
         }
+
+        public static DateTime EndOfThisMonth => StartOfThisMonth.AddMonths(1).AddMilliseconds(-1);
 
         public static DateTime StartOfLastMonth => StartOfThisMonth.AddMonths(-1);
     }
