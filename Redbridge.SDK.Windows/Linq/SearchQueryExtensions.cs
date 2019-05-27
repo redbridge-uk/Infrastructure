@@ -34,9 +34,10 @@ public static class SearchQueryExtensions
 				}
 			}
 
-			IQueryable<T> finalQuery = orQueries.Aggregate<IQueryable<T>, IQueryable<T>>(null, (current, orQuery) => current == null ? orQuery : current.Concat(orQuery));
-			return finalQuery;
-		}
+            IQueryable<T> finalQuery = orQueries.Aggregate<IQueryable<T>, IQueryable<T>>(null,
+                (current, orQuery) => current == null ? orQuery : current.Concat(orQuery));
+            return finalQuery;
+        }
 
 		return input;
 	} }
