@@ -28,6 +28,8 @@ namespace Redbridge.Linq
 			if (pageRequest.Filter != null)
 				source = pageRequest.Filter.CreateQuery(source);
 
+            source = source.Distinct();
+
 			// If no size has been defined, then we simply return all of the source without a query.
 			if (pageRequest.Size.HasValue)
 			{
