@@ -2,8 +2,7 @@
 
 namespace Redbridge.Diagnostics
 {
-
-	public interface ILogger
+    public interface ILogger
 	{
 		void WriteDebug(string message);
 

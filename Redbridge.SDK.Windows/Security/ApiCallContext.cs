@@ -13,8 +13,11 @@ namespace Redbridge.Security
     {
         public static TContext Anonymous => new TContext();
 
+        protected ApiCallContext() : base() { }
         protected ApiCallContext(DateTime systemTime) : base(systemTime) {}
         protected ApiCallContext(ClaimsPrincipal profile) : base(profile) {}
+        protected ApiCallContext(CultureInfo cultureInfo, ClaimsPrincipal profile) : base(cultureInfo, profile) { }
+        protected ApiCallContext(DateTime systemTime, CultureInfo cultureInfo, ClaimsPrincipal profile) : base(systemTime, cultureInfo, profile) { }
 
         public TUserKey? UserId
         {
@@ -73,8 +76,21 @@ namespace Redbridge.Security
 
         protected ApiCallContext(ClaimsPrincipal profile) : this()
         {
-            if (profile == null) throw new ArgumentNullException(nameof(profile));
-            _principal = profile;
+            _principal = profile ?? throw new ArgumentNullException(nameof(profile));
+        }
+
+        protected ApiCallContext(CultureInfo cultureInfo, ClaimsPrincipal profile)
+        {
+            _principal = profile ?? throw new ArgumentNullException(nameof(profile));
+            Culture = cultureInfo;
+            SystemTime = DateTime.UtcNow;
+        }
+
+        protected ApiCallContext(DateTime systemTime, CultureInfo cultureInfo, ClaimsPrincipal profile)
+        {
+            _principal = profile ?? throw new ArgumentNullException(nameof(profile));
+            Culture = cultureInfo;
+            SystemTime = systemTime;
         }
 
         public bool IsAuthenticated => _principal?.Identity != null && _principal.Identity.IsAuthenticated;
@@ -111,6 +127,11 @@ namespace Redbridge.Security
                 var claim = _principal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
                 return claim?.Value;
             }
+        }
+
+        public object GetFormat(Type formatType)
+        {
+            return Culture.GetFormat(formatType);
         }
     }
 }

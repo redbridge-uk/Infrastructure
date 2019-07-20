@@ -2,8 +2,7 @@
 
 namespace Redbridge.Diagnostics
 {
-
-	public class BlackholeLogger : ILogger
+    public class BlackholeLogger : ILogger
 	{
 		public void WriteDebug(string message)
 		{
