@@ -1,6 +1,8 @@
-﻿namespace Redbridge.SDK
+﻿using System;
+
+namespace Redbridge.SDK
 {
-	public interface IApiCallContext
+	public interface IApiCallContext : IFormatProvider
 	{
 		bool IsAuthenticated { get; }
         string FirstName { get; }

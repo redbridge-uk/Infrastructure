@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationInsightsLogger.cs" />
+    <Compile Include="ApplicationInsightsLoggerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApplicationInsightsTelemetryInstaller.cs" />
   </ItemGroup>

@@ -3,8 +3,15 @@ using System.Diagnostics;
 
 namespace Redbridge.Diagnostics
 {
+    public class DebugWriteLoggerFactory : ILoggerFactory
+    {
+        public ILogger Create<T>()
+        {
+            return new DebugWriteLogger();
+        }
+    }
 
-	public class DebugWriteLogger : ILogger
+    public class DebugWriteLogger : ILogger
 	{
 		public void WriteVerbose(string message)
 		{
