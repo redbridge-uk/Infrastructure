@@ -5,7 +5,7 @@ using Microsoft.ApplicationInsights.DataContracts;
 
 namespace Redbridge.Diagnostics.ApplicationInsights
 {
-	public class ApplicationInsightsLogger : ILogger, IEventTracker
+    public class ApplicationInsightsLogger : ILogger, IEventTracker
 	{
 		private readonly TelemetryClient _telemetryClient;
 

@@ -13,8 +13,10 @@ namespace Redbridge.Security
     {
         public static TContext Anonymous => new TContext();
 
+        protected ApiCallContext() : base() { }
         protected ApiCallContext(DateTime systemTime) : base(systemTime) {}
         protected ApiCallContext(ClaimsPrincipal profile) : base(profile) {}
+        protected ApiCallContext(DateTime systemTime, ClaimsPrincipal profile) : base(systemTime, profile) { }
 
         public TUserKey? UserId
         {
@@ -62,24 +64,37 @@ namespace Redbridge.Security
 
         protected ApiCallContext() : this(DateTime.UtcNow) 
         {
-            Culture = new CultureInfo("en-GB");
 		}
 
         protected ApiCallContext(DateTime systemTime)
         {
-            Culture = new CultureInfo("en-GB");
             SystemTime = systemTime;
         }
 
         protected ApiCallContext(ClaimsPrincipal profile) : this()
         {
-            if (profile == null) throw new ArgumentNullException(nameof(profile));
-            _principal = profile;
+            _principal = profile ?? throw new ArgumentNullException(nameof(profile));
+        }
+
+        protected ApiCallContext(DateTime systemTime, ClaimsPrincipal profile)
+        {
+            _principal = profile ?? throw new ArgumentNullException(nameof(profile));
+            SystemTime = systemTime;
         }
 
         public bool IsAuthenticated => _principal?.Identity != null && _principal.Identity.IsAuthenticated;
 
-        public CultureInfo Culture { get; private set; }
+        public virtual CultureInfo Culture
+        {
+            get
+            {
+                var cultureClaim = _principal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Country);
+                return cultureClaim != null
+                    ? CultureInfo.GetCultureInfo(cultureClaim.Value)
+                    : CultureInfo.GetCultureInfo("en-GB");
+            }
+        }
+
         public DateTime SystemTime { get; }
 
         protected ClaimsPrincipal Principal => _principal;
@@ -111,6 +126,11 @@ namespace Redbridge.Security
                 var claim = _principal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
                 return claim?.Value;
             }
+        }
+
+        public object GetFormat(Type formatType)
+        {
+            return Culture.GetFormat(formatType);
         }
     }
 }
