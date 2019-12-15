@@ -1,4 +1,6 @@
-﻿namespace Redbridge.SDK
+﻿using Redbridge.Web.Messaging;
+
+namespace Redbridge.SDK
 {
 	public interface IWebRequestFactory
 	{

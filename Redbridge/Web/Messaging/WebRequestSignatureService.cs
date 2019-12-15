@@ -1,33 +1,32 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Redbridge.Diagnostics;
 using Redbridge.Identity;
+using Redbridge.SDK;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
 	public class WebRequestSignatureService : IWebRequestSignatureService
 	{
-        private readonly IAuthenticationClient _client;
-
-		protected WebRequestSignatureService(ILogger logger, Uri serviceUri, IAuthenticationClient client)
+        protected WebRequestSignatureService(ILogger logger, Uri serviceUri, IAuthenticationClient client)
 		{
-            if (client == null) throw new ArgumentNullException(nameof(client));
             if (serviceUri == null) throw new ArgumentNullException(nameof(serviceUri));
 			Logger = logger;
 			ServiceUri = serviceUri;
-            _client = client;
+            Authority = client ?? throw new ArgumentNullException(nameof(client));
 		}
 
 		protected ILogger Logger { get; }
 
-        public IAuthenticationClient Authority => _client;
+        public IAuthenticationClient Authority { get; }
 
-		public void SignRequest(HttpClient client, AuthenticationMethod method = AuthenticationMethod.Bearer)
+        public void SignRequest(HttpClient client, AuthenticationMethod method = AuthenticationMethod.Bearer)
 		{
 			if (method != AuthenticationMethod.None)
 			{
-				if (_client.IsConnected)
+				if (Authority.IsConnected)
 				{
 					OnAssignAuthenticationMethod(client, method);
 				}
@@ -39,7 +38,44 @@ namespace Redbridge.SDK
 			}
 		}
 
-		protected virtual void OnAssignAuthenticationMethod(HttpClient client, AuthenticationMethod method)
+        public void SignRequest(WebClient client, AuthenticationMethod method = AuthenticationMethod.Bearer)
+        {
+            if (method != AuthenticationMethod.None)
+            {
+                if (Authority.IsConnected)
+                {
+                    OnAssignAuthenticationMethod(client, method);
+                }
+                else
+                {
+                    throw new WebProxyException(
+                        "Unable to sign request as the session manager is not currently connected and AutoConnect is false.");
+                }
+            }
+        }
+
+        protected virtual void OnAssignAuthenticationMethod(WebClient client, AuthenticationMethod method)
+        {
+            if (client == null) throw new ArgumentNullException(nameof(client));
+
+            switch (method)
+            {
+                case AuthenticationMethod.Bearer:
+                    client.Headers.Add(HeaderNames.Authorization,
+                        BearerTokenFormatter.CreateToken(Authority.AccessToken));
+                    break;
+
+                case AuthenticationMethod.QueryString:
+                    client.QueryString.Add(QueryStringParts.Authentication, Authority.AccessToken);
+                    break;
+
+                case AuthenticationMethod.PostParameter:
+                    throw new NotSupportedException(
+                        "Unable to add a post parameter authentication method to a web client.");
+            }
+        }
+
+        protected virtual void OnAssignAuthenticationMethod(HttpClient client, AuthenticationMethod method)
 		{
 			if (client == null) throw new ArgumentNullException(nameof(client));
 
@@ -47,7 +83,7 @@ namespace Redbridge.SDK
 			{
 				case AuthenticationMethod.Bearer:
 					client.DefaultRequestHeaders.Add(HeaderNames.Authorization,
-						BearerTokenFormatter.CreateToken(_client.AccessToken));
+						BearerTokenFormatter.CreateToken(Authority.AccessToken));
 					break;
 					
 				case AuthenticationMethod.QueryString:
@@ -79,7 +115,7 @@ namespace Redbridge.SDK
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects).
-                    _client?.Dispose();
+                    Authority?.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.

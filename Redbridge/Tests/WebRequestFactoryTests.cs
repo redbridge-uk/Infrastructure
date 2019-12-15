@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Redbridge.Identity;
 using Redbridge.Configuration;
 using Redbridge.Diagnostics;
+using Redbridge.Web.Messaging;
 
 namespace Tests
 {

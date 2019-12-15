@@ -4,6 +4,7 @@ using Redbridge.Configuration;
 using Redbridge.Diagnostics;
 using Redbridge.IO;
 using Redbridge.SDK;
+using Redbridge.Web.Messaging;
 
 namespace Redbridge.IntegrationTesting
 {

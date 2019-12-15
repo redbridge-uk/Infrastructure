@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using Redbridge.Identity;
+using Redbridge.SDK;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
     public interface IWebRequestSignatureService : IDisposable
 	{
         IAuthenticationClient Authority { get; }
 		void SignRequest(HttpClient client, AuthenticationMethod method = AuthenticationMethod.Bearer);
-		string PostProcessUrlString(string queriedUriString);
+        void SignRequest(WebClient client, AuthenticationMethod method = AuthenticationMethod.Bearer);
+        string PostProcessUrlString(string queriedUriString);
 	}
 }

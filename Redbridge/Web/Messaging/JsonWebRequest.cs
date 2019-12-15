@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Redbridge.Diagnostics;
+using Redbridge.Web.Messaging;
 
 namespace Redbridge.SDK
 {
