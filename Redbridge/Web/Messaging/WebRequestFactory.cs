@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Redbridge.Diagnostics;
-using Redbridge.Web.Messaging;
+using Redbridge.SDK;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
 	public abstract class WebRequestFactory : IWebRequestFactory
 	{
 		private readonly Uri _baseUri;
         private readonly ILogger _logger;
 
-        public WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager) : this(baseUri, sessionManager, new BlackholeLogger()){}
+        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager) : this(baseUri, sessionManager, new BlackholeLogger()){}
 
-		public WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger)
+        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger)
 		{
 			if (baseUri == null) throw new ArgumentNullException(nameof(baseUri));
-			if (sessionManager == null) throw new ArgumentNullException(nameof(sessionManager));
-			_baseUri = baseUri;
-			SessionManager = sessionManager;
+            _baseUri = baseUri;
+			SessionManager = sessionManager ?? throw new ArgumentNullException(nameof(sessionManager));
 			_logger = logger;
 
 			RegisterConverters();
@@ -43,6 +43,13 @@ namespace Redbridge.SDK
         public WebClient CreateWebClient(AuthenticationMethod method = AuthenticationMethod.Bearer)
         {
             var client = new WebClient {BaseAddress = _baseUri.AbsoluteUri};
+            SessionManager.SignRequest(client, method);
+            return client;
+        }
+
+        public HttpClient CreateHttpClient(AuthenticationMethod method = AuthenticationMethod.Bearer)
+        {
+            var client = new HttpClient() { BaseAddress = _baseUri };
             SessionManager.SignRequest(client, method);
             return client;
         }
