@@ -113,7 +113,7 @@ namespace Redbridge.Windows.Linq
 				var baseTypesAndInterfaces = new List<Type>();
 				if (type.BaseType != null) baseTypesAndInterfaces.Add(type.BaseType);
 				baseTypesAndInterfaces.AddRange(type.GetInterfaces());
-				foreach (Type t in baseTypesAndInterfaces)
+				foreach (var t in baseTypesAndInterfaces)
 				{
 					prop = GetProperty(t, propertyName);
 					if (prop != null)

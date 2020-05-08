@@ -7,7 +7,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Redbridge.Linq;
 
 namespace Redbridge.EntityFramework
 {
@@ -31,6 +30,7 @@ namespace Redbridge.EntityFramework
 
         public override IEnumerable<TEntity> AddRange(IEnumerable<TEntity> entities)
         {
+            if (entities == null) throw new ArgumentNullException(nameof(entities));
             entities.ForEach(e => Add(e));
             return entities;
         }
@@ -57,10 +57,7 @@ namespace Redbridge.EntityFramework
             return Activator.CreateInstance<TDerivedEntity>();
         }
 
-        public override ObservableCollection<TEntity> Local
-        {
-            get { return _data; }
-        }
+        public override ObservableCollection<TEntity> Local => _data;
 
         Type IQueryable.ElementType
         {
