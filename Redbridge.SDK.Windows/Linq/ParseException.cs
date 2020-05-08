@@ -1,6 +1,6 @@
 ﻿using Redbridge.SDK;
 
-namespace Redbridge.Dynamic.Linq
+namespace Redbridge.Windows.Linq
 {
 	public sealed class ParseException : RedbridgeException
 	{

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Redbridge.Dynamic.Linq
+namespace Redbridge.Windows.Linq
 {
 	internal class ExpressionParser
 	{

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Redbridge.SDK;
 
-namespace Redbridge.Linq
+namespace Redbridge.Windows.Linq
 {
 	public static class PageRequestExtensions
 	{
@@ -36,10 +36,10 @@ namespace Redbridge.Linq
 				if (pageRequest.Sort != null && pageRequest.Sort.Any())
 				{
 					if (pageRequest.Skip > 0)
-						return ApplySort(pageRequest, source).Skip(pageRequest.Skip).Take(pageRequest.Size.Value);
+						return Queryable.Take(Queryable.Skip(ApplySort(pageRequest, source), pageRequest.Skip), pageRequest.Size.Value);
 
 					if (pageRequest.Skip == 0)
-						return ApplySort(pageRequest, source).Take(pageRequest.Size.Value);
+						return Queryable.Take(ApplySort(pageRequest, source), pageRequest.Size.Value);
 				}
 				else
 				{
@@ -48,7 +48,7 @@ namespace Redbridge.Linq
 						"Unable to skip records without a sort supplied. Provide at least a single sort field.");
 
 					if (pageRequest.Skip == 0)
-						return ApplySort(pageRequest, source).Take(pageRequest.Size.Value);
+						return Queryable.Take(ApplySort(pageRequest, source), pageRequest.Size.Value);
 				}
 			}
 			else
@@ -56,7 +56,7 @@ namespace Redbridge.Linq
 				if (pageRequest.Sort != null && pageRequest.Sort.Any())
 				{
 					if (pageRequest.Skip > 0)
-						return ApplySort(pageRequest, source).Skip(pageRequest.Skip);
+						return Queryable.Skip(ApplySort(pageRequest, source), pageRequest.Skip);
 
 					if (pageRequest.Skip == 0)
 						return ApplySort(pageRequest, source);

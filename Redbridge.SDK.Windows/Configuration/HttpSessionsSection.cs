@@ -1,7 +1,6 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 
-namespace Redbridge.Configuration
+namespace Redbridge.Windows.Configuration
 {
 	public class HttpSessionsSection : ConfigurationSection
 	{

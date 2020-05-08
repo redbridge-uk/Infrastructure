@@ -1,7 +1,6 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace Redbridge
+namespace Redbridge.Windows
 {
 	public static class StringExtensions
 	{

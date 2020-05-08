@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Threading.Tasks;
 using Redbridge.SDK;
 
-namespace Redbridge.Configuration
+namespace Redbridge.Windows.Configuration
 {
 public class SystemNotificationConfigurationSection : ConfigurationSection
 {

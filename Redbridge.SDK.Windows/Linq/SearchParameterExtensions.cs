@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Redbridge.SDK;
 
-namespace Redbridge.Linq
+namespace Redbridge.Windows.Linq
 {
 public static class SearchParameterExtensions
 {

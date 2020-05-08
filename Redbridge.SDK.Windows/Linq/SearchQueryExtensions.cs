@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Redbridge.SDK;
 
-namespace Redbridge.Linq
+namespace Redbridge.Windows.Linq
 {
 public static class SearchQueryExtensions
 {

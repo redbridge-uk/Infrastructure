@@ -41,9 +41,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Redbridge.SDK.Windows\Redbridge.SDK.Windows.csproj">
+    <ProjectReference Include="..\Redbridge.SDK.Windows\Redbridge.Windows.csproj">
       <Project>{CE6544EC-07AE-4322-94A6-A644C7361E6F}</Project>
-      <Name>Redbridge.SDK.Windows</Name>
+      <Name>Redbridge.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Redbridge\Redbridge.csproj">
       <Project>{FA042554-BC38-4B47-B6EF-A10AC76CB200}</Project>

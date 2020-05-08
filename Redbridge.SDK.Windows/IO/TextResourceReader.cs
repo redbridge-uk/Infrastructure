@@ -1,8 +1,7 @@
-﻿using System;
-using System.Reflection;
-using Redbridge.SDK;
+﻿using System.Reflection;
+using Redbridge.IO;
 
-namespace Redbridge.IO
+namespace Redbridge.Windows.IO
 {
 	public class TextResourceReader : ResourceReader
 	{

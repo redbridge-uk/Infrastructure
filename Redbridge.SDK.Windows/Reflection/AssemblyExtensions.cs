@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Redbridge.Reflection
+namespace Redbridge.Windows.Reflection
 {
 public static class AssemblyExtensions
 {

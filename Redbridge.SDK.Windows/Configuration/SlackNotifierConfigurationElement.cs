@@ -1,10 +1,9 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Threading.Tasks;
 using System.Xml;
 using Redbridge.SDK;
 
-namespace Redbridge.Configuration
+namespace Redbridge.Windows.Configuration
 {
 public class SlackNotifierConfigurationElement : NotifierConfigurationElement
 {
