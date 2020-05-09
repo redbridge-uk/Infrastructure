@@ -1,5 +1,4 @@
-﻿using System;
-namespace Redbridge.IO
+﻿namespace Redbridge.IO
 {
 	public enum FileClashBehaviour
 	{
