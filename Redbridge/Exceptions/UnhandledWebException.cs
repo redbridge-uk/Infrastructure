@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Redbridge.SDK
+namespace Redbridge.Exceptions
 {
     public class UnhandledWebException : RedbridgeException
     {

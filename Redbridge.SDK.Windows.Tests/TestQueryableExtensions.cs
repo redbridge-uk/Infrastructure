@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Redbridge.Linq;
 
-namespace Easilog.Tests
+namespace Redbridge.Windows.Tests
 {
     [TestFixture]
     public class TestQueryableExtensions

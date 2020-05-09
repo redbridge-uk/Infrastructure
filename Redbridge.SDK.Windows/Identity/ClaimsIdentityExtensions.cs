@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 
-namespace Redbridge.Windows.Identity
+namespace Redbridge.Identity
 {
     public static class ClaimsIdentityExtensions
     {

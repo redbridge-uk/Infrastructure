@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Redbridge.SDK;
 
-namespace Redbridge.Windows.Linq
+namespace Redbridge.Linq
 {
 	public static class QueryableExtensions
 	{

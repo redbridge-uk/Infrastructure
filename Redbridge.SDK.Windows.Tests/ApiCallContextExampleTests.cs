@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Security.Claims;
+using NUnit.Framework;
 using Redbridge.Security;
 
-namespace Redbridge.SDK.Windows.Tests
+namespace Redbridge.Windows.Tests
 {
     public class MyTrialContext : ApiCallContext<MyTrialContext, Guid>
     {

@@ -1,8 +1,7 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Redbridge.Configuration;
 
-namespace Redbridge.SDK.Windows.Tests
+namespace Redbridge.Windows.Tests
 {
 	[TestFixture]
 	public class SystemNotificationConfigurationSectionTests

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using Redbridge.SDK;
 
 namespace Redbridge.Data.Mapping
 {

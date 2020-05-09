@@ -1,12 +1,12 @@
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Redbridge.Exceptions;
 using Redbridge.IO;
 using Redbridge.Validation;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
 	public static class WebExceptionProcessor
 	{

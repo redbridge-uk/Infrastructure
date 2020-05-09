@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.SDK
+
+namespace Redbridge.Data
 {
 	public abstract class DescribedUniqueData<TKey> : UniqueData<TKey>, IDescribed
 		where TKey : IEquatable<TKey>

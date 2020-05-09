@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Redbridge.Windows.Reflection
+namespace Redbridge.Reflection
 {
 public static class AttributeExtensions
 {

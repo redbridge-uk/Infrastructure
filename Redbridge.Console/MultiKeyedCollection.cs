@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Redbridge.Collections
+namespace Redbridge.Console
 {
 	public abstract class MultiKeyedCollection<TKey1, TKey2, TItem> : IQueryable<TItem>
 	{

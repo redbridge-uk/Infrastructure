@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Redbridge.SDK.Data
+namespace Redbridge.Data
 {
 	public class FileDownloadData : IDisposable
 	{

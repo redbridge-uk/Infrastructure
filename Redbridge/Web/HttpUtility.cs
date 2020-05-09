@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web
 {
 	public sealed class HttpUtility
 	{

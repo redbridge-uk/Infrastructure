@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Redbridge.Exceptions;
 
-namespace Redbridge.SDK
+namespace Redbridge.Data
 {
 	public abstract class MultiTypeEntityConverter<TInput, TOutput> : EntityConverter<TInput, TOutput>
 		where TInput : class

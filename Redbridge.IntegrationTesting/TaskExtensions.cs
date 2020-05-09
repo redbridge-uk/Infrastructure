@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Redbridge.SDK;
+using Redbridge.Exceptions;
+using Redbridge.Threading;
 
 namespace Redbridge.IntegrationTesting
 {

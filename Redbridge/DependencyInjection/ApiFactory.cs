@@ -1,8 +1,8 @@
 ﻿using System;
 using Redbridge.ApiManagement;
-using Redbridge.DependencyInjection;
+using Redbridge.Exceptions;
 
-namespace Redbridge.SDK
+namespace Redbridge.DependencyInjection
 {
 	public class ApiFactory : IApiFactory
 	{

@@ -2,5 +2,11 @@
 
 namespace Redbridge.LocationServices.Google
 {
-    [DataContract]     public class GoogleLocationResults     {         [DataMember(Name = "results")]         public GoogleLocationResult[] Results { get; set; }     } 
+    [DataContract]
+    public class GoogleLocationResults
+    {
+        [DataMember(Name = "results")]
+        public GoogleLocationResult[] Results { get; set; }
+    }
+
 }

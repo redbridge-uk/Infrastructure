@@ -7,7 +7,7 @@ using System.Web.Http.Filters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Redbridge.Diagnostics;
-using Redbridge.SDK;
+using Redbridge.Exceptions;
 using Redbridge.Validation;
 
 namespace Redbridge.Services.WebApi.Filters

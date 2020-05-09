@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
-using Redbridge.Security;
 
-namespace Redbridge.Windows.Security
+namespace Redbridge.Security
 {
     public class Sha256CryptoServiceHashingService : IHashingService
     {

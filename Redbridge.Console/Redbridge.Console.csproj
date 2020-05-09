@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Redbridge.Console</PackageId>
+    <Copyright>Redbridge Solutions Ltd</Copyright>
+    <PackageTags>Redbridge SDK C# Library netstandard2.0 console windows</PackageTags>
+    <PackageDescription>Redbridge console library for console output</PackageDescription>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 

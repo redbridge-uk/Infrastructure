@@ -1,5 +1,4 @@
-﻿using System;
-namespace Redbridge.SDK
+﻿namespace Redbridge.Data
 {
 	public interface IMetadata<T> : IMetadata
 	{

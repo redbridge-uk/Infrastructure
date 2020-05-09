@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Redbridge.Configuration;
 using Redbridge.Diagnostics;
-using Redbridge.SDK;
 using Redbridge.Web.Messaging;
 
 namespace Redbridge.Identity.OAuthServer

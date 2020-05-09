@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using System.ServiceModel;
+﻿using System.ServiceModel;
+using NUnit.Framework;
 using Redbridge.Reflection;
 
-namespace Redbridge.SDK.Windows.Tests
+namespace Redbridge.Windows.Tests
 {
 [TestFixture]
 public class MethodInfoExtensionsTest

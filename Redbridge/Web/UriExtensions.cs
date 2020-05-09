@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.SDK
+
+namespace Redbridge.Web
 {
 	public static class UriExtensions
 	{

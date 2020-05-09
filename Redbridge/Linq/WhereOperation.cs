@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Redbridge.SDK
+namespace Redbridge.Linq
 {
 	[DataContract]
 	public enum WhereOperation

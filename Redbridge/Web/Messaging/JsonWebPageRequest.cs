@@ -1,5 +1,6 @@
-﻿using System;
-namespace Redbridge.SDK
+﻿using Redbridge.Data;
+
+namespace Redbridge.Web.Messaging
 {
 	public abstract class JsonWebPageRequest<TResult, TInput1> : JsonWebRequestFunc<PagedResultSet<TResult>, TInput1>
 	{

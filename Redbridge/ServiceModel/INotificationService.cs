@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Redbridge.SDK;
+using Redbridge.Notifications;
 
 namespace Redbridge.ServiceModel
 {

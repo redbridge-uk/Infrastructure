@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Redbridge.SDK
+namespace Redbridge.Data
 {
 	[DataContract]
 	public class UniqueData<T> : IUnique<T> where T : IEquatable<T>

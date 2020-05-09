@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Redbridge.Diagnostics;
-using Redbridge.SDK;
 using Redbridge.Validation;
 
 namespace Redbridge.ApiManagement
