@@ -1,47 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Tests\**" />
-    <EmbeddedResource Remove="Tests\**" />
-    <None Remove="Tests\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ApiManagement\" />
-    <Folder Include="Collections\" />
-    <Folder Include="Configuration\" />
-    <Folder Include="Connectivity\" />
-    <Folder Include="Conversion\" />
-    <Folder Include="Data\" />
-    <Folder Include="DependencyInjection\" />
-    <Folder Include="Exceptions\" />
-    <Folder Include="Identity\" />
-    <Folder Include="IO\" />
-    <Folder Include="Linq\" />
-    <Folder Include="LocationServices\" />
-    <Folder Include="Messaging\" />
-    <Folder Include="Notifications\" />
-    <Folder Include="Reactive\" />
-    <Folder Include="Security\" />
-    <Folder Include="ServiceModel\" />
-    <Folder Include="Text\" />
-    <Folder Include="Threading\" />
-    <Folder Include="Validation\" />
-    <Folder Include="Web\" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="System.Reactive" Version="4.1.3" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Redbridge.SDK.2.0.8.nupkg" />
-    <None Remove="Redbridge.SDK.2.0.8.symbols.nupkg" />
-    <None Remove="Redbridge.SDK.2.0.15.nupkg" />
-    <None Remove="Redbridge.SDK.2.0.15.symbols.nupkg" />
-  </ItemGroup>
+
 </Project>

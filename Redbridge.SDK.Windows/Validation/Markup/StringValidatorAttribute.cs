@@ -1,5 +1,7 @@
 ﻿using System;
-namespace Redbridge.Validation.Markup
+using Redbridge.Validation;
+
+namespace Redbridge.Windows.Validation.Markup
 {
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 	public sealed class StringValidatorAttribute : PropertyValidatorAttribute

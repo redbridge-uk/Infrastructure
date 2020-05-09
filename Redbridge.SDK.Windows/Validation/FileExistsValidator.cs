@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Redbridge.Validation;
 
-namespace Redbridge.Validation
+namespace Redbridge.Windows.Validation
 {
 	public class FileExistsValidator : Validator<string>
 	{

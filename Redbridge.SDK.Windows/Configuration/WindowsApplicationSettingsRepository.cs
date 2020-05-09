@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Configuration;
+using Redbridge.Configuration;
 
-namespace Redbridge.Configuration
+namespace Redbridge.Windows.Configuration
 {
     public class WindowsApplicationSettingsRepository : IApplicationSettingsRepository
 	{
@@ -23,9 +24,8 @@ namespace Redbridge.Configuration
 			ValidateKey(key);
 
 			var stringValue = ConfigurationManager.AppSettings[key];
-			int value;
 
-			if (!int.TryParse(stringValue, out value))
+            if (!int.TryParse(stringValue, out var value))
 			{
 				throw new InvalidConfigurationRepositoryValueException($"Unable to return the application key '{key}' from the configuration or the returned value is not convertible to an Int32 type.");
 			}
@@ -38,9 +38,8 @@ namespace Redbridge.Configuration
 			ValidateKey(key);
 
 			var stringValue = ConfigurationManager.AppSettings[key];
-			bool value;
 
-			if (!bool.TryParse(stringValue, out value))
+            if (!bool.TryParse(stringValue, out var value))
 			{
 				throw new InvalidConfigurationRepositoryValueException(
 					$"Unable to return the application key '{key}' from the configuration or the returned value is not convertible to an Boolean type.");

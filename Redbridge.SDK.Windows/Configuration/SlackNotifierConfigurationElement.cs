@@ -1,10 +1,9 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Threading.Tasks;
 using System.Xml;
 using Redbridge.SDK;
 
-namespace Redbridge.Configuration
+namespace Redbridge.Windows.Configuration
 {
 public class SlackNotifierConfigurationElement : NotifierConfigurationElement
 {
@@ -22,9 +21,9 @@ public class SlackNotifierConfigurationElement : NotifierConfigurationElement
 	[ConfigurationProperty("webhookUrl", DefaultValue = "", IsRequired = true, IsKey = false)]
 	public string WebhookUrl
 	{
-		get { return (string)this["webhookUrl"]; }
-		set { this["webhookUrl"] = value; }
-	}
+		get => (string)this["webhookUrl"];
+        set => this["webhookUrl"] = value;
+    }
 
 	protected override void OnReadSettings(XmlReader reader)
 	{

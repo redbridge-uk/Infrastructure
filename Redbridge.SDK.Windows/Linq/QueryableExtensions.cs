@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Redbridge.SDK;
 
-namespace Redbridge.Linq
+namespace Redbridge.Windows.Linq
 {
 	public static class QueryableExtensions
 	{

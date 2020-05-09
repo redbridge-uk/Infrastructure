@@ -3,29 +3,21 @@ using System.Globalization;
 using System.IO.Compression;
 using System.Linq;
 using System.Web;
-using Redbridge.Configuration;
 
 namespace Redbridge.Services.WebApi.Modules
 {
 	public class ResponseCompressionModule : IHttpModule
 	{
 		private const string AcceptedEncoding = "Accept-Encoding";
-		private const string CompressEnabledConfigurationKey = "CompressionEnabled";
 		private const string ContentEncoding = "Content-Encoding";
 		private const string Deflate = "deflate";
 		private const string GZip = "gzip";
-
-		private bool IsEnabled { get; set; }
 
 		public void Dispose() { }
 
 		public void Init(HttpApplication app)
 		{
-			ParseConfiguration();
-			if (IsEnabled)
-			{
-				app.PreRequestHandlerExecute += Compress;
-			}
+			app.PreRequestHandlerExecute += Compress;
 		}
 
 		private void Compress(object sender, EventArgs e)
@@ -52,12 +44,6 @@ namespace Redbridge.Services.WebApi.Modules
 					response.AddHeader(ContentEncoding, Deflate);
 				}
 			}
-		}
-
-		private void ParseConfiguration()
-		{
-			var config = new WindowsApplicationSettingsRepository();
-			IsEnabled = config.GetBooleanValue(CompressEnabledConfigurationKey);
 		}
 	}
 }

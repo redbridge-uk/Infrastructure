@@ -17,15 +17,15 @@ namespace Redbridge.IntegrationTesting
 		[ConfigurationProperty("administratorUser", DefaultValue = "", IsRequired = false)]
 		public string AdministratorUser
 		{
-			get { return (string)this["administratorUser"]; }
-			set { this["administratorUser"] = value; }
-		}
+			get => (string)this["administratorUser"];
+            set => this["administratorUser"] = value;
+        }
 
 		[ConfigurationProperty("administratorPassword", DefaultValue = "", IsRequired = false)]
 		public string AdministratorPassword
 		{
-			get { return (string)this["administratorPassword"]; }
-			set { this["administratorPassword"] = value; }
-		}
+			get => (string)this["administratorPassword"];
+            set => this["administratorPassword"] = value;
+        }
 	}
 }

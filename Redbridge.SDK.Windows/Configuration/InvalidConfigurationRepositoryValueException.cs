@@ -1,7 +1,7 @@
 ﻿using System;
 using Redbridge.SDK;
 
-namespace Redbridge.Configuration
+namespace Redbridge.Windows.Configuration
 {
 	public class InvalidConfigurationRepositoryValueException : RedbridgeException
 	{

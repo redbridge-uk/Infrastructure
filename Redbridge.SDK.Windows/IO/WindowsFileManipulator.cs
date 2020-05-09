@@ -1,6 +1,7 @@
 ﻿using System.IO;
+using Redbridge.IO;
 
-namespace Redbridge.IO
+namespace Redbridge.Windows.IO
 {
     public class WindowsFileManipulator : IFileManipulator
     {

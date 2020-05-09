@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace Redbridge.Configuration
+namespace Redbridge.Windows.Configuration
 {
 	public class SessionManagerSection : ConfigurationSection
 	{
