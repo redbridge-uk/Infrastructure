@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
-using Redbridge.Converters;
+using Redbridge.Conversion;
 
-namespace Redbridge.SDK.Converters.Tests
+namespace Redbridge.Tests
 {
 	[TestFixture()]
 	public class WeightConverterTests

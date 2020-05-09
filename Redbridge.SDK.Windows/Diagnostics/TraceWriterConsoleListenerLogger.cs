@@ -1,8 +1,7 @@
 using System;
 using System.Diagnostics;
-using Redbridge.Diagnostics;
 
-namespace Redbridge.Windows.Diagnostics
+namespace Redbridge.Diagnostics
 {
 	public class TraceWriterConsoleListenerLogger : ILogger
 	{

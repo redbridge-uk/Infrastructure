@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Redbridge.SDK</PackageId>
+    <Copyright>Redbridge Solutions Ltd</Copyright>
+    <PackageTags>Redbridge SDK C# Library netstandard2.0</PackageTags>
+    <PackageDescription>The core redbridge sdk library</PackageDescription>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 

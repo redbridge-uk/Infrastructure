@@ -1,5 +1,6 @@
 using System;
-namespace Redbridge.Converters
+
+namespace Redbridge.Conversion
 {
 	public class ImperialWeight
 	{

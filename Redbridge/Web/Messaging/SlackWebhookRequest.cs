@@ -1,5 +1,6 @@
-﻿using System;
-namespace Redbridge.SDK
+﻿using Redbridge.Notifications;
+
+namespace Redbridge.Web.Messaging
 {
 
 	public class SlackWebhookRequest : JsonWebRequestAction<SlackMessagePayloadData>

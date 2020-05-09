@@ -1,4 +1,4 @@
-﻿namespace Redbridge.SDK
+﻿namespace Redbridge.Data
 {
 	public interface ICopyable<T>
 	{

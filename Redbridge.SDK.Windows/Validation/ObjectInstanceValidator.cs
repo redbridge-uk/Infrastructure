@@ -1,6 +1,4 @@
-﻿using Redbridge.Validation;
-
-namespace Redbridge.Windows.Validation
+﻿namespace Redbridge.Validation
 {
 	public class ObjectInstanceValidator<T> : Validator<T>
 	{

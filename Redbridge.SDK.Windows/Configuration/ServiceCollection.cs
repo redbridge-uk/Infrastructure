@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Redbridge.Windows.Configuration
+namespace Redbridge.Configuration
 {
 	public class ServiceCollection : ConfigurationElementCollection
 	{

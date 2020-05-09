@@ -1,5 +1,4 @@
-﻿using System;
-namespace Redbridge.SDK
+﻿namespace Redbridge.Web.Messaging
 {
 	public enum AuthenticationMethod
 	{

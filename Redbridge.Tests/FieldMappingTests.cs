@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
 using Redbridge.Data.Mapping;
 
-namespace Redbridge.SDK.Tests
+namespace Redbridge.Tests
 {
     [TestFixture()]
     public class FieldMappingTests

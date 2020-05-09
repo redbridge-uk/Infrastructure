@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.SDK.Security
+
+namespace Redbridge.Security
 {
 	public class SecurityAuthenticationException : RedbridgeException
 	{

@@ -1,7 +1,6 @@
 ﻿using System.IO;
-using Redbridge.IO;
 
-namespace Redbridge.Windows.IO
+namespace Redbridge.IO
 {
 	public static class StreamExtensions
 	{

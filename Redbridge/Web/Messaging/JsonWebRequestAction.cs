@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
+using Redbridge.Exceptions;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
 	public class JsonWebRequestAction : JsonWebRequest
 	{

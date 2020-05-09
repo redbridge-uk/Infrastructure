@@ -1,7 +1,7 @@
 ﻿
 using Redbridge.Validation.Markup;
 
-namespace Easilog.Tests.TestClasses
+namespace Redbridge.Windows.Tests.TestClasses
 {
     public class ClassWithStringValidator
     {

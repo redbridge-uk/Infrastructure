@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Linq;
 using NUnit.Framework;
-using Redbridge.EntityFramework;
-using Redbridge.SDK;
-using Redbridge.Linq;
+using Redbridge.Data;
+using System.Linq;
 
-namespace Easilog.Data.EntityFramework.Tests
+namespace Redbridge.EntityFramework.Tests
 {
 	[TestFixture]
 	public class PageRequestExtensionsTests

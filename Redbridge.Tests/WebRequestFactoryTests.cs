@@ -1,17 +1,14 @@
-﻿using NUnit.Framework;
-using System;
-using Redbridge.SDK;
-using Moq;
-using System.Runtime.Serialization;
+﻿using System;
 using System.Linq;
-using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+using Moq;
 using Newtonsoft.Json;
-using Redbridge.Identity;
-using Redbridge.Configuration;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 using Redbridge.Diagnostics;
 using Redbridge.Web.Messaging;
 
-namespace Tests
+namespace Redbridge.Tests
 {
 	public class TestIntegrationJsonConverter : JsonConverter
 	{

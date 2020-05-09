@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using System.Xml;
 
-namespace Redbridge.Windows.Configuration
+namespace Redbridge.Configuration
 {
 public class NotifierCollection : ConfigurationElementCollection
 {

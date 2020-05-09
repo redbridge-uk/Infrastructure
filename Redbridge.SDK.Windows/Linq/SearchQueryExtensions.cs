@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Redbridge.SDK;
+using Redbridge.Data;
 
-namespace Redbridge.Windows.Linq
+namespace Redbridge.Linq
 {
 public static class SearchQueryExtensions
 {

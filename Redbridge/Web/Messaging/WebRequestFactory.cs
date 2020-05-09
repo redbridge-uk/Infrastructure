@@ -5,7 +5,6 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Redbridge.Diagnostics;
-using Redbridge.SDK;
 
 namespace Redbridge.Web.Messaging
 {

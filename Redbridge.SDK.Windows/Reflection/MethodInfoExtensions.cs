@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Redbridge.Windows.Reflection
+namespace Redbridge.Reflection
 {
 public static class MethodInfoExtensions
 {

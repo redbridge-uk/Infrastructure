@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Http;
 using Redbridge.Identity;
-using Redbridge.SDK;
 
 namespace Redbridge.Web.Messaging
 {

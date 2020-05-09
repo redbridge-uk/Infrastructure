@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.SDK
+
+namespace Redbridge.Exceptions
 {
 	public class UserNotAuthenticatedException : RedbridgeException
 	{

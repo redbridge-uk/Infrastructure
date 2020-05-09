@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Redbridge.IO;
 
-namespace Easilog.Tests
+namespace Redbridge.Windows.Tests
 {
     [TestFixture]
     public class EmbeddedResourceReaderTest

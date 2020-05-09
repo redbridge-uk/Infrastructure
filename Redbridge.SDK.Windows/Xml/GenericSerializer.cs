@@ -4,7 +4,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Redbridge.IO;
 
-namespace Redbridge.Windows.Xml
+namespace Redbridge.Xml
 {
 	public class GenericSerializer<T>
 	{

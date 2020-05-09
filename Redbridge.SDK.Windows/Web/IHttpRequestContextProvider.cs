@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Redbridge.Windows.Web
+namespace Redbridge.Web
 {
 	public interface IHttpRequestContextProvider
 	{

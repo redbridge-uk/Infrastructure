@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Configuration;
-using Redbridge.Configuration;
 
-namespace Redbridge.Windows.Configuration
+namespace Redbridge.Configuration
 {
     public class WindowsApplicationSettingsRepository : IApplicationSettingsRepository
 	{

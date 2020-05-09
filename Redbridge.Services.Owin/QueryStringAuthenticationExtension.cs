@@ -1,5 +1,6 @@
 ﻿using Owin;
-using Redbridge.SDK;
+using Redbridge.Web;
+using Redbridge.Web.Messaging;
 
 namespace Redbridge.Services.Owin
 {

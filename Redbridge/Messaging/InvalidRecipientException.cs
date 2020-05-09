@@ -1,5 +1,4 @@
 ﻿using System;
-using Redbridge.SDK;
 
 namespace Redbridge.Messaging
 {
