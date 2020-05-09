@@ -1,24 +1,15 @@
 ﻿using System;
 using System.IO;
 using Redbridge.Configuration;
+using Redbridge.Console.Diagnostics;
 using Redbridge.Diagnostics;
-using Redbridge.IO;
-using Redbridge.SDK;
+using Redbridge.Web.Messaging;
+using Redbridge.Windows.Configuration;
+using Redbridge.Windows.IO;
 
 namespace Redbridge.IntegrationTesting
 {
-	public interface ITestScenario : IDisposable
-	{
-		string ScenarioCode { get; }
-		string Description { get; }
-		ILogger Logger { get; }
-		UserSession Administrator { get; }
-		UserSession Anonymous { get; }
-		UserSession this[string name] { get; }
-		UserSessionCollection Sessions { get; }
-	}
-
-	public abstract class TestScenario<TUserSession> : ITestScenario
+    public abstract class TestScenario<TUserSession> : ITestScenario
 		where TUserSession: UserSession
 	{
 		private readonly UserSessionCollection _sessionCollection = new UserSessionCollection();
@@ -26,15 +17,13 @@ namespace Redbridge.IntegrationTesting
 		private readonly EmbeddedResourceReader _resourceReader = new EmbeddedResourceReader(typeof(TUserSession).Assembly);
 		private readonly IApplicationSettingsRepository _applicationSettingsRepository = new WindowsApplicationSettingsRepository();
 
-		public TestScenario() : this(string.Empty) { }
-		public TestScenario(string scenarioCode) : this(scenarioCode, string.Empty) { }
-		public TestScenario(string scenarioCode, string description)
-		{
-			if (scenarioCode == null) throw new ArgumentNullException(nameof(scenarioCode));
-			if (description == null) throw new ArgumentNullException(nameof(description));
+        protected TestScenario() : this(string.Empty) { }
+        protected TestScenario(string scenarioCode) : this(scenarioCode, string.Empty) { }
 
-			ScenarioCode = scenarioCode;
-			Description = description;
+        protected TestScenario(string scenarioCode, string description)
+		{
+            ScenarioCode = scenarioCode ?? throw new ArgumentNullException(nameof(scenarioCode));
+			Description = description ?? throw new ArgumentNullException(nameof(description));
 			Logger = new ConsoleLogWriter();
 			var administratorUser = _applicationSettingsRepository.GetStringValue("administratorUser");
 			var administratorPassword = _applicationSettingsRepository.GetStringValue("administratorPassword");

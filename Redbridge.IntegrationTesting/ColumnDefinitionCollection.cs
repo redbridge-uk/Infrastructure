@@ -7,8 +7,8 @@ namespace Redbridge.IntegrationTesting
 	{
 		public ColumnDefinition this[int index]
 		{
-			get { return (ColumnDefinition)BaseGet(index); }
-			set
+			get => (ColumnDefinition)BaseGet(index);
+            set
 			{
 				if (BaseGet(index) != null)
 				{

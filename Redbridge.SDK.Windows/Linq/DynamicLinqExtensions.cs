@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace Redbridge.Dynamic.Linq
+namespace Redbridge.Windows.Linq
 {
 	public static class DynamicQueryable
 	{

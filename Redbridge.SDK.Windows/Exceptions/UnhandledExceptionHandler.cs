@@ -2,7 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Redbridge.Exceptions
+namespace Redbridge.Windows.Exceptions
 {
 	public class UnhandledExceptionHandler
 	{

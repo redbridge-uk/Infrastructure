@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Redbridge.Validation;
 
-namespace Redbridge.Validation
+namespace Redbridge.Windows.Validation
 {
 	public class DirectoryExistsValidator : Validator<string>
 	{

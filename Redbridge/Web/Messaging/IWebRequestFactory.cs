@@ -1,4 +1,8 @@
-﻿namespace Redbridge.SDK
+﻿using System.Net;
+using System.Net.Http;
+using Redbridge.SDK;
+
+namespace Redbridge.Web.Messaging
 {
 	public interface IWebRequestFactory
 	{
@@ -10,7 +14,11 @@
 
 		TRequest CreateRequest<TRequest>(AuthenticationMethod method = AuthenticationMethod.Bearer) where TRequest : JsonWebRequest, new();
 
-		JsonWebRequestAction CreateRequest(string url, HttpVerb verb = HttpVerb.Get, params object[] arguments);
+        WebClient CreateWebClient(AuthenticationMethod method = AuthenticationMethod.Bearer);
+
+        HttpClient CreateHttpClient(AuthenticationMethod method = AuthenticationMethod.Bearer);
+
+        JsonWebRequestAction CreateRequest(string url, HttpVerb verb = HttpVerb.Get, params object[] arguments);
 
 		JsonWebRequestAction<TBody> CreateActionRequest<TBody>(string url, HttpVerb verb = HttpVerb.Get, params object[] arguments);
 

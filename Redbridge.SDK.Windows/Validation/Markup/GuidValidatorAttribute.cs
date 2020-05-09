@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.Validation.Markup
+
+namespace Redbridge.Windows.Validation.Markup
 {
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 	public class GuidValidatorAttribute : PropertyValidatorAttribute

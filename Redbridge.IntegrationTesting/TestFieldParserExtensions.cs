@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualBasic.FileIO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Redbridge.IntegrationTesting
 {
@@ -11,8 +11,8 @@ namespace Redbridge.IntegrationTesting
 
             while (parser.ReadLine() != null)
                 totalLines++;
-            Assert.AreEqual(lines, totalLines, "Unexpected line count in csv file.");
 
+            Assert.AreEqual(lines, totalLines, "Unexpected line count in csv file.");
 
             return parser;
         }

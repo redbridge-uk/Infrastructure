@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.Dynamic.Linq
+
+namespace Redbridge.Windows.Linq
 {
 	public class DynamicProperty
 	{

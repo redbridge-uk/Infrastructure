@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Redbridge.Data;
 using Redbridge.SDK;
-using Redbridge.Linq;
 
 namespace Redbridge.EntityFramework
 {

@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Redbridge.SDK;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
 	public abstract class RestWebClient
 	{
 		protected RestWebClient(IWebRequestFactory webRequestFactory)
 		{
-			if (webRequestFactory == null) throw new ArgumentNullException(nameof(webRequestFactory));
-			RequestFactory = webRequestFactory;
+            RequestFactory = webRequestFactory ?? throw new ArgumentNullException(nameof(webRequestFactory));
 		}
 
-		public bool IsConnected
-		{
-			get { return RequestFactory.SessionManager.Authority.IsConnected; }
-		}
+		public bool IsConnected => RequestFactory.SessionManager.Authority.IsConnected;
 
-		public IWebRequestFactory RequestFactory { get; }
+        public IWebRequestFactory RequestFactory { get; }
 
 		protected async Task Execute(string url, HttpVerb verb = HttpVerb.Get, params object[] args)
 		{
