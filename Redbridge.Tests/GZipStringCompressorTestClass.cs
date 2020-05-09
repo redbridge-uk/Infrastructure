@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
 using Redbridge.Text;
 
-namespace Tests
+namespace Redbridge.Tests
 {
     [TestFixture()]
     public class GZipStringCompressorTestClass

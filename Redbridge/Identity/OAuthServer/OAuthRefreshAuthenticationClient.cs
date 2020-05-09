@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Redbridge.Configuration;
 using Redbridge.Diagnostics;
-using Redbridge.SDK;
 using Redbridge.Security;
 using Redbridge.Web.Messaging;
 

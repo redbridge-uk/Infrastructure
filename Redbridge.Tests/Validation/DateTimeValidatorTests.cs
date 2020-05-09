@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using NUnit.Framework;
 using Redbridge.Validation;
 
-namespace Redbridge.SDK.Tests.Validation
+namespace Redbridge.Tests.Validation
 {
     [TestFixture()]
     public class DateTimeValidatorTests

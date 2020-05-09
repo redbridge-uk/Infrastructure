@@ -1,12 +1,4 @@
-﻿using NUnit.Framework;
-using System;
-using Redbridge.SDK;
-using Redbridge.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Linq;
-
-namespace Tests
+﻿namespace Redbridge.Tests
 {
 	//[TestFixture()]
 	//public class ValidationExceptionDeserializationTests

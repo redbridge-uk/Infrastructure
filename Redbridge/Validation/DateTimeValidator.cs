@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Redbridge.SDK;
+using Redbridge.Exceptions;
 
 namespace Redbridge.Validation
 {

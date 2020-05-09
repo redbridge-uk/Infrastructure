@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Redbridge.SDK
+namespace Redbridge.Data
 {
 [DataContract]
 public abstract class AuditedTimestampedNamedUniqueData<TKey, TUserKey> : TimestampedNamedUniqueData<TKey>, IAudited<TUserKey>

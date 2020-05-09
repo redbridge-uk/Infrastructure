@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <IsPackable>true</IsPackable>
+    <RootNamespace>Redbridge</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

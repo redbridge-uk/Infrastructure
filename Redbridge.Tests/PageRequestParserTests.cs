@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using Redbridge.SDK;
+using Redbridge.Linq;
+using Redbridge.Web.Messaging;
 
 namespace Redbridge.Tests
 {

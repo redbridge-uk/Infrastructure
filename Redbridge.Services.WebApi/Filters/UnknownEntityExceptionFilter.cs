@@ -3,8 +3,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Filters;
+using Redbridge.Data;
 using Redbridge.Diagnostics;
-using Redbridge.SDK.Data;
 
 namespace Redbridge.Services.WebApi.Filters
 {

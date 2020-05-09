@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Redbridge.SDK;
 using Redbridge.IO;
 using Redbridge.Web.Messaging;
 

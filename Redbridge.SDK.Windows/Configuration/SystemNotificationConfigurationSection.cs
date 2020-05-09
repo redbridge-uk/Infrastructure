@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Configuration;
 using System.Threading.Tasks;
-using Redbridge.SDK;
+using Redbridge.Notifications;
 
-namespace Redbridge.Windows.Configuration
+namespace Redbridge.Configuration
 {
 public class SystemNotificationConfigurationSection : ConfigurationSection
 {

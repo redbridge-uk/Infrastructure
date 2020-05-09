@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Redbridge.Validation;
 
-namespace Easilog.Tests
+namespace Redbridge.Windows.Tests
 {
     [TestFixture]
     public class ObjectInstanceValidatorTests

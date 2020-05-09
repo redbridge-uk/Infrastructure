@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Redbridge.SDK
+namespace Redbridge.ApiManagement
 {
 	public interface IApiCallContext : IFormatProvider
 	{

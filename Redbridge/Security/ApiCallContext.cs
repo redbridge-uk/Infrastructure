@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
-using Redbridge.SDK;
-using Redbridge.SDK.Security;
+using Redbridge.ApiManagement;
+using Redbridge.Data;
 
 namespace Redbridge.Security
 {

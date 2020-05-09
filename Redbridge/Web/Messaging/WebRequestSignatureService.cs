@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Redbridge.Diagnostics;
 using Redbridge.Identity;
-using Redbridge.SDK;
 
 namespace Redbridge.Web.Messaging
 {

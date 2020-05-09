@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web
 {
 	// https://www.sitepoint.com/web-foundations/mime-types-complete-list/
 	public static class MimeMapping

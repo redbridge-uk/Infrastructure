@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
 	public class HttpStreamRequest : JsonWebRequestFunc<Stream>
 	{

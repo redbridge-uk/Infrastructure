@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
-namespace Tests
+
+namespace Redbridge.Tests
 {
     [TestFixture()]
     public class StringFieldMapTestClass

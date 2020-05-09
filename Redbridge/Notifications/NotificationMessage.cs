@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Redbridge.Data;
 
-namespace Redbridge.SDK
+namespace Redbridge.Notifications
 {
 
 

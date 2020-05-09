@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Redbridge.SDK
+namespace Redbridge.Data
 {
 	public class UniqueObjectEqualityComparer<TKey, TEntity> : IEqualityComparer<TEntity>
 		where TEntity : IUnique<TKey>

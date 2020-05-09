@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using Redbridge.IO;
 
-namespace Redbridge.Windows.IO
+namespace Redbridge.IO
 {
 public class EmbeddedResourceReader
 {

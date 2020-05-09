@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
     [DataContract]
     public class ExternalLoginRequest

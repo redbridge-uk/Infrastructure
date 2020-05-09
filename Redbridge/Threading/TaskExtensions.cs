@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Redbridge.SDK
+namespace Redbridge.Threading
 {
 	public static class TaskExtensions
 	{

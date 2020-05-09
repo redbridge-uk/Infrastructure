@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Web.Http.Filters;
 using Redbridge.Diagnostics;
-using Redbridge.SDK;
+using Redbridge.Exceptions;
 
 namespace Redbridge.Services.WebApi.Filters
 {

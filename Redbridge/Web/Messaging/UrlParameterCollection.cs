@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
 	public class UrlParameterCollection
 	{

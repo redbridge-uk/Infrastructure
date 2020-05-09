@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Redbridge.SDK
+namespace Redbridge.ApiManagement
 {
 	public interface IApiContextProvider<TContext>
 	{

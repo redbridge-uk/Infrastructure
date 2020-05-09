@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
-using Redbridge.Validation;
 
-namespace Redbridge.Windows.Validation
+namespace Redbridge.Validation
 {
 	[DebuggerDisplay("Property Validation Result: {Property} {Success} ({Message})")]
 	public class PropertyValidationResult : ValidationResult

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Redbridge.Configuration;
-using Redbridge.SDK;
 using Redbridge.ServiceModel;
-using Redbridge.Windows.Configuration;
 
-namespace Redbridge.Windows.Notifications
+namespace Redbridge.Notifications
 {
 	public class NotificationService : INotificationService
 	{

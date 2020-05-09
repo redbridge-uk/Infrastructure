@@ -3,9 +3,8 @@ using System.IO;
 using Redbridge.Configuration;
 using Redbridge.Console.Diagnostics;
 using Redbridge.Diagnostics;
+using Redbridge.IO;
 using Redbridge.Web.Messaging;
-using Redbridge.Windows.Configuration;
-using Redbridge.Windows.IO;
 
 namespace Redbridge.IntegrationTesting
 {
