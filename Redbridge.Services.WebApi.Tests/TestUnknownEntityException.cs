@@ -3,10 +3,12 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Moq;
 using NUnit.Framework;
+using Redbridge.Data;
 using Redbridge.Diagnostics;
-using Redbridge.SDK;
-using Redbridge.SDK.Data;
+using Redbridge.Exceptions;
 using Redbridge.Services.WebApi.Filters;
+using Redbridge.Threading;
+using Redbridge.Web.Messaging;
 
 namespace Redbridge.Services.WebApi.Tests
 {

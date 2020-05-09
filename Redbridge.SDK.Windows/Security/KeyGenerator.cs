@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Redbridge.Windows.Security
+namespace Redbridge.Security
 {
 	public class KeyGenerator
 	{

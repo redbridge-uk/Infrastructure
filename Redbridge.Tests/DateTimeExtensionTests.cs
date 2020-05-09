@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using Redbridge.SDK;
+using Redbridge.Data;
 
 namespace Redbridge.Tests
 {

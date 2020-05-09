@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Redbridge.SDK;
-using Redbridge.Validation;
-using Redbridge.Windows.Validation.Markup;
+using Redbridge.Exceptions;
+using Redbridge.Validation.Markup;
 
-namespace Redbridge.Windows.Validation
+namespace Redbridge.Validation
 {
 	public static class TypeExtensions
 	{

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using Redbridge.SDK;
+using Redbridge.Notifications;
 
-namespace Redbridge.Windows.Configuration
+namespace Redbridge.Configuration
 {
 	public class NotificationFilterConfigurationElement : ConfigurationElement
 	{

@@ -1,5 +1,5 @@
 ﻿using System;
-using Redbridge.SDK;
+using Redbridge.Exceptions;
 
 namespace Redbridge.Validation
 {

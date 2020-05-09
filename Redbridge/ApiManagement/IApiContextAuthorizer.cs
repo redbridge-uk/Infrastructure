@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
-using Redbridge.ApiManagement;
 
-namespace Redbridge.SDK
+namespace Redbridge.ApiManagement
 {
 
 	public interface IApiContextAuthorizer<TContext>

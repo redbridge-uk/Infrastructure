@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.SDK
+
+namespace Redbridge
 {
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
 	public class EnumDescriptionAttribute : Attribute

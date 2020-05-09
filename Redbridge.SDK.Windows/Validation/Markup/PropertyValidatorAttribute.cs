@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using Redbridge.SDK;
-using Redbridge.Validation;
+using Redbridge.Exceptions;
 
-namespace Redbridge.Windows.Validation.Markup
+namespace Redbridge.Validation.Markup
 {
 	[AttributeUsage(AttributeTargets.Property)]
 	public abstract class PropertyValidatorAttribute : Attribute

@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Http;
-using Redbridge.SDK;
 
 namespace Redbridge.Web.Messaging
 {

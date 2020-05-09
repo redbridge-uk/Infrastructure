@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
-namespace Redbridge.SDK
+namespace Redbridge.Data
 {
 public class MetadataCollection : KeyedCollection<string, IMetadata>
 {

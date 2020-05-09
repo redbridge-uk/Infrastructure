@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Redbridge.Windows.Validation.Markup
+namespace Redbridge.Validation.Markup
 {
 	[AttributeUsage(AttributeTargets.Interface)]
 	public sealed class ValidationContractAttribute : Attribute { }

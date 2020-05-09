@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.SDK.Data
+
+namespace Redbridge.Data
 {
 	public class FileDownloadsData : IDisposable
 	{

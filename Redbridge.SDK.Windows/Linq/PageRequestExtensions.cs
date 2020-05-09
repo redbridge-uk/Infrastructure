@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Redbridge.SDK;
+using Redbridge.Data;
 
-namespace Redbridge.Windows.Linq
+namespace Redbridge.Linq
 {
 	public static class PageRequestExtensions
 	{

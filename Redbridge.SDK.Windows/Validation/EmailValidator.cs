@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Net.Mail;
-using Redbridge.Validation;
 
-namespace Redbridge.Windows.Validation
+namespace Redbridge.Validation
 {
 	public class EmailValidator : Validator<string>
 	{

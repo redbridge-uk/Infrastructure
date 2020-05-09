@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Redbridge.SDK
+namespace Redbridge.Data
 {
 	[DataContract]
 	public class PagedResultSet<T> : PagedResultSet

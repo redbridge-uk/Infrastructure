@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Redbridge.Xml;
 
-namespace Easilog.Tests
+namespace Redbridge.Windows.Tests
 {
     [TestFixture]
     public class TestGenericSerializer

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Redbridge.Exceptions;
 
-namespace Redbridge.SDK
+namespace Redbridge.Web.Messaging
 {
 	public class JsonWebRequestFunc<TResult, TInput1> : JsonWebRequest
 	{

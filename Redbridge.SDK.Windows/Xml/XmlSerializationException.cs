@@ -1,7 +1,6 @@
 using System;
-using Redbridge.SDK;
 
-namespace Redbridge.Windows.Xml
+namespace Redbridge.Xml
 {
 	public class XmlSerializationException : RedbridgeException
 	{

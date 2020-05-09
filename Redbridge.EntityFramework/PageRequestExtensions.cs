@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Redbridge.SDK;
 using System.Data.Entity;
-using Redbridge.Windows.Linq;
+using Redbridge.Data;
+using Redbridge.Linq;
 
 namespace Redbridge.EntityFramework
 {

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Reactive.Concurrency;
+﻿using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 
-namespace Redbridge.SDK
+namespace Redbridge.Reactive
 {
 	public interface ISchedulerService
 	{

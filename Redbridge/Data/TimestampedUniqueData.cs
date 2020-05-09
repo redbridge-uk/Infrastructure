@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.SDK
+
+namespace Redbridge.Data
 {
 public abstract class TimestampedUniqueData<TKey> : UniqueData<TKey>, ITimestamped
 	where TKey : IEquatable<TKey>

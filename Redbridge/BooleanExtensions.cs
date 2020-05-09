@@ -1,4 +1,4 @@
-﻿namespace Redbridge.SDK
+﻿namespace Redbridge
 {
     public static class BooleanExtensions
 	{

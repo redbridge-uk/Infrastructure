@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Redbridge.SDK.Data
+
+namespace Redbridge.Data
 {
 	public abstract class UnknownEntityException : RedbridgeException
 	{

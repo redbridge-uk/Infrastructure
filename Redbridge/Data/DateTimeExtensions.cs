@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Redbridge.SDK
+namespace Redbridge.Data
 {
 public static class DateTimeExtensions
 {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Redbridge.Data.Mapping;
 
-namespace Redbridge.SDK.IO
+namespace Redbridge.IO
 {
 	public abstract class RecordStreamWriter : IRecordStreamWriter
 	{

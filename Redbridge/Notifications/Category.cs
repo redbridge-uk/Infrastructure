@@ -1,7 +1,7 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using Redbridge.Data;
 
-namespace Redbridge.SDK
+namespace Redbridge.Notifications
 {
 	[DebuggerDisplay("Category Id: {Id}, Name: {Name}")]
 	public class Category : NamedUniqueData<int>

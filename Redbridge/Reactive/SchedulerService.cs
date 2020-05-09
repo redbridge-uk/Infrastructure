@@ -3,7 +3,7 @@ using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Redbridge.SDK
+namespace Redbridge.Reactive
 {
 	public class SchedulerService : ISchedulerService
 	{

@@ -2,9 +2,10 @@
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Xml;
-using Redbridge.SDK;
+using Redbridge.Data;
+using Redbridge.Notifications;
 
-namespace Redbridge.Windows.Configuration
+namespace Redbridge.Configuration
 {
     public class EmailNotifierConfigurationElement : NotifierConfigurationElement
     {

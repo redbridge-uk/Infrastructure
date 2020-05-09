@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Redbridge.Windows
+namespace Redbridge
 {
 	public static class StringExtensions
 	{

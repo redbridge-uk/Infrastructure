@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace Redbridge.SDK
+namespace Redbridge.Data
 {
 	public interface IEntityConverter<in TInput, TOutput>
 	{
