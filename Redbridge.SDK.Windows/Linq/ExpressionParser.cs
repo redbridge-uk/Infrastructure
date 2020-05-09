@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Redbridge.Dynamic.Linq
+namespace Redbridge.Windows.Linq
 {
 	internal class ExpressionParser
 	{
@@ -186,8 +186,7 @@ namespace Redbridge.Dynamic.Linq
 			typeof(TimeSpan),
 			typeof(Guid),
 			typeof(Math),
-			typeof(Convert),
-					 typeof(System.Data.Objects.EntityFunctions)
+			typeof(Convert)
 		};
 
 		static readonly Expression trueLiteral = Expression.Constant(true);

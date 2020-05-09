@@ -4,7 +4,7 @@ using System.Linq;
 using System.Xml;
 using Redbridge.SDK;
 
-namespace Redbridge.Configuration
+namespace Redbridge.Windows.Configuration
 {
 	public class NotificationFilterCollection : ConfigurationElementCollection
 	{

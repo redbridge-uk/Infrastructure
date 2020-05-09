@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading;
 
-namespace Redbridge.Dynamic.Linq
+namespace Redbridge.Windows.Linq
 {
 	internal class ClassFactory
 	{

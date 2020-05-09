@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using Redbridge.SDK;
 using Redbridge.Validation;
-using Redbridge.Validation.Markup;
+using Redbridge.Windows.Validation.Markup;
 
-namespace Redbridge.Validation
+namespace Redbridge.Windows.Validation
 {
 	public static class TypeExtensions
 	{

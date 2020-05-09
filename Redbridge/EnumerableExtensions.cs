@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Redbridge.Linq
+namespace Redbridge
 {
 	public static class EnumerableExtensions
 	{

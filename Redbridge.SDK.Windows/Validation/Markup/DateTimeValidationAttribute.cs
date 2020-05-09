@@ -1,5 +1,7 @@
 ﻿using System;
-namespace Redbridge.SDK.Windows
+using Redbridge.Validation;
+
+namespace Redbridge.Windows.Validation.Markup
 {
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 	public class DateTimeValidatorAttribute : PropertyValidatorAttribute

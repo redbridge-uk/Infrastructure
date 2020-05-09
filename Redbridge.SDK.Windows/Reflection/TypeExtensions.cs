@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Redbridge.Linq.Expressions;
 
-namespace Redbridge.Reflection
+namespace Redbridge.Windows.Reflection
 {
 	public static class TypeExtensions
 	{

@@ -1,7 +1,8 @@
 using System;
 using System.Diagnostics;
+using Redbridge.Diagnostics;
 
-namespace Redbridge.Diagnostics
+namespace Redbridge.Windows.Diagnostics
 {
 	public class DebugTraceListener : TraceListener
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Redbridge.Web
+namespace Redbridge.Windows.Web
 {
 	public class HttpCurrentRequestProvider : IHttpRequestContextProvider
 	{
