@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualBasic.FileIO;
+﻿using Microsoft.VisualBasic.FileIO;
 
 namespace Redbridge.IntegrationTesting
 {

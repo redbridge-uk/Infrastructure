@@ -10,23 +10,11 @@ namespace Redbridge.IntegrationTesting
 		[ConfigurationProperty("types", IsDefaultCollection = true)]
 		[ConfigurationCollection(typeof(ObjectDefinitionCollection), AddItemName = "add", ClearItemsName = "clear",
 			RemoveItemName = "remove")]
-		public ObjectDefinitionCollection Types
-		{
-			get
-			{
-				return (ObjectDefinitionCollection)base["types"];
-			}
-		}
+		public ObjectDefinitionCollection Types => (ObjectDefinitionCollection)base["types"];
 
-		[ConfigurationProperty("columns", IsDefaultCollection = false)]
+        [ConfigurationProperty("columns", IsDefaultCollection = false)]
 		[ConfigurationCollection(typeof(ColumnDefinitionCollection), AddItemName = "add", ClearItemsName = "clear",
 			RemoveItemName = "remove")]
-		public ColumnDefinitionCollection Columns
-		{
-			get
-			{
-				return (ColumnDefinitionCollection)base["columns"];
-			}
-		}
-	}
+		public ColumnDefinitionCollection Columns => (ColumnDefinitionCollection)base["columns"];
+    }
 }

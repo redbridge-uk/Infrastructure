@@ -22,22 +22,22 @@ namespace Redbridge.Windows.Configuration
         [ConfigurationProperty("sender", DefaultValue = "", IsRequired = true, IsKey = false)]
         public string Sender
         {
-            get { return (string)this["sender"]; }
-            set { this["sender"] = value; }
+            get => (string)this["sender"];
+            set => this["sender"] = value;
         }
 
         [ConfigurationProperty("senderDisplayName", DefaultValue = "Easilog Service", IsRequired = true, IsKey = false)]
         public string SenderDisplayName
         {
-            get { return (string)this["senderDisplayName"]; }
-            set { this["senderDisplayName"] = value; }
+            get => (string)this["senderDisplayName"];
+            set => this["senderDisplayName"] = value;
         }
 
         [ConfigurationProperty("target", DefaultValue = "", IsRequired = true, IsKey = false)]
         public string Target
         {
-            get { return (string)this["target"]; }
-            set { this["target"] = value; }
+            get => (string)this["target"];
+            set => this["target"] = value;
         }
 
         protected override void OnReadSettings(XmlReader reader)

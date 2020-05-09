@@ -186,8 +186,7 @@ namespace Redbridge.Windows.Linq
 			typeof(TimeSpan),
 			typeof(Guid),
 			typeof(Math),
-			typeof(Convert),
-					 typeof(System.Data.Objects.EntityFunctions)
+			typeof(Convert)
 		};
 
 		static readonly Expression trueLiteral = Expression.Constant(true);

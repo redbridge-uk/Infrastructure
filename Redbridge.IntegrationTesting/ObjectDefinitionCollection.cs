@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace Redbridge.IntegrationTesting
 {
@@ -7,8 +6,8 @@ namespace Redbridge.IntegrationTesting
 	{
 		public ObjectDefinition this[int index]
 		{
-			get { return (ObjectDefinition)BaseGet(index); }
-			set
+			get => (ObjectDefinition)BaseGet(index);
+            set
 			{
 				if (BaseGet(index) != null)
 				{

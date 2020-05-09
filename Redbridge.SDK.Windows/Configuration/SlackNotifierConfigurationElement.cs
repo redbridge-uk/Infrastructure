@@ -21,9 +21,9 @@ public class SlackNotifierConfigurationElement : NotifierConfigurationElement
 	[ConfigurationProperty("webhookUrl", DefaultValue = "", IsRequired = true, IsKey = false)]
 	public string WebhookUrl
 	{
-		get { return (string)this["webhookUrl"]; }
-		set { this["webhookUrl"] = value; }
-	}
+		get => (string)this["webhookUrl"];
+        set => this["webhookUrl"] = value;
+    }
 
 	protected override void OnReadSettings(XmlReader reader)
 	{

@@ -15,16 +15,16 @@ namespace Redbridge.IntegrationTesting
 		[ConfigurationProperty("name", IsRequired = true)]
 		public string Name
 		{
-			get { return (string)this["name"]; }
-			set { this["name"] = value; }
-		}
+			get => (string)this["name"];
+            set => this["name"] = value;
+        }
 
 		[ConfigurationProperty("type", IsRequired = false)]
 		public Type Type
 		{
-			get { return (Type)this["type"]; }
-			set { this["type"] = value; }
-		}
+			get => (Type)this["type"];
+            set => this["type"] = value;
+        }
 
 		[ConfigurationProperty("values", IsDefaultCollection = false)]
 		[ConfigurationCollection(typeof(ColumnDefinitionCollection), AddItemName = "add", ClearItemsName = "clear",

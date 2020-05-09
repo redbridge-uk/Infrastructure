@@ -12,16 +12,16 @@ public class SystemNotificationConfigurationSection : ConfigurationSection
 	[ConfigurationProperty("enabled", DefaultValue = "true", IsRequired = false)]
 	public bool Enabled
 	{
-		get { return (bool)this["enabled"]; }
-		set { this["enabled"] = value; }
-	}
+		get => (bool)this["enabled"];
+        set => this["enabled"] = value;
+    }
 
 	[ConfigurationProperty("environment", DefaultValue = "Development", IsRequired = false)]
 	public string Environment
 	{
-		get { return (string)this["environment"]; }
-		set { this["environment"] = value; }
-	}
+		get => (string)this["environment"];
+        set => this["environment"] = value;
+    }
 
 	[ConfigurationProperty("notifiers", IsDefaultCollection = true)]
 	[ConfigurationCollection(typeof(NotifierCollection), AddItemName = "add", ClearItemsName = "clear", RemoveItemName = "remove")]
