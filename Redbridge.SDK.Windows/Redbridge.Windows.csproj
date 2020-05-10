@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
+    <PackageId>Redbridge.SDK.Windows</PackageId>
+    <PackageIconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</PackageIconUrl>
+    <Copyright>Redbridge Solutions Ltd</Copyright>
     <IsPackable>true</IsPackable>
     <RootNamespace>Redbridge</RootNamespace>
   </PropertyGroup>

@@ -1,5 +1,4 @@
-﻿using Redbridge.Collections;
-
+﻿
 namespace Redbridge.Console
 {
     /// <summary>
@@ -53,7 +52,7 @@ namespace Redbridge.Console
         /// <param name="options"></param>
         internal void SetDefaults(object options)
         {
-            foreach (PropertyArgumentAttribute propertyAttribute in this)
+            foreach (var propertyAttribute in this)
             {
                 if (propertyAttribute.HasDefault)
                     propertyAttribute.SetDefault(options);
