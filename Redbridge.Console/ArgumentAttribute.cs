@@ -8,7 +8,7 @@ namespace Redbridge.Console
         /// Represents an argument attribute.
         /// </summary>
         /// <param name="parameterName"></param>
-        public ArgumentAttribute (string parameterName)
+        protected ArgumentAttribute (string parameterName)
         {
             if (string.IsNullOrWhiteSpace(parameterName))
                 throw new CommandLineParseException("The parameter name is not permitted to be null or whitespace");

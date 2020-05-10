@@ -19,8 +19,8 @@ namespace Redbridge.Console
         private const char IndentationCharacter = ' ';
         private const int MaximumParameterNameWidth = 20;
         private const int SwitchIndentation = 2; 
-        private CommandLineOptionsCollection _arguments = new CommandLineOptionsCollection();
-        private CommandLineOptionsAttribute _globalOptions;
+        private readonly CommandLineOptionsCollection _arguments = new CommandLineOptionsCollection();
+        private readonly CommandLineOptionsAttribute _globalOptions;
 
         #region Constructors
 
@@ -65,31 +65,6 @@ namespace Redbridge.Console
         }
 
         /// <summary>
-        /// Gets the help switches collection.
-        /// </summary>
-        /// <remarks>Using any of the following switches on the command line with display the help file for this
-        /// set of command line arguments
-        /// <list type="bullet">
-        /// <item>
-        ///     <term>?</term>
-        /// </item>
-        /// <item>
-        ///     <term>/?</term>
-        /// </item>
-        /// <item>
-        ///     <term>Help</term>
-        /// </item>
-        /// <item>
-        ///     <term>-Help</term>
-        /// </item>
-        /// </list>
-        /// </remarks>
-        private IEnumerable<string> HelpSwitches
-        {
-            get { return new[] { "? ", "/?", "Help", "-Help" }; }
-        }
-
-        /// <summary>
         /// Method that parses the supplied arguments which typically are supplied from the command line.
         /// </summary>
         /// <returns>An instance of <typeparamref name="TOptions"/> with values populated according to the inputs
@@ -107,7 +82,7 @@ namespace Redbridge.Console
             _arguments.SetDefaults(options);
 
             // If there are any command line arguments supplied, then process them into the options file...
-            if (arguments != null && arguments.Count() > 0)
+            if (arguments != null && arguments.Any())
             {
                 OnParse(options, arguments);
             }
@@ -117,7 +92,7 @@ namespace Redbridge.Console
                 PropertyArgumentAttribute attribute = _arguments.FirstOrDefault(required => required.Required);
 
                 if (attribute != null)
-                    throw new OptionRequiredException(string.Format("Switch/Parameter '{0}' is required.", attribute.ParameterName));
+                    throw new OptionRequiredException($"Switch/Parameter '{attribute.ParameterName}' is required.");
             }
 
             return options;
@@ -144,58 +119,40 @@ namespace Redbridge.Console
                     argumentValue = argumentParts[1];
                 }
 
-                PropertyArgumentAttribute commandLineArg;
-
                 if ( !argumentName.StartsWith(ParameterIndicator.ToString()) )
                 {
-                    throw new CommandLineParseException(string.Format("Please ensure that all parameters and switches are denoted with the delimiting character '{0}'", ParameterIndicator));
+                    throw new CommandLineParseException(
+                        $"Please ensure that all parameters and switches are denoted with the delimiting character '{ParameterIndicator}'");
                 }
 
-                string trimmedArgumentName = argumentName.Trim(new char[] { ParameterIndicator });
-                string splitNamedParameter = trimmedArgumentName.Split(new char[] { ParameterValueIndicator }).First();
+                var trimmedArgumentName = argumentName.Trim(new char[] { ParameterIndicator });
+                var splitNamedParameter = trimmedArgumentName.Split(new char[] { ParameterValueIndicator }).First();
 
-                if (_arguments.TryGet(trimmedArgumentName, out commandLineArg))
+                if (_arguments.TryGet(trimmedArgumentName, out var commandLineArg))
                 {
                     commandLineArg.Parse(options, argumentValue);
                 }
                 else if (_arguments.TryGet(splitNamedParameter, out commandLineArg))
                 {
                     // We know that the argument is for a split named parameter set.
-                    string parameterName = trimmedArgumentName.Split(new char[] { ParameterValueIndicator }).Last();
-                    commandLineArg.Parse(options, string.Format("{0}={1}", parameterName, argumentValue)); 
+                    var parameterName = trimmedArgumentName.Split(new char[] { ParameterValueIndicator }).Last();
+                    commandLineArg.Parse(options, $"{parameterName}={argumentValue}"); 
                 }
                 else
-                    throw new UnknownOptionException(string.Format("The supplied option '{0}' is invalid or unknown, please check usage guide.", argumentName));
+                    throw new UnknownOptionException(
+                        $"The supplied option '{argumentName}' is invalid or unknown, please check usage guide.");
             }
         }
 
         /// <summary>
         /// Gets whether a banner has been defined.
         /// </summary>
-        public bool BannerDefined
-        {
-            get { return _globalOptions != null && !string.IsNullOrWhiteSpace(_globalOptions.BannerResource); }
-        }
+        public bool BannerDefined => _globalOptions != null && !string.IsNullOrWhiteSpace(_globalOptions.BannerResource);
 
         /// <summary>
         /// Gets whether a help resouces has been defined.
         /// </summary>
-        public bool HelpResourceDefined
-        {
-            get { return _globalOptions != null && !string.IsNullOrWhiteSpace(_globalOptions.HelpResource); }
-        }
-
-        /// <summary>
-        /// Method that gets the banner text for the command line argument set.
-        /// </summary>
-        /// <returns></returns>
-        public string GetBanner()
-        {
-            if (BannerDefined)
-                throw new NotSupportedException("The defined banner code has not been written, implement it or use the default only.");
-            else
-                return CreateDefaultBanner();
-        }
+        public bool HelpResourceDefined => _globalOptions != null && !string.IsNullOrWhiteSpace(_globalOptions.HelpResource);
 
         /// <summary>
         /// Method that returns the usage text for the command line arguments set.
@@ -241,10 +198,10 @@ namespace Redbridge.Console
                     string switchIndentation = new string(IndentationCharacter, SwitchIndentation);
                     string descriptionIndentation = new string(IndentationCharacter, SwitchIndentation + MaximumParameterNameWidth);
                     
-                    string parameterDisplay = string.Format("{0}{1}{2}", switchIndentation, ParameterIndicator, propertyArg.ParameterDisplay);
+                    string parameterDisplay = $"{switchIndentation}{ParameterIndicator}{propertyArg.ParameterDisplay}";
                     optionUsageBuilder.AppendLine(parameterDisplay);
 
-                    string parameterDescription = string.Format("{0}{1}", descriptionIndentation, propertyArg.HelpText);
+                    string parameterDescription = $"{descriptionIndentation}{propertyArg.HelpText}";
                     optionUsageBuilder.AppendLine(parameterDescription);
                 }
 
@@ -260,8 +217,8 @@ namespace Redbridge.Console
         /// <returns></returns>
         private string CreateDefaultBanner()
         {
-            StringBuilder bannerBuilder = new StringBuilder();
-            Assembly applicationAssembly = Assembly.GetEntryAssembly();
+            var bannerBuilder = new StringBuilder();
+            var applicationAssembly = Assembly.GetEntryAssembly();
 
             if (applicationAssembly != null)
             {

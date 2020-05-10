@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
+    <PackageIconUrl>https://github.com/redbridge-uk/resources/blob/master/redbridge_32.png</PackageIconUrl>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
