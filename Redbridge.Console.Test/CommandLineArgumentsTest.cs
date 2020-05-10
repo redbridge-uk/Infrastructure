@@ -166,10 +166,11 @@ namespace Redbridge.Console.Test
 		[TestCase]
 		public void ConstructCommandLineArguments_ParseAssemblyParameter_GetUsage()
 		{
-			CommandLineArguments<SingleParameterOptions> arguments = CommandLineArguments<SingleParameterOptions>.Setup();
-			string usage = arguments.GetUsage();
+			var arguments = CommandLineArguments<SingleParameterOptions>.Setup();
+			var usage = arguments.GetUsage();
 
-			StringBuilder expectedBuilder = new StringBuilder();
+			var expectedBuilder = new StringBuilder();
+            expectedBuilder.AppendLine("Copyright (C) Redbridge Software 2020. All rights reserved.");
 			expectedBuilder.AppendLine("Switches:");
 			expectedBuilder.AppendLine();
 			expectedBuilder.AppendLine("  -Assembly=(Assembly)");

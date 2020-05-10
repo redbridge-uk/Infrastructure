@@ -159,7 +159,7 @@ namespace Redbridge.Console
         /// </summary>
         public string GetUsage()
         {
-            StringBuilder usageBuilder = new StringBuilder();
+            var usageBuilder = new StringBuilder();
 
             // If a banner resource is defined.
             if (BannerDefined)
@@ -189,26 +189,26 @@ namespace Redbridge.Console
         {
             if (_arguments != null && _arguments.Count > 0)
             {
-                StringBuilder optionUsageBuilder = new StringBuilder();
+                var optionUsageBuilder = new StringBuilder();
                 optionUsageBuilder.AppendLine("Switches:");
                 optionUsageBuilder.AppendLine();
 
-                foreach (PropertyArgumentAttribute propertyArg in _arguments)
+                foreach (var propertyArg in _arguments)
                 {
-                    string switchIndentation = new string(IndentationCharacter, SwitchIndentation);
-                    string descriptionIndentation = new string(IndentationCharacter, SwitchIndentation + MaximumParameterNameWidth);
+                    var switchIndentation = new string(IndentationCharacter, SwitchIndentation);
+                    var descriptionIndentation = new string(IndentationCharacter, SwitchIndentation + MaximumParameterNameWidth);
                     
-                    string parameterDisplay = $"{switchIndentation}{ParameterIndicator}{propertyArg.ParameterDisplay}";
+                    var parameterDisplay = $"{switchIndentation}{ParameterIndicator}{propertyArg.ParameterDisplay}";
                     optionUsageBuilder.AppendLine(parameterDisplay);
 
-                    string parameterDescription = $"{descriptionIndentation}{propertyArg.HelpText}";
+                    var parameterDescription = $"{descriptionIndentation}{propertyArg.HelpText}";
                     optionUsageBuilder.AppendLine(parameterDescription);
                 }
 
                 return optionUsageBuilder.ToString();
             }
-            else
-                return string.Empty;
+
+            return string.Empty;
         }
 
         /// <summary>
@@ -222,10 +222,11 @@ namespace Redbridge.Console
 
             if (applicationAssembly != null)
             {
-                AssemblyName assemblyName = applicationAssembly.GetName();
+                var assemblyName = applicationAssembly.GetName();
                 bannerBuilder.AppendFormat("Redbridge Software {0} Version {1}{2}", assemblyName.Name, assemblyName.Version, Environment.NewLine);
-                bannerBuilder.AppendFormat("Copyright (C) Redbridge Software {0}. All rights reserved.{1}", DateTime.Now.Year, Environment.NewLine);
             }
+
+            bannerBuilder.AppendFormat("Copyright (C) Redbridge Software {0}. All rights reserved.{1}", DateTime.Now.Year, Environment.NewLine);
 
             return bannerBuilder.ToString();
         }
