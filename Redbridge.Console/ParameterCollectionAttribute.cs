@@ -45,20 +45,17 @@ namespace Redbridge.Console
         
         protected override void SetValue(object settings, object value)
         {
-            string[] nameValue = (string []) value;
-            ParameterCollection collection = (ParameterCollection) Property.GetValue(settings, null);
+            var nameValue = (string []) value;
+            var collection = (ParameterCollection) Property.GetValue(settings, null);
             collection.Add(nameValue.First(), nameValue.Last());
         }
         
         public string DefaultValue
         {
-            get { return (string) base.PropertyDefaultValue; }
-            set { PropertyDefaultValue = (string)value; }
+            get => (string) base.PropertyDefaultValue;
+            set => PropertyDefaultValue = (string)value;
         }
         
-        protected override IEnumerable<Type> SupportedTypes
-        {
-            get { return new[] { typeof(ParameterCollection) }; }
-        }
+        protected override IEnumerable<Type> SupportedTypes => new[] { typeof(ParameterCollection) };
     }
 }

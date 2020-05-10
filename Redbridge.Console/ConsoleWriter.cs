@@ -7,8 +7,8 @@ namespace Redbridge.Console
     /// </summary>
     public class ConsoleWriter : IDisposable
     {
-        private ConsoleColor _previousForegroundColor;
-        private ConsoleColor _previousBackgroundColor;
+        private readonly ConsoleColor _previousForegroundColor;
+        private readonly ConsoleColor _previousBackgroundColor;
 
         #region Constructors
 
