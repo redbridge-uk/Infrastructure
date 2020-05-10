@@ -212,7 +212,7 @@ namespace Redbridge.Console
         }
 
         /// <summary>
-        /// Method that creates the default banner for a CLS application.
+        /// Method that creates the default banner for Redbridge application.
         /// </summary>
         /// <returns></returns>
         private string CreateDefaultBanner()
@@ -223,8 +223,8 @@ namespace Redbridge.Console
             if (applicationAssembly != null)
             {
                 AssemblyName assemblyName = applicationAssembly.GetName();
-                bannerBuilder.AppendFormat("CLS Services {0} Version {1}{2}", assemblyName.Name, assemblyName.Version, Environment.NewLine);
-                bannerBuilder.AppendFormat("Copyright (C) CLS Services {0}. All rights reserved.{1}", DateTime.Now.Year, Environment.NewLine);
+                bannerBuilder.AppendFormat("Redbridge Software {0} Version {1}{2}", assemblyName.Name, assemblyName.Version, Environment.NewLine);
+                bannerBuilder.AppendFormat("Copyright (C) Redbridge Software {0}. All rights reserved.{1}", DateTime.Now.Year, Environment.NewLine);
             }
 
             return bannerBuilder.ToString();

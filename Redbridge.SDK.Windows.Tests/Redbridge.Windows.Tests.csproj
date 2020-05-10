@@ -6,10 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\AUD.gif" />
+    <None Remove="Resources\EmbeddedTextFile_1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AUD.gif" />
+    <EmbeddedResource Include="Resources\EmbeddedTextFile_1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="coverlet.msbuild" Version="2.8.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <PackageReference Include="Moq" Version="4.14.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="NUnit" Version="3.12.0" />
