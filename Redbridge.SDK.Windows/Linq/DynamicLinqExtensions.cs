@@ -16,9 +16,9 @@ namespace Redbridge.Linq
 
 		public static IQueryable Where(this IQueryable source, string predicate, params object[] values)
 		{
-			if (source == null) throw new ArgumentNullException("source");
-			if (predicate == null) throw new ArgumentNullException("predicate");
-			LambdaExpression lambda = DynamicExpression.ParseLambda(source.ElementType, typeof(bool), predicate, values);
+			if (source == null) throw new ArgumentNullException(nameof(source));
+			if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+			var lambda = DynamicExpression.ParseLambda(source.ElementType, typeof(bool), predicate, values);
 			return source.Provider.CreateQuery(
 				Expression.Call(
 					typeof(Queryable), "Where",
@@ -28,8 +28,8 @@ namespace Redbridge.Linq
 
 		public static IQueryable Select(this IQueryable source, string selector, params object[] values)
 		{
-			if (source == null) throw new ArgumentNullException("source");
-			if (selector == null) throw new ArgumentNullException("selector");
+			if (source == null) throw new ArgumentNullException(nameof(source));
+			if (selector == null) throw new ArgumentNullException(nameof(selector));
 			LambdaExpression lambda = DynamicExpression.ParseLambda(source.ElementType, null, selector, values);
 			return source.Provider.CreateQuery(
 				Expression.Call(
@@ -45,8 +45,8 @@ namespace Redbridge.Linq
 
 		public static IQueryable OrderBy(this IQueryable source, string ordering, params object[] values)
 		{
-			if (source == null) throw new ArgumentNullException("source");
-			if (ordering == null) throw new ArgumentNullException("ordering");
+			if (source == null) throw new ArgumentNullException(nameof(source));
+			if (ordering == null) throw new ArgumentNullException(nameof(ordering));
 
 			var parameters = new[] { Expression.Parameter(source.ElementType, "") };
 
@@ -70,7 +70,7 @@ namespace Redbridge.Linq
 
 		public static IQueryable Take(this IQueryable source, int count)
 		{
-			if (source == null) throw new ArgumentNullException("source");
+			if (source == null) throw new ArgumentNullException(nameof(source));
 			return source.Provider.CreateQuery(
 				Expression.Call(
 					typeof(Queryable), "Take",
@@ -80,7 +80,7 @@ namespace Redbridge.Linq
 
 		public static IQueryable Skip(this IQueryable source, int count)
 		{
-			if (source == null) throw new ArgumentNullException("source");
+			if (source == null) throw new ArgumentNullException(nameof(source));
 			return source.Provider.CreateQuery(
 				Expression.Call(
 					typeof(Queryable), "Skip",
@@ -88,23 +88,9 @@ namespace Redbridge.Linq
 					source.Expression, Expression.Constant(count)));
 		}
 
-		public static IQueryable GroupBy(this IQueryable source, string keySelector, string elementSelector, params object[] values)
-		{
-			if (source == null) throw new ArgumentNullException("source");
-			if (keySelector == null) throw new ArgumentNullException("keySelector");
-			if (elementSelector == null) throw new ArgumentNullException("elementSelector");
-			LambdaExpression keyLambda = DynamicExpression.ParseLambda(source.ElementType, null, keySelector, values);
-			LambdaExpression elementLambda = DynamicExpression.ParseLambda(source.ElementType, null, elementSelector, values);
-			return source.Provider.CreateQuery(
-				Expression.Call(
-					typeof(Queryable), "GroupBy",
-					new Type[] { source.ElementType, keyLambda.Body.Type, elementLambda.Body.Type },
-					source.Expression, Expression.Quote(keyLambda), Expression.Quote(elementLambda)));
-		}
-
 		public static bool Any(this IQueryable source)
 		{
-			if (source == null) throw new ArgumentNullException("source");
+			if (source == null) throw new ArgumentNullException(nameof(source));
 			return (bool)source.Provider.Execute(
 				Expression.Call(
 					typeof(Queryable), "Any",
@@ -128,7 +114,7 @@ namespace Redbridge.Linq
 			var props = GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
 			var sb = new StringBuilder();
 			sb.Append("{");
-			for (int i = 0; i < props.Length; i++)
+			for (var i = 0; i < props.Length; i++)
 			{
 				if (i > 0) sb.Append(", ");
 				sb.Append(props[i].Name);
@@ -140,42 +126,7 @@ namespace Redbridge.Linq
 		}
 	}
 
-	public static class DynamicExpression
-	{
-		public static Expression Parse(Type resultType, string expression, params object[] values)
-		{
-			var parser = new ExpressionParser(null, expression, values);
-			return parser.Parse(resultType);
-		}
-
-		public static LambdaExpression ParseLambda(Type itType, Type resultType, string expression, params object[] values)
-		{
-			return ParseLambda(new[] { Expression.Parameter(itType, "") }, resultType, expression, values);
-		}
-
-		public static LambdaExpression ParseLambda(ParameterExpression[] parameters, Type resultType, string expression, params object[] values)
-		{
-			var parser = new ExpressionParser(parameters, expression, values);
-			return Expression.Lambda(parser.Parse(resultType), parameters);
-		}
-
-		public static Expression<Func<T, S>> ParseLambda<T, S>(string expression, params object[] values)
-		{
-			return (Expression<Func<T, S>>)ParseLambda(typeof(T), typeof(S), expression, values);
-		}
-
-		public static Type CreateClass(params DynamicProperty[] properties)
-		{
-			return ClassFactory.Instance.GetDynamicClass(properties);
-		}
-
-		public static Type CreateClass(IEnumerable<DynamicProperty> properties)
-		{
-			return ClassFactory.Instance.GetDynamicClass(properties);
-		}
-	}
-
-	internal class DynamicOrdering
+    internal class DynamicOrdering
 	{
 		public Expression Selector;
 		public bool Ascending;
@@ -184,26 +135,26 @@ namespace Redbridge.Linq
 	internal class Signature : IEquatable<Signature>
 	{
 		public DynamicProperty[] properties;
-		public int hashCode;
+		public readonly int HashCode;
 
 		public Signature(IEnumerable<DynamicProperty> properties)
 		{
 			this.properties = properties.ToArray();
-			hashCode = 0;
-			foreach (DynamicProperty p in properties)
+			HashCode = 0;
+			foreach (var p in properties)
 			{
-				hashCode ^= p.Name.GetHashCode() ^ p.Type.GetHashCode();
+				HashCode ^= p.Name.GetHashCode() ^ p.Type.GetHashCode();
 			}
 		}
 
 		public override int GetHashCode()
 		{
-			return hashCode;
+			return HashCode;
 		}
 
 		public override bool Equals(object obj)
 		{
-			return obj is Signature ? Equals((Signature)obj) : false;
+			return obj is Signature a && Equals(a);
 		}
 
 		public bool Equals(Signature other)
