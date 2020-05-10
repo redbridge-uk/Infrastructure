@@ -52,9 +52,7 @@ namespace Redbridge.Data.Mapping
 							Expression<Func<TRecord, TSourceFieldType, TDestinationFieldType>> convertFunc = null,
 							Expression<Func<TDestinationFieldType, TSourceFieldType>> convertBackFunc = null)
 		{
-			if (fieldName == null) throw new ArgumentNullException(nameof(fieldName));
-
-			FieldName = fieldName;
+            FieldName = fieldName ?? throw new ArgumentNullException(nameof(fieldName));
 			_func = func;
 			_convertFunc = convertFunc;
 			_convertBackFunc = convertBackFunc;
@@ -72,7 +70,7 @@ namespace Redbridge.Data.Mapping
 					default:
 						throw new InvalidOperationException();
 				}
-                _propertySetter = propertyInfo.SetMethod; // .GetSetMethod();
+                _propertySetter = propertyInfo.SetMethod;
 			}
 
 			LoadTypeConverters();
@@ -117,7 +115,7 @@ namespace Redbridge.Data.Mapping
 
 		protected virtual TDestinationFieldType OnRead(TRecord record)
 		{
-            var columnValue = !record.Equals(null) ? _func.Compile()(record) : default(TSourceFieldType);
+            var columnValue = _func.Compile()(record);
 			var convertedValue = _convertFunc != null ? _convertFunc.Compile()(record, columnValue) : OnConvert(columnValue);
 			return convertedValue;
 		}
@@ -134,9 +132,8 @@ namespace Redbridge.Data.Mapping
 				throw new RedbridgeException($"Failed to read value '{value}'. The value isn't in the format expected.");
 			}
 
-            if (mappedValue.Equals(null)) return TryGetResult.Fail<TDestinationFieldType>();
-			return TryGetResult.FromResult(mappedValue);
-		}
+            return mappedValue.Equals(null) ? TryGetResult.Fail<TDestinationFieldType>() : TryGetResult.FromResult(mappedValue);
+        }
 
 		protected virtual TryGetResult<TSourceFieldType> TryConvertBack(TDestinationFieldType value)
 		{
@@ -150,8 +147,7 @@ namespace Redbridge.Data.Mapping
 
 			var targetType = typeof(TSourceFieldType);
 			// See if we have a converter that can take our type and return the TValue...
-			Func<object, object> converter;
-			if (_sourcetypeConverters.TryGetValue(targetType, out converter))
+            if (_sourcetypeConverters.TryGetValue(targetType, out var converter))
 			{
 				var otherConvertedValue = converter(value);
 				return TryGetResult.FromResult((TSourceFieldType)otherConvertedValue);
