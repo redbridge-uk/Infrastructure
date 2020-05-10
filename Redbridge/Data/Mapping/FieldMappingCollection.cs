@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Redbridge.Linq;
 
 namespace Redbridge.Data.Mapping
 {
@@ -14,8 +13,7 @@ namespace Redbridge.Data.Mapping
 
 		public FieldMappingCollection(IDataParserFactory factory)
 		{
-			if (factory == null) throw new ArgumentNullException(nameof(factory));
-			_factory = factory;
+            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
 		}
 
 		protected override string GetKeyForItem(IFieldMap<TRecord> item)
