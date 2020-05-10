@@ -1,12 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageIconUrl>https://github.com/redbridge-uk/resources/blob/master/redbridge_32.png</PackageIconUrl>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
-  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Redbridge\Redbridge.csproj" />
   </ItemGroup>
