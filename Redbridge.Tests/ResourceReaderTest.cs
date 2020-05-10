@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Redbridge.IO;
 
-namespace Redbridge.Windows.Tests
+namespace Redbridge.Tests
 {
     [TestFixture]
     public class EmbeddedResourceReaderTest

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Redbridge.SDK</PackageId>
-    <PackageIconUrl>https://github.com/redbridge-uk/resources/blob/master/redbridge_32.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</PackageIconUrl>
     <Copyright>Redbridge Solutions Ltd</Copyright>
     <PackageTags>Redbridge SDK C# Library netstandard2.0</PackageTags>
     <PackageDescription>The core redbridge sdk library</PackageDescription>
