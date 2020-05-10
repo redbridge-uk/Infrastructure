@@ -24,7 +24,7 @@ namespace Redbridge.Console
 			}
 		}
 
-        private object _syncLock = new object();
+        private readonly object _syncLock = new object();
 		private readonly KeyCollection<TKey1> _standardCollection;
 		private readonly KeyCollection<TKey2> _alternateCollection;
 		private readonly IQueryable<TItem> _queryableInstance;
