@@ -35,22 +35,16 @@ public class EmbeddedResourceReader
 	private string BuildResourcePath(string resourcePath)
 	{
 		string fullPath;
-		string assemblyPath = SourceAssembly.GetName().Name;
+		var assemblyPath = SourceAssembly.GetName().Name;
 
 		if (!string.IsNullOrWhiteSpace(RootPath))
-		{
-			if (!RootPath.StartsWith(assemblyPath, StringComparison.Ordinal))
-				fullPath = $"{assemblyPath}.{RootPath}.{resourcePath}";
-			else
-				fullPath = $"{RootPath}.{resourcePath}";
-		}
+        {
+            fullPath = !RootPath.StartsWith(assemblyPath, StringComparison.Ordinal) ? $"{assemblyPath}.{RootPath}.{resourcePath}" : $"{RootPath}.{resourcePath}";
+        }
 		else
-		{
-			if (resourcePath.StartsWith(assemblyPath, StringComparison.Ordinal))
-				fullPath = resourcePath;
-			else
-				fullPath = $"{assemblyPath}.{resourcePath}";
-		}
+        {
+            fullPath = resourcePath.StartsWith(assemblyPath, StringComparison.Ordinal) ? resourcePath : $"{assemblyPath}.{resourcePath}";
+        }
 
 		return fullPath;
 	}

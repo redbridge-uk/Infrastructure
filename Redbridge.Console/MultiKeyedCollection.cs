@@ -11,7 +11,7 @@ namespace Redbridge.Console
 	{
 		private class KeyCollection<TKey> : KeyedCollection<TKey, TItem>
 		{
-			private Func<TItem, TKey> _keyRetriever;
+			private readonly Func<TItem, TKey> _keyRetriever;
 
 			public KeyCollection(Func<TItem, TKey> keyRetriever)
 			{
@@ -24,21 +24,21 @@ namespace Redbridge.Console
 			}
 		}
 
-		private KeyCollection<TKey1> _standardCollection;
-		private KeyCollection<TKey2> _alternateCollection;
-		private IQueryable<TItem> _querableInstance;
-
+        private readonly object _syncLock = new object();
+		private readonly KeyCollection<TKey1> _standardCollection;
+		private readonly KeyCollection<TKey2> _alternateCollection;
+		private readonly IQueryable<TItem> _queryableInstance;
 
 		protected MultiKeyedCollection()
 		{
 			_standardCollection = new KeyCollection<TKey1>(GetKey1ForItem);
 			_alternateCollection = new KeyCollection<TKey2>(GetKey2ForItem);
-			_querableInstance = _standardCollection.AsQueryable();
+			_queryableInstance = _standardCollection.AsQueryable();
 		}
 
 		public void Add(TItem item)
 		{
-			lock (this)
+			lock (_syncLock)
 			{
 				_standardCollection.Add(item);
 				_alternateCollection.Add(item);
@@ -47,20 +47,17 @@ namespace Redbridge.Console
 
 		public void AddRange(IEnumerable<TItem> items)
 		{
-			foreach (TItem item in items)
+			foreach (var item in items)
 			{
 				Add(item);
 			}
 		}
 
-		public int Count
-		{
-			get { return _standardCollection.Count; }
-		}
+		public int Count => _standardCollection.Count;
 
-		public bool TryGet(TKey1 key, out TItem item)
+        public bool TryGet(TKey1 key, out TItem item)
 		{
-			TKey1 processedKey = PreProcessKey1(key);
+			var processedKey = PreProcessKey1(key);
 			item = default(TItem);
 
 			if (_standardCollection.Contains(processedKey))
@@ -68,12 +65,12 @@ namespace Redbridge.Console
 				item = _standardCollection[processedKey];
 				return true;
 			}
-			else
-				return false;
-		}
+
+            return false;
+        }
 
 		/// <summary>
-		/// Method that returns whether the multikeyed collection contains the specified key.
+		/// Method that returns whether the multi-keyed collection contains the specified key.
 		/// </summary>
 		/// <param name="key"></param>
 		/// <returns></returns>
@@ -111,16 +108,14 @@ namespace Redbridge.Console
 		{
 			get
 			{
-				TKey1 processedKey = PreProcessKey1(key);
+				var processedKey = PreProcessKey1(key);
 
 				if (_standardCollection.Contains(processedKey))
 					return _standardCollection[processedKey];
-				else
-				{
-					object keyObj = (object)key;
-					return this[keyObj];
-				}
-			}
+
+                object keyObj = key;
+                return this[keyObj];
+            }
 		}
 
 		/// <summary>
@@ -132,7 +127,7 @@ namespace Redbridge.Console
 		{
 			get
 			{
-				TKey2 key2 = (TKey2)key;
+				var key2 = (TKey2)key;
 				return _alternateCollection[PreProcessKey2(key2)];
 			}
 		}
@@ -157,40 +152,31 @@ namespace Redbridge.Console
 		/// <returns></returns>
 		public IEnumerator<TItem> GetEnumerator()
 		{
-			return _querableInstance.GetEnumerator();
+			return _queryableInstance.GetEnumerator();
 		}
 
 		/// <summary>
 		/// Gets the enumerator for the collection.
 		/// </summary>
 		/// <returns></returns>
-		IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return _querableInstance.GetEnumerator();
+			return _queryableInstance.GetEnumerator();
 		}
 
 		/// <summary>
 		/// Gets the queryable element type.
 		/// </summary>
-		public Type ElementType
-		{
-			get { return typeof(TItem); }
-		}
+		public Type ElementType => typeof(TItem);
 
-		/// <summary>
+        /// <summary>
 		/// Gets the expression for the instance.
 		/// </summary>
-		public Expression Expression
-		{
-			get { return _querableInstance.Expression; }
-		}
+		public Expression Expression => _queryableInstance.Expression;
 
-		/// <summary>
+        /// <summary>
 		/// Gets the provider for the query
 		/// </summary>
-		public IQueryProvider Provider
-		{
-			get { return _querableInstance.Provider; }
-		}
-	}
+		public IQueryProvider Provider => _queryableInstance.Provider;
+    }
 }
