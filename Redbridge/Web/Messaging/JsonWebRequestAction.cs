@@ -5,7 +5,7 @@ namespace Redbridge.Web.Messaging
 {
 	public class JsonWebRequestAction : JsonWebRequest
 	{
-		public JsonWebRequestAction(string requestUri, HttpVerb httpVerb) : base(requestUri, httpVerb) { }
+		public JsonWebRequestAction(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory) : base(requestUri, httpVerb, clientFactory) { }
 
 		public async Task ExecuteAsync()
 		{
@@ -26,7 +26,7 @@ namespace Redbridge.Web.Messaging
 
 	public class JsonWebRequestAction<TInput1> : JsonWebRequest
 	{
-		public JsonWebRequestAction(string requestUri, HttpVerb httpVerb) : base(requestUri, httpVerb) { }
+		public JsonWebRequestAction(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory) : base(requestUri, httpVerb, clientFactory) { }
 
 		public async Task ExecuteAsync(TInput1 input1)
 		{

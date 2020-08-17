@@ -18,7 +18,8 @@ namespace Redbridge.Identity.OAuthServer
 
         private readonly IHashingService _hashingService;
 
-        public OAuthUsernamePasswordAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger, IHashingService hashingService) : base(settings, logger) 
+        public OAuthUsernamePasswordAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger, IHashingService hashingService, IHttpClientFactory clientFactory) 
+            : base(settings, logger, clientFactory) 
         {
             _hashingService = hashingService ?? throw new ArgumentNullException(nameof(hashingService));
         }
@@ -73,7 +74,7 @@ namespace Redbridge.Identity.OAuthServer
             {
                 Logger.WriteInfo($"Connecting to service at url {ServiceUri} as user {Username} (Client Id {ClientId})");
                 var uri = new Uri(ServiceUri, "oauth/token");
-                var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post);
+                var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post, ClientFactory);
                 var data = new OAuthAccessTokenRequestData() { ClientId = ClientId, ClientSecret = ClientSecret, Email = _username, Password = _password, GrantType = GrantTypes.Password };
                 var token = await request.ExecuteAsync(data.AsDictionary());
 

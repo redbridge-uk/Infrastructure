@@ -56,7 +56,7 @@ namespace Redbridge.Exceptions
 				builder.AppendLine(
 					$"Component {ComponentName} has errored, please report the following details:");
 			else
-				builder.AppendLine("A Easilog Component has errored, please report the following details:");
+				builder.AppendLine("A Redbridge Component has errored, please report the following details:");
 
 			builder.AppendLine($"Message: {exception.Message}");
 			builder.AppendLine($"Source: {exception.Source}");
