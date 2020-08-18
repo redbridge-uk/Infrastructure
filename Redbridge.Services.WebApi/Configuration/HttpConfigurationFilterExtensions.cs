@@ -11,11 +11,10 @@ namespace Redbridge.Services.WebApi.Configuration
     {
         public static void InstallExceptionFilters (this HttpConfiguration configuration, ILogger logger) 
         {
-            logger.WriteDebug("Installing exception filters...");
-
             if (logger == null) throw new ArgumentNullException(nameof(logger));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            
+
+            logger.WriteDebug("Installing exception filters...");
             configuration.Filters.Add(new ValidationExceptionFilter(logger));
             configuration.Filters.Add(new UnknownEntityExceptionFilter(logger));
             configuration.Filters.Add(new UserNotAuthenticatedExceptionFilter(logger));
