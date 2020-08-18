@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Xml;
 using Redbridge.Notifications;
+using Redbridge.Web.Messaging;
 
 namespace Redbridge.Configuration
 {
@@ -17,16 +18,16 @@ public class NotifierConfigurationElement : ConfigurationElement
 	[ConfigurationProperty("name", DefaultValue = "", IsRequired = true, IsKey = true)]
 	public string Name
 	{
-		get { return (string)this["name"]; }
-		set { this["name"] = value; }
-	}
+		get => (string)this["name"];
+        set => this["name"] = value;
+    }
 
 	[ConfigurationProperty("enabled", DefaultValue = true, IsRequired = false, IsKey = false)]
 	public bool Enabled
 	{
-		get { return (bool)this["enabled"]; }
-		set { this["enabled"] = value; }
-	}
+		get => (bool)this["enabled"];
+        set => this["enabled"] = value;
+    }
 
 	[ConfigurationProperty("filters", IsDefaultCollection = true)]
 	[ConfigurationCollection(typeof(NotificationFilterCollection), AddItemName = "add", ClearItemsName = "clear", RemoveItemName = "remove")]
@@ -44,20 +45,20 @@ public class NotifierConfigurationElement : ConfigurationElement
 		}
 	}
 
-	public Task NotifyAsync(NotificationMessage message)
+	public Task NotifyAsync(NotificationMessage message, IHttpClientFactory clientFactory)
 	{
 		if (Filters != null && Filters.Count > 0)
 		{
 			if (Filters.IsIncluded(message))
-				return OnNotifyAsync(message);
+				return OnNotifyAsync(message, clientFactory);
 
 			return Task.FromResult(false);
 		}
 		else
-			return OnNotifyAsync(message);
+			return OnNotifyAsync(message, clientFactory);
 	}
 
-	protected virtual Task OnNotifyAsync(NotificationMessage message)
+	protected virtual Task OnNotifyAsync(NotificationMessage message, IHttpClientFactory clientFactory)
 	{
 		return Task.FromResult(true);
 	}

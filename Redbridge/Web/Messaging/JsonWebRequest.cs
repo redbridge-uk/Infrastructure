@@ -10,18 +10,24 @@ using Redbridge.Exceptions;
 
 namespace Redbridge.Web.Messaging
 {
-	public abstract class JsonWebRequest
+    public interface IHttpClientFactory
+    {
+        HttpClient Create();
+    }
+
+    public abstract class JsonWebRequest
 	{
 		private readonly string _requestUriString;
-		private readonly HttpVerb _httpVerb;
-		private readonly UrlParameterCollection _parameters = new UrlParameterCollection();
+        private readonly IHttpClientFactory _clientFactory;
+        private readonly UrlParameterCollection _parameters = new UrlParameterCollection();
 		private readonly ICollection<JsonConverter> _converters = new List<JsonConverter>();
 
-		protected JsonWebRequest(string requestUri, HttpVerb httpVerb)
+		protected JsonWebRequest(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)
 		{
             _requestUriString = requestUri ?? throw new ArgumentNullException(nameof(requestUri));
-			_httpVerb = httpVerb;
-			AuthenticationMethod = AuthenticationMethod.Bearer;
+			HttpVerb = httpVerb;
+            _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
+            AuthenticationMethod = AuthenticationMethod.Bearer;
 		}
 
 		public UrlParameterCollection Parameters => _parameters;
@@ -41,12 +47,11 @@ namespace Redbridge.Web.Messaging
 		internal IWebRequestSignatureService SessionManager { get; set; }
 
 		public HttpClient ToHttpClient()
-		{
-			return new HttpClient()
-			{
-				BaseAddress = OnCreateEndpointUri(),
-			};
-		}
+        {
+            var client = _clientFactory.Create();
+            client.BaseAddress = OnCreateEndpointUri();
+            return client;
+        }
 
         protected virtual void OnHandleUnhandledWebException (UnhandledWebException uwe)
         {
@@ -73,21 +78,20 @@ namespace Redbridge.Web.Messaging
 		{
 			var endpointUri = OnCreateEndpointUri();
 
-			using (var request = new HttpClient())
-			{
-				OnApplySignature(request);
+            var request = _clientFactory.Create();
+			
+			OnApplySignature(request);
 
-				if (HttpVerb == HttpVerb.Get)
-					return await request.GetAsync(endpointUri);
+			if (HttpVerb == HttpVerb.Get)
+				return await request.GetAsync(endpointUri);
 
-				if (HttpVerb == HttpVerb.Delete)
-					return await request.DeleteAsync(endpointUri);
+			if (HttpVerb == HttpVerb.Delete)
+				return await request.DeleteAsync(endpointUri);
 
-				if (HttpVerb == HttpVerb.Post)
-					return await request.PostAsync(endpointUri, null); 
-			}
+			if (HttpVerb == HttpVerb.Post)
+				return await request.PostAsync(endpointUri, null);
 
-			throw new NotSupportedException("Only gets are currently supported for making requests with no body.");
+            throw new NotSupportedException("Only gets are currently supported for making requests with no body.");
 		}
 
         public virtual string ContentType { get; protected set; } = "application/json";
@@ -96,23 +100,22 @@ namespace Redbridge.Web.Messaging
 		{
 			var endpointUri = OnCreateEndpointUri();
 
-			using (var request = new HttpClient())
+            var request = _clientFactory.Create();
+			
+			OnApplySignature(request);
+
+			if (HttpVerb == HttpVerb.Post || HttpVerb == HttpVerb.Put)
 			{
-				OnApplySignature(request);
+				var payload = OnCreatePayload(body);
+				var content = new StringContent(payload, Encoding.UTF8, ContentType);
 
-				if (HttpVerb == HttpVerb.Post || HttpVerb == HttpVerb.Put)
-				{
-					var payload = OnCreatePayload(body);
-					var content = new StringContent(payload, Encoding.UTF8, ContentType);
-
-					if (HttpVerb == HttpVerb.Put)
-						return await request.PutAsync(endpointUri, content);
-					
-					return await request.PostAsync(endpointUri, content);
-				}
-
-				throw new NotSupportedException("Only post and put are currently supported for sending requests with a body.");
+				if (HttpVerb == HttpVerb.Put)
+					return await request.PutAsync(endpointUri, content);
+				
+				return await request.PostAsync(endpointUri, content);
 			}
+
+			throw new NotSupportedException("Only post and put are currently supported for sending requests with a body.");
 		}
 
         protected virtual string OnCreatePayload (object body)
@@ -163,8 +166,8 @@ namespace Redbridge.Web.Messaging
 
 		public Uri RequestUri => OnCreateEndpointUri();
 
-		public HttpVerb HttpVerb => _httpVerb;
+		public HttpVerb HttpVerb { get; }
 
-		public ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 	}
 }

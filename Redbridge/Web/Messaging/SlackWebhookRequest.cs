@@ -5,12 +5,12 @@ namespace Redbridge.Web.Messaging
 
 	public class SlackWebhookRequest : JsonWebRequestAction<SlackMessagePayloadData>
 	{
-		public SlackWebhookRequest() : base("https://hooks.slack.com/services/{channelurl}", HttpVerb.Post)
+		public SlackWebhookRequest(IHttpClientFactory clientFactory) : base("https://hooks.slack.com/services/{channelurl}", HttpVerb.Post, clientFactory)
 		{
 			AddParameter("channelurl");
 		}
 
-		public SlackWebhookRequest(string channelUrl) : base("https://hooks.slack.com/services/{channelurl}", HttpVerb.Post)
+		public SlackWebhookRequest(string channelUrl, IHttpClientFactory clientFactory) : base("https://hooks.slack.com/services/{channelurl}", HttpVerb.Post, clientFactory)
 		{
 			AddParameter("channelurl");
 			ChannelUrl = channelUrl;
@@ -18,9 +18,9 @@ namespace Redbridge.Web.Messaging
 
 		public string ChannelUrl
 		{
-			get { return (string)Parameters["channelurl"]; }
-			set { Parameters["channelurl"] = value; }
-		}
+			get => (string)Parameters["channelurl"];
+            set => Parameters["channelurl"] = value;
+        }
 
 		public override bool RequiresSignature => false;
 	}

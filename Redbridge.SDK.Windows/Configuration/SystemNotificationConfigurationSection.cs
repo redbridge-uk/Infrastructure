@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Threading.Tasks;
 using Redbridge.Notifications;
+using Redbridge.Web.Messaging;
 
 namespace Redbridge.Configuration
 {
@@ -39,14 +40,14 @@ public class SystemNotificationConfigurationSection : ConfigurationSection
 		}
 	}
 
-	public async Task NotifyAllAsync(NotificationMessage message)
+	public async Task NotifyAllAsync(NotificationMessage message, IHttpClientFactory clientFactory)
 	{
 		if (message == null) throw new ArgumentNullException(nameof(message));
 		if (Notifiers != null)
 		{
 			foreach (NotifierConfigurationElement notifier in Notifiers)
 			{
-				await notifier.NotifyAsync(message);
+				await notifier.NotifyAsync(message, clientFactory);
 			}
 		}
 	} }

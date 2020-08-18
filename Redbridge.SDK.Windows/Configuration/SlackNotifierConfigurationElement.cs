@@ -33,9 +33,9 @@ public class SlackNotifierConfigurationElement : NotifierConfigurationElement
 		WebhookUrl = reader.GetAttribute("webhookUrl");
 	}
 
-	protected override async Task OnNotifyAsync(NotificationMessage message)
+	protected override async Task OnNotifyAsync(NotificationMessage message, IHttpClientFactory clientFactory)
 	{
-		var request = new SlackWebhookRequest(WebhookUrl);
+		var request = new SlackWebhookRequest(WebhookUrl, clientFactory);
 		var emojiMetaData = message.Metadata["slack-emoji"];
 		var payload = new SlackMessagePayloadData()
 		{

@@ -50,11 +50,12 @@ namespace Redbridge.Tests
 
 	public class SpecializedWebRequestFactory : WebRequestFactory
 	{
-		public SpecializedWebRequestFactory(IWebRequestSignatureService sessionManager) : base(new Uri("http://smuggoat-api.azurewebsites.net"), sessionManager, new BlackholeLogger()) { }
+		public SpecializedWebRequestFactory(IWebRequestSignatureService sessionManager, IHttpClientFactory clientFactory) 
+            : base(new Uri("http://smuggoat-api.azurewebsites.net"), sessionManager, new BlackholeLogger(), clientFactory) { }
 
 		protected override IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger)
 		{
-			return new SpecializedWebRequestFactory(sessionManager);
+			return new SpecializedWebRequestFactory(sessionManager, ClientFactory);
 		}
 
 		protected override void OnRegisterConverters()
@@ -71,7 +72,8 @@ namespace Redbridge.Tests
 		public void CreateSpecializedFactoryFuncRequestExpectCustomJsonConverter()
 		{
 			var sessionManager = new Mock<IWebRequestSignatureService>();
-			var factory = new SpecializedWebRequestFactory(sessionManager.Object);
+            var clientFactory = new Mock<IHttpClientFactory>();
+			var factory = new SpecializedWebRequestFactory(sessionManager.Object, clientFactory.Object);
 			var request = factory.CreateFuncRequest<IntegrationData[]>($"integrations/my");
 			Assert.AreEqual(2, request.Converters.Count());
 		}
