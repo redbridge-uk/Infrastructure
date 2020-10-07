@@ -12,6 +12,7 @@ namespace Redbridge.Identity.OAuthServer
 {
     public abstract class OAuthRefreshAuthenticationClient : AuthenticationClient
     {
+        private readonly IHttpClientFactory _clientFactory;
         private IDisposable _tokenExpiredObservable;
 		private string _accessToken;
 		private string _refreshToken;
@@ -19,9 +20,10 @@ namespace Redbridge.Identity.OAuthServer
 		private readonly string _clientSecret;
 		private readonly Uri _serviceUri;
 
-		protected OAuthRefreshAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger) : base(settings, logger)
+		protected OAuthRefreshAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger, IHttpClientFactory clientFactory) : base(settings, logger)
         {
-			_clientId = settings.GetStringValue("ClientId");
+            _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
+            _clientId = settings.GetStringValue("ClientId");
 			_clientSecret = settings.GetStringValue("ClientSecret");
 			_serviceUri = settings.GetUrl("AuthorisationServiceUrl");
 		}
@@ -31,11 +33,9 @@ namespace Redbridge.Identity.OAuthServer
         protected string RefreshToken => _refreshToken;
         protected string ClientId => _clientId;
         protected string ClientSecret => _clientSecret;
+        protected IHttpClientFactory ClientFactory => _clientFactory;
 
-        public bool CanRefresh
-        {
-            get { return !string.IsNullOrWhiteSpace(_refreshToken); }
-        }
+        public bool CanRefresh => !string.IsNullOrWhiteSpace(_refreshToken);
 
         protected override void OnSetCredentials(UserCredentials credentials)
         {
@@ -116,7 +116,7 @@ namespace Redbridge.Identity.OAuthServer
             SetStatus(ClientConnectionStatus.Refreshing);
             Logger.WriteDebug($"Refreshing token at service url {_serviceUri} as user {Username} token: {_refreshToken}...");
 			var uri = new Uri(_serviceUri, "oauth/token");
-			var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post);
+			var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post, _clientFactory);
 			var data = new OAuthRefreshTokenAccessTokenRequestData() { ClientId = _clientId, ClientSecret = _clientSecret, RefreshToken = _refreshToken };
             Logger.WriteDebug($"Refresh request client id: {_clientId}");
             Logger.WriteDebug($"Refresh request client id: {_clientSecret?.Substring(0, 5)}XXXX");
@@ -175,9 +175,8 @@ namespace Redbridge.Identity.OAuthServer
             Logger.WriteInfo("Saving authentication settings...");
 			var memoryStream = new MemoryStream();
 			var settings = JsonConvert.SerializeObject(new AuthSettings() { RefreshToken = RefreshToken, AuthenticationType = AuthenticationMethod });
-			var writer = new StreamWriter(memoryStream);
-			writer.AutoFlush = true;
-			await writer.WriteAsync(settings);
+            var writer = new StreamWriter(memoryStream) {AutoFlush = true};
+            await writer.WriteAsync(settings);
 			return memoryStream;
 		}
 

@@ -12,18 +12,22 @@ namespace Redbridge.Web.Messaging
 	{
 		private readonly Uri _baseUri;
         private readonly ILogger _logger;
+        private readonly IHttpClientFactory _clientFactory;
 
-        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager) : this(baseUri, sessionManager, new BlackholeLogger()){}
+        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, IHttpClientFactory clientFactory) 
+            : this(baseUri, sessionManager, new BlackholeLogger(), clientFactory){}
 
-        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger)
+        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger, IHttpClientFactory clientFactory)
 		{
-			if (baseUri == null) throw new ArgumentNullException(nameof(baseUri));
-            _baseUri = baseUri;
+            _baseUri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
 			SessionManager = sessionManager ?? throw new ArgumentNullException(nameof(sessionManager));
-			_logger = logger;
+			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
 
-			RegisterConverters();
+            RegisterConverters();
 		}
+
+        protected IHttpClientFactory ClientFactory => _clientFactory;
 
 		protected void RegisterConverters() 
 		{
@@ -80,7 +84,7 @@ namespace Redbridge.Web.Messaging
 
 		public JsonWebRequestAction CreateRequest(string url, HttpVerb verb = HttpVerb.Get, params object[] arguments)
 		{
-			var request = new JsonWebRequestAction(string.Format(url, arguments), verb)
+			var request = new JsonWebRequestAction(string.Format(url, arguments), verb, _clientFactory)
 			{
 				RootUri = _baseUri,
 				SessionManager = SessionManager,
@@ -92,7 +96,7 @@ namespace Redbridge.Web.Messaging
 
 		public JsonWebRequestAction<TBody> CreateActionRequest<TBody>(string url, HttpVerb verb = HttpVerb.Post, params object[] arguments)
 		{
-			var request = new JsonWebRequestAction<TBody>(string.Format(url, arguments), verb)
+			var request = new JsonWebRequestAction<TBody>(string.Format(url, arguments), verb, _clientFactory)
 			{
 				RootUri = _baseUri,
 				SessionManager = SessionManager,
@@ -104,7 +108,7 @@ namespace Redbridge.Web.Messaging
 
 		public JsonWebRequestFunc<TResponse> CreateFuncRequest<TResponse>(string url, HttpVerb verb = HttpVerb.Get, params object[] arguments)
 		{
-			var request = new JsonWebRequestFunc<TResponse>(string.Format(url, arguments), verb)
+			var request = new JsonWebRequestFunc<TResponse>(string.Format(url, arguments), verb, _clientFactory)
 			{
 				RootUri = _baseUri,
 				SessionManager = SessionManager,
@@ -116,7 +120,7 @@ namespace Redbridge.Web.Messaging
 
 		public JsonWebRequestFunc<TBody, TResponse> CreateFuncRequest<TBody, TResponse>(string url, HttpVerb verb = HttpVerb.Post, params object[] arguments)
 		{
-			var request = new JsonWebRequestFunc<TBody, TResponse>(string.Format(url, arguments), verb)
+			var request = new JsonWebRequestFunc<TBody, TResponse>(string.Format(url, arguments), verb, _clientFactory)
 			{
 				RootUri = _baseUri,
 				SessionManager = SessionManager,

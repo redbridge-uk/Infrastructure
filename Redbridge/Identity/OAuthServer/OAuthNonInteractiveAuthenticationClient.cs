@@ -8,7 +8,8 @@ namespace Redbridge.Identity.OAuthServer
 {
     public class OAuthNonInteractiveAuthenticationClient : OAuthRefreshAuthenticationClient
     {
-		public OAuthNonInteractiveAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger) : base(settings, logger){}
+		public OAuthNonInteractiveAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger, IHttpClientFactory clientFactory) 
+            : base(settings, logger, clientFactory){}
 
 		public override string Username => string.Empty;
 		public override string ClientType => ClientTypeId;
@@ -26,7 +27,7 @@ namespace Redbridge.Identity.OAuthServer
 			{
 				Logger.WriteInfo($"Connecting to service at url {ServiceUri} as non-interactive client {ClientId})");
 				var uri = new Uri(ServiceUri, "oauth/token");
-				var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post);
+				var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post, ClientFactory);
 				var data = new OAuthAccessTokenRequestData() { ClientId = ClientId, ClientSecret = ClientSecret, GrantType = GrantTypes.ClientSecret };
 				var token = await request.ExecuteAsync(data.AsDictionary());
 

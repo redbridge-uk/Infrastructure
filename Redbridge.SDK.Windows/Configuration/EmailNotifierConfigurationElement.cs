@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Redbridge.Data;
 using Redbridge.Notifications;
+using Redbridge.Web.Messaging;
 
 namespace Redbridge.Configuration
 {
@@ -27,7 +28,7 @@ namespace Redbridge.Configuration
             set => this["sender"] = value;
         }
 
-        [ConfigurationProperty("senderDisplayName", DefaultValue = "Easilog Service", IsRequired = true, IsKey = false)]
+        [ConfigurationProperty("senderDisplayName", DefaultValue = "My Service", IsRequired = true, IsKey = false)]
         public string SenderDisplayName
         {
             get => (string)this["senderDisplayName"];
@@ -49,7 +50,7 @@ namespace Redbridge.Configuration
             SenderDisplayName = reader.GetAttribute("senderDisplayName");
         }
 
-        protected override async Task OnNotifyAsync(NotificationMessage message)
+        protected override async Task OnNotifyAsync(NotificationMessage message, IHttpClientFactory clientFactory)
         {
             var smptClient = new SmtpClient();
             var senderAddress = new MailAddress(Sender, SenderDisplayName);

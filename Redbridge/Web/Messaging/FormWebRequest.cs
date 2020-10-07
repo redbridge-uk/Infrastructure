@@ -6,7 +6,7 @@ namespace Redbridge.Web.Messaging
 {
 	public class FormServiceRequest<TResponse> : JsonWebRequestFunc<TResponse, IDictionary<string, string>>
 	{
-		public FormServiceRequest(Uri actionUri, HttpVerb verb) : base(actionUri.AbsoluteUri, verb)
+		public FormServiceRequest(Uri actionUri, HttpVerb verb, IHttpClientFactory clientFactory) : base(actionUri.AbsoluteUri, verb, clientFactory)
 		{
 			ContentType = "application/x-www-form-urlencoded";
 		}

@@ -137,16 +137,16 @@ namespace Redbridge.Console.Test
 		public void ConstructCommandLineArguments_ParseAssemblyParameter_ExpectSuccess()
 		{
 			CommandLineArguments<SingleParameterOptions> arguments = CommandLineArguments<SingleParameterOptions>.Setup();
-			SingleParameterOptions args = arguments.Parse("-assembly=Easilog.ServiceAssembly.Service");
-			Assert.AreEqual("Easilog.ServiceAssembly.Service", args.Assembly, "Unexpected assembly value.");
+			SingleParameterOptions args = arguments.Parse("-assembly=Test.ServiceAssembly.Service");
+			Assert.AreEqual("Test.ServiceAssembly.Service", args.Assembly, "Unexpected assembly value.");
 		}
 
 		[TestCase]
 		public void ConstructCommandLineArguments_ParseAssemblyParameterWithQuotes_ExpectSuccess()
 		{
 			CommandLineArguments<SingleParameterOptions> arguments = CommandLineArguments<SingleParameterOptions>.Setup();
-			SingleParameterOptions args = arguments.Parse("-assembly=\"Easilog.ServiceAssembly.Service\"");
-			Assert.AreEqual("Easilog.ServiceAssembly.Service", args.Assembly, "Unexpected assembly value.");
+			SingleParameterOptions args = arguments.Parse("-assembly=\"Test.ServiceAssembly.Service\"");
+			Assert.AreEqual("Test.ServiceAssembly.Service", args.Assembly, "Unexpected assembly value.");
 		}
 
 		[TestCase]

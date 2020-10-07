@@ -9,7 +9,7 @@ namespace Redbridge.Web.Messaging
 {
 	public class JsonWebRequestFunc<TResult, TInput1> : JsonWebRequest
 	{
-		public JsonWebRequestFunc(string requestUri, HttpVerb httpVerb)	: base(requestUri, httpVerb) { }
+		public JsonWebRequestFunc(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)	: base(requestUri, httpVerb, clientFactory) { }
 		
 		public async Task<TResult> ExecuteAsync(TInput1 input1)
 		{
@@ -62,14 +62,14 @@ namespace Redbridge.Web.Messaging
 
 	public class JsonWebRequestFunc<TResult> : JsonWebRequest
 	{
-		public JsonWebRequestFunc(Uri baseUri, string requestUri, HttpVerb httpVerb)
-			: this(requestUri, httpVerb)
+		public JsonWebRequestFunc(Uri baseUri, string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)
+			: this(requestUri, httpVerb, clientFactory)
 		{
             RootUri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
 		}
 
-		public JsonWebRequestFunc(string requestUri, HttpVerb httpVerb)
-			: base(requestUri, httpVerb) { }
+		public JsonWebRequestFunc(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)
+			: base(requestUri, httpVerb, clientFactory) { }
 
 		public async Task<TResult> ExecuteAsync()
 		{
