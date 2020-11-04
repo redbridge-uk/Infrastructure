@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Redbridge.Linq;
 
 namespace Redbridge.Web.Messaging
 {
 	public class FormServiceRequest<TResponse> : JsonWebRequestFunc<TResponse, IDictionary<string, string>>
 	{
-		public FormServiceRequest(Uri actionUri, HttpVerb verb, IHttpClientFactory clientFactory) : base(actionUri.AbsoluteUri, verb, clientFactory)
+		public FormServiceRequest(Uri actionUri, HttpVerb verb) : base(actionUri.AbsoluteUri, verb)
 		{
 			ContentType = "application/x-www-form-urlencoded";
 		}

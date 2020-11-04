@@ -5,10 +5,13 @@ namespace Redbridge.Web.Messaging
 {
 	public abstract class RestWebClient
 	{
-		protected RestWebClient(IWebRequestFactory webRequestFactory)
-		{
+        private readonly IHttpClientFactory _clientFactory;
+
+        protected RestWebClient(IWebRequestFactory webRequestFactory, IHttpClientFactory clientFactory)
+        {
+            _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
             RequestFactory = webRequestFactory ?? throw new ArgumentNullException(nameof(webRequestFactory));
-		}
+        }
 
 		public bool IsConnected => RequestFactory.SessionManager.Authority.IsConnected;
 
@@ -17,25 +20,25 @@ namespace Redbridge.Web.Messaging
 		protected async Task Execute(string url, HttpVerb verb = HttpVerb.Get, params object[] args)
 		{
 			var request = RequestFactory.CreateRequest(url, verb, args);
-			await request.ExecuteAsync();
+			await request.ExecuteAsync(_clientFactory);
 		}
 
 		protected async Task ExecuteAction<TBody>(TBody body, string url, HttpVerb verb = HttpVerb.Post, params object[] args)
 		{
 			var request = RequestFactory.CreateActionRequest<TBody>(url, verb, args);
-			await request.ExecuteAsync(body);
+			await request.ExecuteAsync(_clientFactory, body);
 		}
 
 		protected async Task<TResult> ExecuteFunc<TResult>(string url, HttpVerb verb = HttpVerb.Get, params object[] args)
 		{
 			var request = RequestFactory.CreateFuncRequest<TResult>(url, verb, args);
-			return await request.ExecuteAsync();
+			return await request.ExecuteAsync(_clientFactory);
 		}
 
 		protected async Task<TResult> ExecuteFunc<TResult, TBody>(TBody body, string url, HttpVerb verb = HttpVerb.Get, params object[] args)
 		{
 			var request = RequestFactory.CreateFuncRequest<TResult, TBody>(url, verb, args);
-			return await request.ExecuteAsync(body);
+			return await request.ExecuteAsync(_clientFactory, body);
 		}
 	}
 }

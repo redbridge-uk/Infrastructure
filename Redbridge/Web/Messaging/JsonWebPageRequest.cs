@@ -4,7 +4,7 @@ namespace Redbridge.Web.Messaging
 {
 	public abstract class JsonWebPageRequest<TResult, TInput1> : JsonWebRequestFunc<PagedResultSet<TResult>, TInput1>
 	{
-		protected JsonWebPageRequest(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory) : base(requestUri, httpVerb, clientFactory)
+		protected JsonWebPageRequest(string requestUri, HttpVerb httpVerb) : base(requestUri, httpVerb)
 		{
 			Page = 1;
 			Size = 20;
@@ -31,8 +31,8 @@ namespace Redbridge.Web.Messaging
 
 	public abstract class JsonWebPageRequest<TResult> : JsonWebRequestFunc<PagedResultSet<TResult>>
 	{
-		protected JsonWebPageRequest(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory) 
-            : base(requestUri, httpVerb, clientFactory)
+		protected JsonWebPageRequest(string requestUri, HttpVerb httpVerb) 
+            : base(requestUri, httpVerb)
 		{
 			Page = 1;
 			Size = 20;
