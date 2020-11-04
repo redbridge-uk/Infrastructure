@@ -9,6 +9,6 @@
     <ProjectReference Include="..\Redbridge\Redbridge.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Unity" Version="5.9.5" />
+    <PackageReference Include="Unity" Version="5.11.7" />
   </ItemGroup>
 </Project>

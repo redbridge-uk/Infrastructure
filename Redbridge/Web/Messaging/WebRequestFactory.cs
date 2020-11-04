@@ -84,7 +84,7 @@ namespace Redbridge.Web.Messaging
 
 		public JsonWebRequestAction CreateRequest(string url, HttpVerb verb = HttpVerb.Get, params object[] arguments)
 		{
-			var request = new JsonWebRequestAction(string.Format(url, arguments), verb, _clientFactory)
+			var request = new JsonWebRequestAction(string.Format(url, arguments), verb)
 			{
 				RootUri = _baseUri,
 				SessionManager = SessionManager,
@@ -96,7 +96,7 @@ namespace Redbridge.Web.Messaging
 
 		public JsonWebRequestAction<TBody> CreateActionRequest<TBody>(string url, HttpVerb verb = HttpVerb.Post, params object[] arguments)
 		{
-			var request = new JsonWebRequestAction<TBody>(string.Format(url, arguments), verb, _clientFactory)
+			var request = new JsonWebRequestAction<TBody>(string.Format(url, arguments), verb)
 			{
 				RootUri = _baseUri,
 				SessionManager = SessionManager,
@@ -108,7 +108,7 @@ namespace Redbridge.Web.Messaging
 
 		public JsonWebRequestFunc<TResponse> CreateFuncRequest<TResponse>(string url, HttpVerb verb = HttpVerb.Get, params object[] arguments)
 		{
-			var request = new JsonWebRequestFunc<TResponse>(string.Format(url, arguments), verb, _clientFactory)
+			var request = new JsonWebRequestFunc<TResponse>(string.Format(url, arguments), verb)
 			{
 				RootUri = _baseUri,
 				SessionManager = SessionManager,
@@ -120,7 +120,7 @@ namespace Redbridge.Web.Messaging
 
 		public JsonWebRequestFunc<TBody, TResponse> CreateFuncRequest<TBody, TResponse>(string url, HttpVerb verb = HttpVerb.Post, params object[] arguments)
 		{
-			var request = new JsonWebRequestFunc<TBody, TResponse>(string.Format(url, arguments), verb, _clientFactory)
+			var request = new JsonWebRequestFunc<TBody, TResponse>(string.Format(url, arguments), verb)
 			{
 				RootUri = _baseUri,
 				SessionManager = SessionManager,

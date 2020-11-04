@@ -7,11 +7,11 @@ namespace Redbridge.Web.Messaging
 {
 	public class HttpStreamRequest : JsonWebRequestFunc<Stream>
 	{
-		public HttpStreamRequest(Uri baseUri, string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)
-			: base(baseUri, requestUri, httpVerb, clientFactory) {}
+		public HttpStreamRequest(Uri baseUri, string requestUri, HttpVerb httpVerb)
+			: base(baseUri, requestUri, httpVerb) {}
 
-		public HttpStreamRequest(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)
-			: base(requestUri, httpVerb, clientFactory) { }
+		public HttpStreamRequest(string requestUri, HttpVerb httpVerb)
+			: base(requestUri, httpVerb) { }
 
 		protected override async Task<Stream> OnReadResultBody(HttpResponseMessage responseMessage)
 		{
