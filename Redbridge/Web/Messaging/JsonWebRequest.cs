@@ -30,11 +30,14 @@ namespace Redbridge.Web.Messaging
 
 		public UrlParameterCollection Parameters => _parameters;
 
-		protected void AddParameter(string parameterName)
-		{
-			if (parameterName == null) throw new ArgumentNullException(nameof(parameterName));
-			_parameters.Add(parameterName);
-		}
+        public void RegisterConverters(IEnumerable<JsonConverter> converters)
+        {
+            if (converters == null) throw new ArgumentNullException(nameof(converters));
+            foreach (var converter in converters)
+                _converters.Add(converter);
+        }
+
+        
 
 		public IEnumerable<JsonConverter> Converters => _converters;
 
@@ -49,6 +52,14 @@ namespace Redbridge.Web.Messaging
             var client = clientFactory.Create();
             client.BaseAddress = OnCreateEndpointUri();
             return client;
+        }
+
+        public virtual bool RequiresSignature => false;
+
+        protected void AddParameter(string parameterName)
+        {
+            if (parameterName == null) throw new ArgumentNullException(nameof(parameterName));
+            _parameters.Add(parameterName);
         }
 
         protected virtual void OnHandleUnhandledWebException (UnhandledWebException uwe)
@@ -69,9 +80,7 @@ namespace Redbridge.Web.Messaging
 					SessionManager.SignRequest(request);
 			}
 		}
-
-		public virtual bool RequiresSignature => false;
-
+        
 		protected async Task<HttpResponseMessage> OnExecuteRequestAsync(IHttpClientFactory clientFactory)
 		{
 			var endpointUri = OnCreateEndpointUri();
@@ -92,9 +101,7 @@ namespace Redbridge.Web.Messaging
                     throw new NotSupportedException("Only gets are currently supported for making requests with no body.");
             }
         }
-
-        public virtual string ContentType { get; protected set; } = "application/json";
-
+        
 		protected async Task<HttpResponseMessage> OnExecuteRequestAsync (IHttpClientFactory clientFactory, object body)
 		{
 			var endpointUri = OnCreateEndpointUri();
@@ -116,6 +123,8 @@ namespace Redbridge.Web.Messaging
 			throw new NotSupportedException("Only post and put are currently supported for sending requests with a body.");
 		}
 
+        public virtual string ContentType { get; protected set; } = "application/json";
+
         protected virtual string OnCreatePayload (object body)
         {
             return JsonConvert.SerializeObject(body, _converters.ToArray());
@@ -127,12 +136,7 @@ namespace Redbridge.Web.Messaging
 				serializer.Converters.Add(converter);
 		}
 
-		public void RegisterConverters(IEnumerable<JsonConverter> converters)
-		{
-			if (converters == null) throw new ArgumentNullException(nameof(converters));
-			foreach (var converter in converters)
-				_converters.Add(converter);
-		}
+		
 
 		protected virtual Uri OnCreateEndpointUri()
 		{
@@ -150,12 +154,9 @@ namespace Redbridge.Web.Messaging
 		}
 
 		protected string PostProcessQueryString(string queriedUriString)
-		{
-			if (SessionManager != null)
-				return SessionManager.PostProcessUrlString(queriedUriString);
-
-			return queriedUriString;
-		}
+        {
+            return SessionManager != null ? SessionManager.PostProcessUrlString(queriedUriString) : queriedUriString;
+        }
 
 		protected virtual string AppendQuery(string baseUri)
 		{
