@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.ApplicationInsights.Extensibility;
 
 namespace Redbridge.Diagnostics.ApplicationInsights
 {
@@ -11,7 +12,7 @@ namespace Redbridge.Diagnostics.ApplicationInsights
 
 		public ApplicationInsightsLogger()
 		{
-			_telemetryClient = new TelemetryClient();
+			_telemetryClient = new TelemetryClient(TelemetryConfiguration.CreateDefault());
 		}
 
 		public void WriteException(Exception exception)
