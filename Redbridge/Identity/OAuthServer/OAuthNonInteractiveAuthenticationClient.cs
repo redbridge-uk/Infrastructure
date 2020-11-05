@@ -27,9 +27,9 @@ namespace Redbridge.Identity.OAuthServer
 			{
 				Logger.WriteInfo($"Connecting to service at url {ServiceUri} as non-interactive client {ClientId})");
 				var uri = new Uri(ServiceUri, "oauth/token");
-				var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post, ClientFactory);
+				var request = new FormWebRequest<OAuthTokenResult>(uri, HttpVerb.Post);
 				var data = new OAuthAccessTokenRequestData() { ClientId = ClientId, ClientSecret = ClientSecret, GrantType = GrantTypes.ClientSecret };
-				var token = await request.ExecuteAsync(data.AsDictionary());
+				var token = await request.ExecuteAsync(ClientFactory, data.AsDictionary());
 
 				if (token != null)
 				{

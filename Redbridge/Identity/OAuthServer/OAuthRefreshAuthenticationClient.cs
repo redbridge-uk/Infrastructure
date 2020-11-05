@@ -96,7 +96,7 @@ namespace Redbridge.Identity.OAuthServer
 			if (expiresInSeconds > 0)
 			{
                 Logger.WriteDebug($"Authentication client is configuring expiry timer from requested {expiresInSeconds} seconds...");
-				var eagerExpiryTime = Convert.ToInt32((95M / 100M) * (decimal)expiresInSeconds);
+				var eagerExpiryTime = Convert.ToInt32((95M / 100M) * expiresInSeconds);
 				Logger.WriteInfo($"{ClientType} token expiry set as {expiresInSeconds} seconds from now. Setting local expiry to just before {eagerExpiryTime} seconds...");
 				_tokenExpiredObservable = Observable.Timer(TimeSpan.FromSeconds(eagerExpiryTime)).Take(1)
 													.Subscribe(async (l) =>
@@ -116,12 +116,12 @@ namespace Redbridge.Identity.OAuthServer
             SetStatus(ClientConnectionStatus.Refreshing);
             Logger.WriteDebug($"Refreshing token at service url {_serviceUri} as user {Username} token: {_refreshToken}...");
 			var uri = new Uri(_serviceUri, "oauth/token");
-			var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post, _clientFactory);
+			var request = new FormWebRequest<OAuthTokenResult>(uri, HttpVerb.Post);
 			var data = new OAuthRefreshTokenAccessTokenRequestData() { ClientId = _clientId, ClientSecret = _clientSecret, RefreshToken = _refreshToken };
             Logger.WriteDebug($"Refresh request client id: {_clientId}");
             Logger.WriteDebug($"Refresh request client id: {_clientSecret?.Substring(0, 5)}XXXX");
             Logger.WriteDebug($"Refresh request client id: {_refreshToken}");
-			var token = await request.ExecuteAsync(data.AsDictionary());
+			var token = await request.ExecuteAsync(_clientFactory, data.AsDictionary());
 
             if (token != null)
             {

@@ -5,11 +5,11 @@ namespace Redbridge.Web.Messaging
 {
 	public class JsonWebRequestAction : JsonWebRequest
 	{
-		public JsonWebRequestAction(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory) : base(requestUri, httpVerb, clientFactory) { }
+		public JsonWebRequestAction(string requestUri, HttpVerb httpVerb) : base(requestUri, httpVerb) { }
 
-		public async Task ExecuteAsync()
+		public async Task ExecuteAsync(IHttpClientFactory clientFactory)
 		{
-			using (var response = await OnExecuteRequestAsync())
+			using (var response = await OnExecuteRequestAsync(clientFactory))
 			{
                 try
                 {
@@ -26,12 +26,12 @@ namespace Redbridge.Web.Messaging
 
 	public class JsonWebRequestAction<TInput1> : JsonWebRequest
 	{
-		public JsonWebRequestAction(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory) : base(requestUri, httpVerb, clientFactory) { }
+		public JsonWebRequestAction(string requestUri, HttpVerb httpVerb) : base(requestUri, httpVerb) { }
 
-		public async Task ExecuteAsync(TInput1 input1)
+		public async Task ExecuteAsync(IHttpClientFactory clientFactory, TInput1 input1)
 		{
 				OnExtractParameters(input1);
-				using (var response = await OnExecuteRequestAsync(input1))
+				using (var response = await OnExecuteRequestAsync(clientFactory, input1))
 				{
                     try
                     {
