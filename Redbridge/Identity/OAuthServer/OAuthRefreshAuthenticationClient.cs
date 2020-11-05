@@ -116,7 +116,7 @@ namespace Redbridge.Identity.OAuthServer
             SetStatus(ClientConnectionStatus.Refreshing);
             Logger.WriteDebug($"Refreshing token at service url {_serviceUri} as user {Username} token: {_refreshToken}...");
 			var uri = new Uri(_serviceUri, "oauth/token");
-			var request = new FormServiceRequest<OAuthTokenResult>(uri, HttpVerb.Post);
+			var request = new FormWebRequest<OAuthTokenResult>(uri, HttpVerb.Post);
 			var data = new OAuthRefreshTokenAccessTokenRequestData() { ClientId = _clientId, ClientSecret = _clientSecret, RefreshToken = _refreshToken };
             Logger.WriteDebug($"Refresh request client id: {_clientId}");
             Logger.WriteDebug($"Refresh request client id: {_clientSecret?.Substring(0, 5)}XXXX");
