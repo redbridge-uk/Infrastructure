@@ -25,13 +25,13 @@ namespace Redbridge.Windows.Tests
             Assert.IsTrue(element.Enabled);
         }
 
-        [Test]
-        public async Task SlackNotifierConfigurationElementDefaultConstructor_ExpectSuccess()
-        {
-            var element = new SlackNotifierConfigurationElement {WebhookUrl = "http://localhost:1234/channel"};
-            var factory = new Mock<IHttpClientFactory>();
-            factory.Setup(f => f.Create()).Returns(new HttpClient());
-            await element.NotifyAsync(new TestNotificationMessage(), factory.Object);
-        }
+        //[Test]
+        //public async Task SlackNotifierConfigurationElementDefaultConstructor_ExpectSuccess()
+        //{
+        //    var element = new SlackNotifierConfigurationElement {WebhookUrl = "http://localhost:1234/channel"};
+        //    var factory = new Mock<IHttpClientFactory>();
+        //    factory.Setup(f => f.Create()).Returns(new HttpClient());
+        //    await element.NotifyAsync(new TestNotificationMessage(), factory.Object);
+        //}
     }
 }
