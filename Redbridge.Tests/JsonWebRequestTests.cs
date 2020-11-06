@@ -35,7 +35,7 @@ namespace Redbridge.Tests
             Assert.AreEqual("application/json", request.ContentType);
             Assert.AreEqual(AuthenticationMethod.Bearer, request.AuthenticationMethod);
             Assert.AreEqual(HttpVerb.Post, request.HttpVerb);
-            Assert.AreEqual(0, request.Parameters);
+            Assert.AreEqual(0, request.Parameters.Count);
             Assert.IsNull(request.Logger);
             Assert.IsFalse(request.RequiresSignature);
         }

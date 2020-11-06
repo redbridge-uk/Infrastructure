@@ -11,6 +11,7 @@ namespace Redbridge.Tests
         {
             var webhook = new SlackWebhookRequest();
             Assert.IsNotNull(webhook);
+            Assert.AreEqual(HttpVerb.Post, webhook.HttpVerb);
         }
 
         [Test]
@@ -18,6 +19,7 @@ namespace Redbridge.Tests
         {
             var webhook = new SlackWebhookRequest("channelUrl/1234");
             Assert.AreEqual("channelUrl/1234", webhook.ChannelUrl);
+            Assert.AreEqual(HttpVerb.Post, webhook.HttpVerb);
         }
     }
 }

@@ -10,8 +10,6 @@ namespace Redbridge.Console
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class PropertyArgumentAttribute : ArgumentAttribute
     {
-        private object m_defaultValue;
-
         /// <summary>
         /// Constructor for a switch attribute.
         /// </summary>
@@ -30,11 +28,7 @@ namespace Redbridge.Console
         /// <summary>
         /// Gets/sets the underlying property default value.
         /// </summary>
-        protected object PropertyDefaultValue
-        {
-            get { return m_defaultValue; }
-            set { m_defaultValue = value; }
-        }
+        protected object PropertyDefaultValue { get; set; }
 
         /// <summary>
         /// Method that configures the property argument to the attribute.
@@ -59,6 +53,6 @@ namespace Redbridge.Console
             SetValue(settings, PropertyDefaultValue);
         }
 
-        public bool HasDefault => m_defaultValue != null;
+        public bool HasDefault => _mDefaultValue != null;
     }
 }

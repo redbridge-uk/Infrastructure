@@ -2,9 +2,6 @@
 
 namespace Redbridge.Console
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ConsoleProgressBar
     {
         /// <summary>
