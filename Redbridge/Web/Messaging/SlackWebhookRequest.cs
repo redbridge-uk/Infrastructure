@@ -5,12 +5,12 @@ namespace Redbridge.Web.Messaging
 
 	public class SlackWebhookRequest : JsonWebRequestAction<SlackMessagePayloadData>
 	{
-		public SlackWebhookRequest(IHttpClientFactory clientFactory) : base("https://hooks.slack.com/services/{channelurl}", HttpVerb.Post, clientFactory)
+		public SlackWebhookRequest() : base("https://hooks.slack.com/services/{channelurl}", HttpVerb.Post)
 		{
 			AddParameter("channelurl");
 		}
 
-		public SlackWebhookRequest(string channelUrl, IHttpClientFactory clientFactory) : base("https://hooks.slack.com/services/{channelurl}", HttpVerb.Post, clientFactory)
+		public SlackWebhookRequest(string channelUrl) : base("https://hooks.slack.com/services/{channelurl}", HttpVerb.Post)
 		{
 			AddParameter("channelurl");
 			ChannelUrl = channelUrl;

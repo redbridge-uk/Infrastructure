@@ -23,7 +23,8 @@ namespace Redbridge.Console
         protected override void OnConfigure (PropertyInfo propertyInfo)
         {
             if (propertyInfo.PropertyType != typeof(bool) && propertyInfo.PropertyType != typeof(bool?))
-                throw new CommandLineParseException(string.Format("The SwitchAttribute must only be used on boolean or nullable boolean types, property {0} has an invalid return type.", propertyInfo.Name));
+                throw new CommandLineParseException(
+                    $"The SwitchAttribute must only be used on boolean or nullable boolean types, property {propertyInfo.Name} has an invalid return type.");
         }
 
         /// <summary>

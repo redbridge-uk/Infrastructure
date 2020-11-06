@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Redbridge.Diagnostics;
-using Redbridge.Validation;
 
 namespace Redbridge.ApiManagement
 {
@@ -13,8 +12,7 @@ namespace Redbridge.ApiManagement
 		protected UnitOfWorkActionApi(IUnitOfWorkFactory<TUnitOfWork> unitOfWorkFactory, ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
 			: base(logger, contextProvider, authority)
 		{
-			if (unitOfWorkFactory == null) throw new ArgumentNullException(nameof(unitOfWorkFactory));
-			_unitOfWorkFactory = unitOfWorkFactory;
+            _unitOfWorkFactory = unitOfWorkFactory ?? throw new ArgumentNullException(nameof(unitOfWorkFactory));
 		}
 
         protected IUnitOfWorkFactory<TUnitOfWork> Factory => _unitOfWorkFactory;

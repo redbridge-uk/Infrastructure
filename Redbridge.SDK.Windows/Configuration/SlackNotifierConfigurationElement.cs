@@ -35,7 +35,7 @@ public class SlackNotifierConfigurationElement : NotifierConfigurationElement
 
 	protected override async Task OnNotifyAsync(NotificationMessage message, IHttpClientFactory clientFactory)
 	{
-		var request = new SlackWebhookRequest(WebhookUrl, clientFactory);
+		var request = new SlackWebhookRequest(WebhookUrl);
 		var emojiMetaData = message.Metadata["slack-emoji"];
 		var payload = new SlackMessagePayloadData()
 		{
@@ -45,6 +45,6 @@ public class SlackNotifierConfigurationElement : NotifierConfigurationElement
 		if (emojiMetaData != null)
 			payload.IconEmoji = emojiMetaData.Value.ToString();
 
-		await request.ExecuteAsync(payload);
+		await request.ExecuteAsync(clientFactory, payload);
 	} }
 }

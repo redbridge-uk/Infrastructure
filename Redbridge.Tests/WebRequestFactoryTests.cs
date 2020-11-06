@@ -51,7 +51,7 @@ namespace Redbridge.Tests
 	public class SpecializedWebRequestFactory : WebRequestFactory
 	{
 		public SpecializedWebRequestFactory(IWebRequestSignatureService sessionManager, IHttpClientFactory clientFactory) 
-            : base(new Uri("http://smuggoat-api.azurewebsites.net"), sessionManager, new BlackholeLogger(), clientFactory) { }
+            : base(new Uri("http://mytest-api.azurewebsites.net"), sessionManager, new BlackholeLogger(), clientFactory) { }
 
 		protected override IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger)
 		{
@@ -65,17 +65,20 @@ namespace Redbridge.Tests
 		}
 	}
 
-	[TestFixture()]
+	[TestFixture]
 	public class WebRequestFactoryTests
 	{
-		[Test()]
+		[Test]
 		public void CreateSpecializedFactoryFuncRequestExpectCustomJsonConverter()
 		{
 			var sessionManager = new Mock<IWebRequestSignatureService>();
+            sessionManager.Setup(sm => sm.PostProcessUrlString(It.IsAny<string>())).Returns("integrations/my");
             var clientFactory = new Mock<IHttpClientFactory>();
 			var factory = new SpecializedWebRequestFactory(sessionManager.Object, clientFactory.Object);
-			var request = factory.CreateFuncRequest<IntegrationData[]>($"integrations/my");
+			var request = factory.CreateFuncRequest<IntegrationData[]>("integrations/my");
 			Assert.AreEqual(2, request.Converters.Count());
-		}
+            Assert.AreEqual(new Uri("http://mytest-api.azurewebsites.net"), request.RootUri);
+            Assert.AreEqual(new Uri("http://mytest-api.azurewebsites.net/integrations/my"), request.RequestUri);
+        }
 	}
 }

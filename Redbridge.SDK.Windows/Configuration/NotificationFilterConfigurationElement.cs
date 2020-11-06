@@ -16,9 +16,9 @@ namespace Redbridge.Configuration
 		[ConfigurationProperty("event", DefaultValue = "", IsRequired = true, IsKey = true)]
 		public string Event
 		{
-			get { return (string)this["event"]; }
-			set { this["event"] = value; }
-		}
+			get => (string)this["event"];
+            set => this["event"] = value;
+        }
 
 		public bool Includes(NotificationMessage message)
 		{

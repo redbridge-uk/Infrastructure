@@ -2,33 +2,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Windows", "Redbridge.SDK.Windows\Redbridge.Windows.csproj", "{CE6544EC-07AE-4322-94A6-A644C7361E6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Windows", "Redbridge.SDK.Windows\Redbridge.Windows.csproj", "{CE6544EC-07AE-4322-94A6-A644C7361E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.IntegrationTesting", "Redbridge.IntegrationTesting\Redbridge.IntegrationTesting.csproj", "{449020D2-AF99-4006-97E5-695A8E3AA0E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.IntegrationTesting", "Redbridge.IntegrationTesting\Redbridge.IntegrationTesting.csproj", "{449020D2-AF99-4006-97E5-695A8E3AA0E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Console", "Redbridge.Console\Redbridge.Console.csproj", "{A369B5B2-12A2-46E4-8D9F-F1F67389E00E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Console", "Redbridge.Console\Redbridge.Console.csproj", "{A369B5B2-12A2-46E4-8D9F-F1F67389E00E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.EntityFramework", "Redbridge.EntityFramework\Redbridge.EntityFramework.csproj", "{56C45C64-F125-4269-8145-467B29853EE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.EntityFramework", "Redbridge.EntityFramework\Redbridge.EntityFramework.csproj", "{56C45C64-F125-4269-8145-467B29853EE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Services.WebApi", "Redbridge.Services.WebApi\Redbridge.Services.WebApi.csproj", "{BD8D6847-ABF0-4058-BE01-DE7452C4B3A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Services.WebApi", "Redbridge.Services.WebApi\Redbridge.Services.WebApi.csproj", "{BD8D6847-ABF0-4058-BE01-DE7452C4B3A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Diagnostics.ApplicationInsights", "Redbridge.Diagnostics.ApplicationInsights\Redbridge.Diagnostics.ApplicationInsights.csproj", "{B76BC7DC-438B-4769-A229-860139197A38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Diagnostics.ApplicationInsights", "Redbridge.Diagnostics.ApplicationInsights\Redbridge.Diagnostics.ApplicationInsights.csproj", "{B76BC7DC-438B-4769-A229-860139197A38}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge", "Redbridge\Redbridge.csproj", "{FA042554-BC38-4B47-B6EF-A10AC76CB200}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Unity", "Redbridge.Unity\Redbridge.Unity.csproj", "{B2280F6E-EC25-478A-BF81-DEC5C1CC1B2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Tests", "Redbridge.Tests\Redbridge.Tests.csproj", "{ED326C80-ECCB-4394-B04E-91B4A0B2DB88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Tests", "Redbridge.Tests\Redbridge.Tests.csproj", "{ED326C80-ECCB-4394-B04E-91B4A0B2DB88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Console.Test", "Redbridge.Console.Test\Redbridge.Console.Test.csproj", "{697FF0AD-7A8D-4B04-8678-33DB1036CCAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Console.Test", "Redbridge.Console.Test\Redbridge.Console.Test.csproj", "{697FF0AD-7A8D-4B04-8678-33DB1036CCAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.EntityFramework.Tests", "Redbridge.EntityFramework.Tests\Redbridge.EntityFramework.Tests.csproj", "{5067219F-5A53-4C85-9876-73555A3CE849}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.EntityFramework.Tests", "Redbridge.EntityFramework.Tests\Redbridge.EntityFramework.Tests.csproj", "{5067219F-5A53-4C85-9876-73555A3CE849}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Services.WebApi.Tests", "Redbridge.Services.WebApi.Tests\Redbridge.Services.WebApi.Tests.csproj", "{298780F8-5085-4DC9-8D20-22A74DBE003F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Services.WebApi.Tests", "Redbridge.Services.WebApi.Tests\Redbridge.Services.WebApi.Tests.csproj", "{298780F8-5085-4DC9-8D20-22A74DBE003F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Services.Owin", "Redbridge.Services.Owin\Redbridge.Services.Owin.csproj", "{217C7AC5-8AAB-432F-93C9-2A73C0204FC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Services.Owin", "Redbridge.Services.Owin\Redbridge.Services.Owin.csproj", "{217C7AC5-8AAB-432F-93C9-2A73C0204FC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Windows.Tests", "Redbridge.SDK.Windows.Tests\Redbridge.Windows.Tests.csproj", "{2F943CA2-B1DF-4127-A8A3-F7705278C780}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Windows.Tests", "Redbridge.SDK.Windows.Tests\Redbridge.Windows.Tests.csproj", "{2F943CA2-B1DF-4127-A8A3-F7705278C780}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Diagnostics.ApplicationInsights.Tests", "Redbridge.Diagnostics.ApplicationInsights.Tests\Redbridge.Diagnostics.ApplicationInsights.Tests.csproj", "{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -208,6 +210,18 @@ Global
 		{2F943CA2-B1DF-4127-A8A3-F7705278C780}.Release|iPhone.Build.0 = Release|Any CPU
 		{2F943CA2-B1DF-4127-A8A3-F7705278C780}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{2F943CA2-B1DF-4127-A8A3-F7705278C780}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|iPhone.Build.0 = Release|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
