@@ -1,5 +1,4 @@
-﻿using System;
-namespace Redbridge.ApiManagement
+﻿namespace Redbridge.ApiManagement
 {
 	public interface IApiFactory
 	{

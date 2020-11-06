@@ -41,6 +41,7 @@ namespace Redbridge.Console
         }
         
         protected virtual IEnumerable<Type> SupportedTypes => new Type[] {};
+
         protected virtual void OnConfigure(PropertyInfo propertyInfo) { }
 
         protected virtual void SetValue(object settings, object value)
@@ -53,6 +54,6 @@ namespace Redbridge.Console
             SetValue(settings, PropertyDefaultValue);
         }
 
-        public bool HasDefault => _mDefaultValue != null;
+        public bool HasDefault => PropertyDefaultValue != null;
     }
 }

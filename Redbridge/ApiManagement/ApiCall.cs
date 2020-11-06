@@ -11,8 +11,7 @@ namespace Redbridge.ApiManagement
 
 		protected ApiCall(ILogger logger)
 		{
-			if (logger == null) throw new ArgumentNullException(nameof(logger));
-			Logger = logger;
+            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
 		}
 
 		public virtual string ApiName => "Unspecified";
