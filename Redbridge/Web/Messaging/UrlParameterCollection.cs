@@ -9,9 +9,11 @@ namespace Redbridge.Web.Messaging
 
 		public object this[string key]
 		{
-			get { return _parameters[key.ToLowerInvariant()]; }
-			set { _parameters[key.ToLowerInvariant()] = value; }
-		}
+			get => _parameters[key.ToLowerInvariant()];
+            set => _parameters[key.ToLowerInvariant()] = value;
+        }
+
+        public int Count => _parameters.Count;
 
 		public void Add(string key)
 		{

@@ -46,17 +46,17 @@ public class NotifierConfigurationElement : ConfigurationElement
 	}
 
 	public Task NotifyAsync(NotificationMessage message, IHttpClientFactory clientFactory)
-	{
-		if (Filters != null && Filters.Count > 0)
+    {
+        if (Filters != null && Filters.Count > 0)
 		{
 			if (Filters.IsIncluded(message))
 				return OnNotifyAsync(message, clientFactory);
 
 			return Task.FromResult(false);
 		}
-		else
-			return OnNotifyAsync(message, clientFactory);
-	}
+
+        return OnNotifyAsync(message, clientFactory);
+    }
 
 	protected virtual Task OnNotifyAsync(NotificationMessage message, IHttpClientFactory clientFactory)
 	{

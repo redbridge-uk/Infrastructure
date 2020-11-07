@@ -18,25 +18,26 @@ namespace Redbridge.Web.Messaging
     public abstract class JsonWebRequest
 	{
 		private readonly string _requestUriString;
-        private readonly IHttpClientFactory _clientFactory;
         private readonly UrlParameterCollection _parameters = new UrlParameterCollection();
 		private readonly ICollection<JsonConverter> _converters = new List<JsonConverter>();
 
-		protected JsonWebRequest(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)
+		protected JsonWebRequest(string requestUri, HttpVerb httpVerb)
 		{
             _requestUriString = requestUri ?? throw new ArgumentNullException(nameof(requestUri));
 			HttpVerb = httpVerb;
-            _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
             AuthenticationMethod = AuthenticationMethod.Bearer;
 		}
 
 		public UrlParameterCollection Parameters => _parameters;
 
-		protected void AddParameter(string parameterName)
-		{
-			if (parameterName == null) throw new ArgumentNullException(nameof(parameterName));
-			_parameters.Add(parameterName);
-		}
+        public void RegisterConverters(IEnumerable<JsonConverter> converters)
+        {
+            if (converters == null) throw new ArgumentNullException(nameof(converters));
+            foreach (var converter in converters)
+                _converters.Add(converter);
+        }
+
+        
 
 		public IEnumerable<JsonConverter> Converters => _converters;
 
@@ -46,11 +47,19 @@ namespace Redbridge.Web.Messaging
 
 		internal IWebRequestSignatureService SessionManager { get; set; }
 
-		public HttpClient ToHttpClient()
+		public HttpClient ToHttpClient(IHttpClientFactory clientFactory)
         {
-            var client = _clientFactory.Create();
+            var client = clientFactory.Create();
             client.BaseAddress = OnCreateEndpointUri();
             return client;
+        }
+
+        public virtual bool RequiresSignature => false;
+
+        protected void AddParameter(string parameterName)
+        {
+            if (parameterName == null) throw new ArgumentNullException(nameof(parameterName));
+            _parameters.Add(parameterName);
         }
 
         protected virtual void OnHandleUnhandledWebException (UnhandledWebException uwe)
@@ -71,36 +80,32 @@ namespace Redbridge.Web.Messaging
 					SessionManager.SignRequest(request);
 			}
 		}
-
-		public virtual bool RequiresSignature => false;
-
-		protected async Task<HttpResponseMessage> OnExecuteRequestAsync()
+        
+		protected async Task<HttpResponseMessage> OnExecuteRequestAsync(IHttpClientFactory clientFactory)
 		{
 			var endpointUri = OnCreateEndpointUri();
 
-            var request = _clientFactory.Create();
+            var request = clientFactory.Create();
 			
 			OnApplySignature(request);
 
-			if (HttpVerb == HttpVerb.Get)
-				return await request.GetAsync(endpointUri);
-
-			if (HttpVerb == HttpVerb.Delete)
-				return await request.DeleteAsync(endpointUri);
-
-			if (HttpVerb == HttpVerb.Post)
-				return await request.PostAsync(endpointUri, null);
-
-            throw new NotSupportedException("Only gets are currently supported for making requests with no body.");
-		}
-
-        public virtual string ContentType { get; protected set; } = "application/json";
-
-		protected async Task<HttpResponseMessage> OnExecuteRequestAsync (object body)
+			switch (HttpVerb)
+            {
+                case HttpVerb.Get:
+                    return await request.GetAsync(endpointUri);
+                case HttpVerb.Delete:
+                    return await request.DeleteAsync(endpointUri);
+                case HttpVerb.Post:
+                    return await request.PostAsync(endpointUri, null);
+                default:
+                    throw new NotSupportedException("Only gets are currently supported for making requests with no body.");
+            }
+        }
+        
+		protected async Task<HttpResponseMessage> OnExecuteRequestAsync (IHttpClientFactory clientFactory, object body)
 		{
 			var endpointUri = OnCreateEndpointUri();
-
-            var request = _clientFactory.Create();
+            var request = clientFactory.Create();
 			
 			OnApplySignature(request);
 
@@ -118,6 +123,8 @@ namespace Redbridge.Web.Messaging
 			throw new NotSupportedException("Only post and put are currently supported for sending requests with a body.");
 		}
 
+        public virtual string ContentType { get; protected set; } = "application/json";
+
         protected virtual string OnCreatePayload (object body)
         {
             return JsonConvert.SerializeObject(body, _converters.ToArray());
@@ -129,12 +136,7 @@ namespace Redbridge.Web.Messaging
 				serializer.Converters.Add(converter);
 		}
 
-		public void RegisterConverters(IEnumerable<JsonConverter> converters)
-		{
-			if (converters == null) throw new ArgumentNullException(nameof(converters));
-			foreach (var converter in converters)
-				_converters.Add(converter);
-		}
+		
 
 		protected virtual Uri OnCreateEndpointUri()
 		{
@@ -152,12 +154,9 @@ namespace Redbridge.Web.Messaging
 		}
 
 		protected string PostProcessQueryString(string queriedUriString)
-		{
-			if (SessionManager != null)
-				return SessionManager.PostProcessUrlString(queriedUriString);
-
-			return queriedUriString;
-		}
+        {
+            return SessionManager != null ? SessionManager.PostProcessUrlString(queriedUriString) : queriedUriString;
+        }
 
 		protected virtual string AppendQuery(string baseUri)
 		{

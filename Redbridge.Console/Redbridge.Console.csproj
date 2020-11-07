@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Redbridge.Console</PackageId>
-    <PackageIconUrl>https://github.com/redbridge-uk/resources/blob/master/redbridge_32.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/redbridge-uk/resources/master/redbridge_32.png</PackageIconUrl>
     <Copyright>Redbridge Solutions Ltd</Copyright>
     <PackageTags>Redbridge SDK C# Library netstandard2.0 console windows</PackageTags>
     <PackageDescription>Redbridge console library for console output</PackageDescription>
@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
