@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace Redbridge.Console
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [Serializable]
     public class OptionRequiredException : CommandLineParseException
     {

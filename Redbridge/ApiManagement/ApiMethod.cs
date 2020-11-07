@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Redbridge.Diagnostics;
-using Redbridge.Validation;
 
 namespace Redbridge.ApiManagement
 {
@@ -13,11 +12,8 @@ namespace Redbridge.ApiManagement
 		protected ApiMethod(ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority)
 				: base(logger)
 		{
-			
-			if (authority == null) throw new ArgumentNullException(nameof(authority));
-			if (contextProvider == null) throw new ArgumentNullException(nameof(contextProvider));
-			_contextProvider = contextProvider;
-			_authority = authority;
+            _contextProvider = contextProvider ?? throw new ArgumentNullException(nameof(contextProvider));
+			_authority = authority ?? throw new ArgumentNullException(nameof(authority));
 		}
 
 		public async Task<TReturn> InvokeAsync(TIn1 in1, TIn2 in2, TIn3 in3)

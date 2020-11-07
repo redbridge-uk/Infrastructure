@@ -9,12 +9,12 @@ namespace Redbridge.Web.Messaging
 {
 	public class JsonWebRequestFunc<TResult, TInput1> : JsonWebRequest
 	{
-		public JsonWebRequestFunc(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)	: base(requestUri, httpVerb, clientFactory) { }
+		public JsonWebRequestFunc(string requestUri, HttpVerb httpVerb)	: base(requestUri, httpVerb) { }
 		
-		public async Task<TResult> ExecuteAsync(TInput1 input1)
+		public async Task<TResult> ExecuteAsync(IHttpClientFactory clientFactory, TInput1 input1)
 		{
 			OnExtractParameters(input1);
-			using (var response = await OnExecuteRequestAsync(input1))
+			using (var response = await OnExecuteRequestAsync(clientFactory, input1))
 			{
                 try
                 {
@@ -62,18 +62,18 @@ namespace Redbridge.Web.Messaging
 
 	public class JsonWebRequestFunc<TResult> : JsonWebRequest
 	{
-		public JsonWebRequestFunc(Uri baseUri, string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)
-			: this(requestUri, httpVerb, clientFactory)
+		public JsonWebRequestFunc(Uri baseUri, string requestUri, HttpVerb httpVerb)
+			: this(requestUri, httpVerb)
 		{
             RootUri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
 		}
 
-		public JsonWebRequestFunc(string requestUri, HttpVerb httpVerb, IHttpClientFactory clientFactory)
-			: base(requestUri, httpVerb, clientFactory) { }
+		public JsonWebRequestFunc(string requestUri, HttpVerb httpVerb)
+			: base(requestUri, httpVerb) { }
 
-		public async Task<TResult> ExecuteAsync()
+		public async Task<TResult> ExecuteAsync(IHttpClientFactory clientFactory)
 		{
-			using (var response = await OnExecuteRequestAsync())
+			using (var response = await OnExecuteRequestAsync(clientFactory))
 			{
                 try
                 {
