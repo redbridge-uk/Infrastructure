@@ -7,13 +7,15 @@ namespace Redbridge.Console.Test
 	public class SwitchAttributeTest
 	{
 		[TestCase]
-		public void ConstructSwitchAttribute()
+		public void ConstructSwitchAttribute_ExpectSuccess()
 		{
-			SwitchAttribute attribute = new SwitchAttribute("NoLog");
+			var attribute = new SwitchAttribute("NoLog");
 			Assert.IsFalse(attribute.AllowEmptyValues, "Allow empty values is not supported.");
+            Assert.IsFalse(attribute.DefaultValue);
 		}
 
-		[TestCase]
+
+        [TestCase]
 		public void ConstructSwitchAttribute_BlankName_ExpectException()
         {
             Assert.Throws<CommandLineParseException>(() => new SwitchAttribute(string.Empty));
