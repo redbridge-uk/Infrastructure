@@ -32,17 +32,14 @@ namespace Redbridge.Console
         /// </summary>
         public bool DefaultValue
         {
-            get => (bool) PropertyDefaultValue;
+            get => (bool?) PropertyDefaultValue ?? false;
             set => PropertyDefaultValue = value;
         }
 
         /// <summary>
         /// Gets the supported type of the parameter.
         /// </summary>
-        protected override IEnumerable<Type> SupportedTypes
-        {
-            get { return new[] { typeof(string) }; }
-        }
+        protected override IEnumerable<Type> SupportedTypes => new[] { typeof(string) };
 
         /// <summary>
         /// Method that parses the value
