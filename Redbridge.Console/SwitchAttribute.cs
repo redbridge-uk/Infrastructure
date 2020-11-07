@@ -20,7 +20,7 @@ namespace Redbridge.Console
         /// Method that configures the property info to the attribute.
         /// </summary>
         /// <param name="propertyInfo"></param>
-        protected override void OnConfigure (PropertyInfo propertyInfo)
+        internal override void OnConfigure (PropertyInfo propertyInfo)
         {
             if (propertyInfo.PropertyType != typeof(bool) && propertyInfo.PropertyType != typeof(bool?))
                 throw new CommandLineParseException(
@@ -32,17 +32,14 @@ namespace Redbridge.Console
         /// </summary>
         public bool DefaultValue
         {
-            get { return (bool) PropertyDefaultValue; }
-            set { PropertyDefaultValue = value; }
+            get => (bool?) PropertyDefaultValue ?? false;
+            set => PropertyDefaultValue = value;
         }
 
         /// <summary>
         /// Gets the supported type of the parameter.
         /// </summary>
-        protected override IEnumerable<Type> SupportedTypes
-        {
-            get { return new[] { typeof(string) }; }
-        }
+        protected override IEnumerable<Type> SupportedTypes => new[] { typeof(string) };
 
         /// <summary>
         /// Method that parses the value

@@ -55,7 +55,7 @@ namespace Redbridge.Console.Test
 			}
 
 			[ParameterCollection]
-			public ParameterCollection Parameters { get; set; }
+			public ParameterCollection Parameters { get; }
 		}
 
 		private class IntegerParameterOptionsTest
@@ -88,7 +88,7 @@ namespace Redbridge.Console.Test
 		[TestCase]
 		public void ConstructCommandLineArguments_ParseEmpty_InstanceCreated_DefaultNonNullableBoolean()
 		{
-			CommandLineArguments<SingleSwitchOptionsTest> arguments = CommandLineArguments<SingleSwitchOptionsTest>.Setup();
+			var arguments = CommandLineArguments<SingleSwitchOptionsTest>.Setup();
 			SingleSwitchOptionsTest args = arguments.Parse(null);
 			Assert.IsFalse(args.EnableLogging, "The enable logging option should be false by default.");
 		}
@@ -96,7 +96,7 @@ namespace Redbridge.Console.Test
 		[TestCase]
 		public void ConstructCommandLineArguments_ParseSwitch_LoggingTrue()
 		{
-			CommandLineArguments<SingleSwitchOptionsTest> arguments = CommandLineArguments<SingleSwitchOptionsTest>.Setup();
+			var arguments = CommandLineArguments<SingleSwitchOptionsTest>.Setup();
 			SingleSwitchOptionsTest args = arguments.Parse("-EnableLog");
 			Assert.IsTrue(args.EnableLogging, "The enable logging option should be true as switch is set.");
 		}
@@ -104,15 +104,15 @@ namespace Redbridge.Console.Test
 		[TestCase]
 		public void ConstructCommandLineArguments_ParseEmpty_InstanceCreated_TrueDefaultNonNullableBoolean()
 		{
-			CommandLineArguments<SingleSwitchOptionsTestDefaultTrue> arguments = CommandLineArguments<SingleSwitchOptionsTestDefaultTrue>.Setup();
-			SingleSwitchOptionsTestDefaultTrue args = arguments.Parse(null);
+			var arguments = CommandLineArguments<SingleSwitchOptionsTestDefaultTrue>.Setup();
+			var args = arguments.Parse(null);
 			Assert.IsTrue(args.EnableLogging, "The enable logging option should be true by default.");
 		}
 
-		[TestCase]
+        [TestCase]
 		public void ConstructCommandLineArguments_ParseEmpty_InstanceCreated_EmptyPropertyCollection()
 		{
-			CommandLineArguments<ParameterArrayOptionsTestClass> arguments = CommandLineArguments<ParameterArrayOptionsTestClass>.Setup();
+			var arguments = CommandLineArguments<ParameterArrayOptionsTestClass>.Setup();
 			ParameterArrayOptionsTestClass args = arguments.Parse(null);
 			Assert.IsNotNull(args.Parameters);
 		}
@@ -120,7 +120,7 @@ namespace Redbridge.Console.Test
 		[TestCase]
 		public void ConstructCommandLineArguments_ParseEmpty_InstanceCreated_EmptyPropertyCollection_CheckCount()
 		{
-			CommandLineArguments<ParameterArrayOptionsTestClass> arguments = CommandLineArguments<ParameterArrayOptionsTestClass>.Setup();
+			var arguments = CommandLineArguments<ParameterArrayOptionsTestClass>.Setup();
 			ParameterArrayOptionsTestClass args = arguments.Parse(null);
 			Assert.AreEqual(0, args.Parameters.Count);
 		}
@@ -128,16 +128,16 @@ namespace Redbridge.Console.Test
 		[TestCase]
 		public void ConstructCommandLineArguments_ParseEmpty_InstanceCreated_PropertyCollection_CheckSingleParameter()
 		{
-			CommandLineArguments<ParameterArrayOptionsTestClass> arguments = CommandLineArguments<ParameterArrayOptionsTestClass>.Setup();
-			ParameterArrayOptionsTestClass args = arguments.Parse(new[] { "-parameter:Name=UserA" });
+			var arguments = CommandLineArguments<ParameterArrayOptionsTestClass>.Setup();
+			var args = arguments.Parse("-parameter:Name=UserA");
 			Assert.AreEqual(1, args.Parameters.Count);
 		}
 
 		[TestCase]
 		public void ConstructCommandLineArguments_ParseAssemblyParameter_ExpectSuccess()
 		{
-			CommandLineArguments<SingleParameterOptions> arguments = CommandLineArguments<SingleParameterOptions>.Setup();
-			SingleParameterOptions args = arguments.Parse("-assembly=Test.ServiceAssembly.Service");
+			var arguments = CommandLineArguments<SingleParameterOptions>.Setup();
+			var args = arguments.Parse("-assembly=Test.ServiceAssembly.Service");
 			Assert.AreEqual("Test.ServiceAssembly.Service", args.Assembly, "Unexpected assembly value.");
 		}
 
