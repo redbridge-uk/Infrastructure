@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using System.Linq;
+using Moq;
 using NUnit.Framework;
 using Redbridge.ApiManagement;
 using Redbridge.Diagnostics;
@@ -29,6 +30,17 @@ namespace Redbridge.Tests
             public AttributedUnnamedTestApiCall(ILogger logger) : base(logger)
             {
             }
+        }
+
+        [Test]
+        public void Construct_AssertApiCallDefaults()
+        {
+            var mockLogger = new Mock<ILogger>();
+            var api = new UnnamedTestApiCall(mockLogger.Object);
+            Assert.AreEqual(true, api.RequiresAuthentication);
+            Assert.IsNull(api.PermittedClients);
+            Assert.AreEqual(0, api.RequiredActions.Count());
+            Assert.AreEqual(0, api.RequiredRoles.Count());
         }
 
         [Test]
