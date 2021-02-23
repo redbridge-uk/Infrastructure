@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using NUnit.Framework;
 
 namespace Redbridge.Console.Test
@@ -168,9 +169,9 @@ namespace Redbridge.Console.Test
 		{
 			var arguments = CommandLineArguments<SingleParameterOptions>.Setup();
 			var usage = arguments.GetUsage();
-
+            var year = DateTime.Now.Year;
 			var expectedBuilder = new StringBuilder();
-            expectedBuilder.AppendLine("Copyright (C) Redbridge Software 2020. All rights reserved.");
+            expectedBuilder.AppendLine($"Copyright (C) Redbridge Software {year}. All rights reserved.");
 			expectedBuilder.AppendLine("Switches:");
 			expectedBuilder.AppendLine();
 			expectedBuilder.AppendLine("  -Assembly=(Assembly)");
