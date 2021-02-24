@@ -1,4 +1,5 @@
-﻿using Owin;
+﻿using System;
+using Owin;
 using Redbridge.Web;
 using Redbridge.Web.Messaging;
 
@@ -28,7 +29,14 @@ namespace Redbridge.Services.Owin
                     }
                 }
 
-                await next.Invoke();
+                try
+                {
+                    await next.Invoke();
+                }
+                catch (OperationCanceledException)
+                {
+                    // Do not propagate this exception.
+                }
             });
         }
     }

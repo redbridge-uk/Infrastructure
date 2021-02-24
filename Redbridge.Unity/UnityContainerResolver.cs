@@ -4,21 +4,11 @@ using Redbridge.DependencyInjection;
 using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
-using Unity.Registration;
 using Unity.Resolution;
 
 namespace Redbridge.Unity
 {
-	public static class UnityContainerExtensions
-	{
-		public static UnityContainerResolver ToResolver (this IUnityContainer container)
-		{
-			if (container == null) throw new ArgumentNullException(nameof(container));
-			return new UnityContainerResolver(container);
-		}
-	}
-
-	public class UnityContainerResolver : IContainer
+    public class UnityContainerResolver : IContainer
 	{
 		private readonly IUnityContainer _container;
 
@@ -29,8 +19,7 @@ namespace Redbridge.Unity
 
 		public UnityContainerResolver(IUnityContainer container)
 		{
-			if (container == null) throw new ArgumentNullException(nameof(container));
-			_container = container;
+            _container = container ?? throw new ArgumentNullException(nameof(container));
 		}
 
 		public void RegisterInstance<T>(T instance)
@@ -47,12 +36,6 @@ namespace Redbridge.Unity
 		{
 			_container.RegisterType<T, T1>();
 		}
-
-        public void RegisterType<T, T1>(ContainerInjectionMember injectionMember) where T1 : T
-        {
-            var injectionFactory = new InjectionFactory((arg) => injectionMember.InstanceFactory);
-            _container.RegisterType<T, T1>(injectionFactory);
-        }
 
 		public void RegisterType<T, T1>(LifeTime lifeTime = LifeTime.Transient) where T1 : T
 		{
