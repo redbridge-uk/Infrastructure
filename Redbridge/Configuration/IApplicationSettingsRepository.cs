@@ -2,7 +2,7 @@
 
 namespace Redbridge.Configuration
 {
-	public interface IApplicationSettingsRepository
+    public interface IApplicationSettingsRepository
 	{
         Guid GetGuidValue(string key);
 
