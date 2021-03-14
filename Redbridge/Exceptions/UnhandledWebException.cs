@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net;
+using System.Runtime.Serialization;
 
 namespace Redbridge.Exceptions
 {
+    [Serializable]
     public class UnhandledWebException : RedbridgeException
     {
         public UnhandledWebException(HttpStatusCode code, string reasonMessage) : this($"Unable to process web message, response code {code} reason given: {reasonMessage}")
@@ -18,6 +20,12 @@ namespace Redbridge.Exceptions
         {
             private set;
             get;
+        }
+
+        protected UnhandledWebException(
+            SerializationInfo info,
+            StreamingContext context) : base(info, context)
+        {
         }
     }
 }
