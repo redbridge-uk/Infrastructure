@@ -29,33 +29,36 @@ namespace Redbridge.Security
 
         protected abstract TUserKey? OnParseClaimKey(Claim claim);
 
-		public void AuditCreate(IAudited<TUserKey> auditedType)
-		{
+		public T AuditCreate<T>(T auditedType) where T: IAudited<TUserKey>
+        {
 			if (!IsAuthenticated) throw new SecurityAuthenticationException("The current user is not authorized.");
 			if (!UserId.HasValue) throw new SecurityAuthenticationException("The current user id is not defined.");
 			auditedType.Created = SystemTime;
 			auditedType.Updated = SystemTime;
 			auditedType.CreatedBy = UserId.Value;
 			auditedType.UpdatedBy = UserId.Value;
-		}
+            return auditedType;
+        }
 
-		public void AuditUpdate(IAudited<TUserKey> auditedType)
-		{
+		public T AuditUpdate<T>(T auditedType) where T : IAudited<TUserKey>
+        {
 			if (!IsAuthenticated) throw new SecurityAuthenticationException("The current user is not authorized.");
 			if (!UserId.HasValue) throw new SecurityAuthenticationException("The current user id is not defined.");
 			auditedType.Updated = SystemTime;
 			auditedType.UpdatedBy = UserId.Value;
-		}
+            return auditedType;
+        }
 
-		public void AuditDelete(IAudited<TUserKey> auditedType)
-		{
+		public T AuditDelete<T>(T auditedType) where T : IAudited<TUserKey>
+        {
 			if (!IsAuthenticated) throw new SecurityAuthenticationException("The current user is not authorized.");
 			if (!UserId.HasValue) throw new SecurityAuthenticationException("The current user is not configured correctly.");
 			auditedType.Updated = SystemTime;
 			auditedType.UpdatedBy = UserId.Value;
 			auditedType.Deleted = SystemTime;
 			auditedType.DeletedBy = UserId;
-		}
+            return auditedType;
+        }
     }
 
     public abstract class ApiCallContext : IApiCallContext
