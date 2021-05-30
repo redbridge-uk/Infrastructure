@@ -4,39 +4,81 @@ using Redbridge.Diagnostics;
 
 namespace Redbridge.ApiManagement
 {
-public abstract class ApiAction<TIn1, TContext> : ApiCall
-{
-	private readonly IApiContextProvider<TContext> _contextProvider;
-	private readonly IApiContextAuthorizer<TContext> _authority;
+    public abstract class ApiAction<TIn1, TIn2, TContext> : ApiCall
+    {
+        private readonly IApiContextProvider<TContext> _contextProvider;
+        private readonly IApiContextAuthorizer<TContext> _authority;
 
-	protected ApiAction(ILogger logger, IApiContextProvider<TContext> contextProvider, IApiContextAuthorizer<TContext> authority) : base(logger)
-	{
-		_authority = authority ?? throw new ArgumentNullException(nameof(authority));
-		_contextProvider = contextProvider ?? throw new ArgumentNullException(nameof(contextProvider));
-	}
+        protected ApiAction(ILogger logger, IApiContextProvider<TContext> contextProvider,
+            IApiContextAuthorizer<TContext> authority) : base(logger)
+        {
+            _authority = authority ?? throw new ArgumentNullException(nameof(authority));
+            _contextProvider = contextProvider ?? throw new ArgumentNullException(nameof(contextProvider));
+        }
 
-	public async Task InvokeAsync(TIn1 in1)
-	{
-		OnBeforeInvoke(in1);
+        public async Task InvokeAsync(TIn1 in1, TIn2 in2)
+        {
+            OnBeforeInvoke(in1, in2);
 
-		var context = await _contextProvider.GetCurrentAsync();
+            var context = await _contextProvider.GetCurrentAsync();
 
-		await _authority.AuthorizeAsync(this, context);
+            await _authority.AuthorizeAsync(this, context);
 
-		await OnInvoke(in1, context);
+            await OnInvoke(in1, in2, context);
 
-		OnAfterInvoke();
+            OnAfterInvoke();
 
-	}
+        }
 
-	protected abstract Task OnInvoke(TIn1 in1, TContext context);
+        protected abstract Task OnInvoke(TIn1 in1, TIn2 in2, TContext context);
 
-	protected virtual void OnBeforeInvoke(TIn1 in1)	{	}
+        protected virtual void OnBeforeInvoke(TIn1 in1, TIn2 in2)
+        {
+        }
 
-	protected virtual void OnAfterInvoke() { }
-}
+        protected virtual void OnAfterInvoke()
+        {
+        }
+    }
 
-	public abstract class ApiAction<TContext> : ApiCall
+    public abstract class ApiAction<TIn1, TContext> : ApiCall
+    {
+        private readonly IApiContextProvider<TContext> _contextProvider;
+        private readonly IApiContextAuthorizer<TContext> _authority;
+
+        protected ApiAction(ILogger logger, IApiContextProvider<TContext> contextProvider,
+            IApiContextAuthorizer<TContext> authority) : base(logger)
+        {
+            _authority = authority ?? throw new ArgumentNullException(nameof(authority));
+            _contextProvider = contextProvider ?? throw new ArgumentNullException(nameof(contextProvider));
+        }
+
+        public async Task InvokeAsync(TIn1 in1)
+        {
+            OnBeforeInvoke(in1);
+
+            var context = await _contextProvider.GetCurrentAsync();
+
+            await _authority.AuthorizeAsync(this, context);
+
+            await OnInvoke(in1, context);
+
+            OnAfterInvoke();
+
+        }
+
+        protected abstract Task OnInvoke(TIn1 in1, TContext context);
+
+        protected virtual void OnBeforeInvoke(TIn1 in1)
+        {
+        }
+
+        protected virtual void OnAfterInvoke()
+        {
+        }
+    }
+
+    public abstract class ApiAction<TContext> : ApiCall
 	{
 		private readonly IApiContextProvider<TContext>  _contextProvider;
 		private readonly IApiContextAuthorizer<TContext> _authority;
