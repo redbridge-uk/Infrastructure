@@ -11,9 +11,8 @@ namespace Redbridge.Diagnostics
 		{
 			var handler = MessageReceived;
 
-			if (handler != null)
-				handler.Invoke(this, new DebugEventArgs(message));
-		}
+            handler?.Invoke(this, new DebugEventArgs(message));
+        }
 
 		public override void Write(string message)
 		{
