@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Redbridge.Diagnostics;
 
@@ -26,11 +24,6 @@ namespace Redbridge.ApiManagement
         }
 
         public virtual bool RequiresAuthentication => true;
-
-		public virtual IEnumerable<string> RequiredActions => Enumerable.Empty<string>();
-
-		public virtual IEnumerable<string> RequiredRoles => Enumerable.Empty<string>();
-
-        public virtual IEnumerable<string> PermittedClients => null;
+		public virtual string RequiredAction => null;
 	}
 }
