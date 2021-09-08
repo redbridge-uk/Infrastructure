@@ -33,17 +33,6 @@ namespace Redbridge.Tests
         }
 
         [Test]
-        public void Construct_AssertApiCallDefaults()
-        {
-            var mockLogger = new Mock<ILogger>();
-            var api = new UnnamedTestApiCall(mockLogger.Object);
-            Assert.AreEqual(true, api.RequiresAuthentication);
-            Assert.IsNull(api.PermittedClients);
-            Assert.AreEqual(0, api.RequiredActions.Count());
-            Assert.AreEqual(0, api.RequiredRoles.Count());
-        }
-
-        [Test]
         public void GetApiName_UnnamedTestApiCall_ExpectUnnamedTestApiCall()
         {
             var mockLogger = new Mock<ILogger>();
