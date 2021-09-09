@@ -12,24 +12,22 @@ namespace Redbridge.Web.Messaging
 	{
 		private readonly Uri _baseUri;
         private readonly ILogger _logger;
-        private readonly IHttpClientFactory _clientFactory;
+		private readonly ILoggerFactory _factory;
 
-        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, IHttpClientFactory clientFactory) 
-            : this(baseUri, sessionManager, new BlackholeLogger(), clientFactory){}
-
-        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger, IHttpClientFactory clientFactory)
+        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILoggerFactory factory, IHttpClientFactory clientFactory)
 		{
             _baseUri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
 			SessionManager = sessionManager ?? throw new ArgumentNullException(nameof(sessionManager));
-			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
+            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
+			_logger = factory.Create<WebRequestFactory>();
+            ClientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
 
             RegisterConverters();
 		}
 
-        protected IHttpClientFactory ClientFactory => _clientFactory;
+        protected IHttpClientFactory ClientFactory { get; }
 
-		protected void RegisterConverters() 
+        protected void RegisterConverters() 
 		{
 			OnRegisterConverters();
 		}
@@ -133,9 +131,9 @@ namespace Redbridge.Web.Messaging
 		public IWebRequestFactory CreateFactory(IWebRequestSignatureService sessionManager)
 		{
 			if (sessionManager == null) throw new ArgumentNullException(nameof(sessionManager));
-			return OnCreateFactory(_baseUri, sessionManager, _logger);
+			return OnCreateFactory(_baseUri, sessionManager, _factory);
 		}
 
-		protected abstract IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger);
+		protected abstract IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILoggerFactory logger);
 	}
 }
