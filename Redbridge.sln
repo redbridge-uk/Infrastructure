@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Windows", "Redbridge.SDK.Windows\Redbridge.Windows.csproj", "{CE6544EC-07AE-4322-94A6-A644C7361E6F}"
 EndProject
@@ -11,8 +11,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.EntityFramework", "Redbridge.EntityFramework\Redbridge.EntityFramework.csproj", "{56C45C64-F125-4269-8145-467B29853EE4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Services.WebApi", "Redbridge.Services.WebApi\Redbridge.Services.WebApi.csproj", "{BD8D6847-ABF0-4058-BE01-DE7452C4B3A0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Diagnostics.ApplicationInsights", "Redbridge.Diagnostics.ApplicationInsights\Redbridge.Diagnostics.ApplicationInsights.csproj", "{B76BC7DC-438B-4769-A229-860139197A38}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge", "Redbridge\Redbridge.csproj", "{FA042554-BC38-4B47-B6EF-A10AC76CB200}"
 EndProject
@@ -29,8 +27,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Services.Owin", "Redbridge.Services.Owin\Redbridge.Services.Owin.csproj", "{217C7AC5-8AAB-432F-93C9-2A73C0204FC2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Windows.Tests", "Redbridge.SDK.Windows.Tests\Redbridge.Windows.Tests.csproj", "{2F943CA2-B1DF-4127-A8A3-F7705278C780}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbridge.Diagnostics.ApplicationInsights.Tests", "Redbridge.Diagnostics.ApplicationInsights.Tests\Redbridge.Diagnostics.ApplicationInsights.Tests.csproj", "{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,18 +98,6 @@ Global
 		{BD8D6847-ABF0-4058-BE01-DE7452C4B3A0}.Release|iPhone.Build.0 = Release|Any CPU
 		{BD8D6847-ABF0-4058-BE01-DE7452C4B3A0}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{BD8D6847-ABF0-4058-BE01-DE7452C4B3A0}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Release|iPhone.Build.0 = Release|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{B76BC7DC-438B-4769-A229-860139197A38}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{FA042554-BC38-4B47-B6EF-A10AC76CB200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA042554-BC38-4B47-B6EF-A10AC76CB200}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA042554-BC38-4B47-B6EF-A10AC76CB200}.Debug|iPhone.ActiveCfg = Debug|Any CPU
@@ -210,18 +194,6 @@ Global
 		{2F943CA2-B1DF-4127-A8A3-F7705278C780}.Release|iPhone.Build.0 = Release|Any CPU
 		{2F943CA2-B1DF-4127-A8A3-F7705278C780}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{2F943CA2-B1DF-4127-A8A3-F7705278C780}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|iPhone.Build.0 = Release|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{A7C0A57D-0034-40D9-98DD-B3C12EF6E1A2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
