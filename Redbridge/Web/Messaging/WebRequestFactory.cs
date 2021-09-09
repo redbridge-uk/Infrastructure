@@ -14,9 +14,6 @@ namespace Redbridge.Web.Messaging
         private readonly ILogger _logger;
         private readonly IHttpClientFactory _clientFactory;
 
-        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, IHttpClientFactory clientFactory) 
-            : this(baseUri, sessionManager, new BlackholeLogger(), clientFactory){}
-
         protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger, IHttpClientFactory clientFactory)
 		{
             _baseUri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
