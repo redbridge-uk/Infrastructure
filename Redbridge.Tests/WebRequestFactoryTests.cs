@@ -50,12 +50,12 @@ namespace Redbridge.Tests
 
 	public class SpecializedWebRequestFactory : WebRequestFactory
 	{
-		public SpecializedWebRequestFactory(IWebRequestSignatureService sessionManager, IHttpClientFactory clientFactory) 
-            : base(new Uri("http://mytest-api.azurewebsites.net"), sessionManager, new BlackholeLogger(), clientFactory) { }
+		public SpecializedWebRequestFactory(IWebRequestSignatureService sessionManager, ILoggerFactory factory, IHttpClientFactory clientFactory) 
+            : base(new Uri("http://mytest-api.azurewebsites.net"), sessionManager, factory, clientFactory) { }
 
-		protected override IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger logger)
+		protected override IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILoggerFactory factory)
 		{
-			return new SpecializedWebRequestFactory(sessionManager, ClientFactory);
+			return new SpecializedWebRequestFactory(sessionManager, factory, ClientFactory);
 		}
 
 		protected override void OnRegisterConverters()
@@ -74,7 +74,8 @@ namespace Redbridge.Tests
 			var sessionManager = new Mock<IWebRequestSignatureService>();
             sessionManager.Setup(sm => sm.PostProcessUrlString(It.IsAny<string>())).Returns("integrations/my");
             var clientFactory = new Mock<IHttpClientFactory>();
-			var factory = new SpecializedWebRequestFactory(sessionManager.Object, clientFactory.Object);
+            var loggerFactory = new Mock<ILoggerFactory>();
+			var factory = new SpecializedWebRequestFactory(sessionManager.Object, loggerFactory.Object, clientFactory.Object);
 			var request = factory.CreateFuncRequest<IntegrationData[]>("integrations/my");
 			Assert.AreEqual(2, request.Converters.Count());
             Assert.AreEqual(new Uri("http://mytest-api.azurewebsites.net"), request.RootUri);
