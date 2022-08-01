@@ -1,10 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Windows", "Redbridge.SDK.Windows\Redbridge.Windows.csproj", "{CE6544EC-07AE-4322-94A6-A644C7361E6F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.IntegrationTesting", "Redbridge.IntegrationTesting\Redbridge.IntegrationTesting.csproj", "{449020D2-AF99-4006-97E5-695A8E3AA0E3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbridge.Console", "Redbridge.Console\Redbridge.Console.csproj", "{A369B5B2-12A2-46E4-8D9F-F1F67389E00E}"
 EndProject
@@ -50,18 +48,6 @@ Global
 		{CE6544EC-07AE-4322-94A6-A644C7361E6F}.Release|iPhone.Build.0 = Release|Any CPU
 		{CE6544EC-07AE-4322-94A6-A644C7361E6F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{CE6544EC-07AE-4322-94A6-A644C7361E6F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Release|iPhone.Build.0 = Release|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{449020D2-AF99-4006-97E5-695A8E3AA0E3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{A369B5B2-12A2-46E4-8D9F-F1F67389E00E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A369B5B2-12A2-46E4-8D9F-F1F67389E00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A369B5B2-12A2-46E4-8D9F-F1F67389E00E}.Debug|iPhone.ActiveCfg = Debug|Any CPU

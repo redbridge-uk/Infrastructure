@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
-using Redbridge.ApiManagement;
+using Redbridge.DependencyInjection;
 using Redbridge.Diagnostics;
 
 namespace Redbridge.EntityFramework
