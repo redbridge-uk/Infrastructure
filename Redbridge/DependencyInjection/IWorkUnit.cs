@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Redbridge.ApiManagement
+namespace Redbridge.DependencyInjection
 {
 	public interface IWorkUnit : IDisposable
 	{

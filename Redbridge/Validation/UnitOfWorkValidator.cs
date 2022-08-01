@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Redbridge.ApiManagement;
+using Redbridge.DependencyInjection;
 
 namespace Redbridge.Validation
 {
