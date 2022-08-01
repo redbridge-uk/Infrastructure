@@ -29,12 +29,12 @@ jobs:
       run: dotnet tool install --global dotnet-coverage
     - name: Install Sonar global tool
       run: dotnet tool install --global dotnet-sonarscanner
+    - name: Begin Sonar scan
+      run: dotnet sonarscanner begin /k:"redbridge-uk_Infrastructure" /o:"redbridge-uk" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Begin Sonar scan
-      run: dotnet sonarscanner begin /k:"redbridge-uk_Infrastructure" /o:"redbridge-uk" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Coverage
