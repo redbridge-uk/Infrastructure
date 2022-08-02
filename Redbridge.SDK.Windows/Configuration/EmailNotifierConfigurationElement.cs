@@ -52,7 +52,7 @@ namespace Redbridge.Configuration
 
         protected override async Task OnNotifyAsync(NotificationMessage message, IHttpClientFactory clientFactory)
         {
-            var smptClient = new SmtpClient();
+            var smtpClient = new SmtpClient() { EnableSsl = true };
             var senderAddress = new MailAddress(Sender, SenderDisplayName);
             var mailMessage = new MailMessage()
             {
@@ -64,7 +64,7 @@ namespace Redbridge.Configuration
             };
 
             mailMessage.To.Add(new MailAddress(Target));
-            await smptClient.SendMailAsync(mailMessage);
+            await smtpClient.SendMailAsync(mailMessage);
         }
     }
 }

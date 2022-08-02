@@ -16,7 +16,7 @@ namespace Redbridge.IO
 
         public string GetTempFileName()
         {
-            return Path.GetTempFileName();
+            return Path.GetRandomFileName();
         }
 
         public void DeleteFile(string path)

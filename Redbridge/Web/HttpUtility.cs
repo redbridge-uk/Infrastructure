@@ -154,14 +154,14 @@ namespace Redbridge.Web
 
 		private void FillFromString(string query, bool urlencoded)
 		{
-			int num = query?.Length ?? 0;
+			var num = query?.Length ?? 0;
 			for (int i = 0; i < num; i++)
 			{
-				int startIndex = i;
-				int num4 = -1;
-				while (i < num)
+				var startIndex = i;
+				var num4 = -1;
+				while (i < num && query != null)
 				{
-					char ch = query[i];
+					var ch = query[i];
 					if (ch == '=')
 					{
 						if (num4 < 0)

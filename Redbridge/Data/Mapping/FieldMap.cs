@@ -142,7 +142,7 @@ namespace Redbridge.Data.Mapping
 				return TryGetResult.FromResult(_convertBackFunc.Compile()(value));
 			}
 
-            if (value.Equals(null))
+            if ( value == null )
 				return TryGetResult.Fail<TSourceFieldType>();
 
 			var targetType = typeof(TSourceFieldType);
