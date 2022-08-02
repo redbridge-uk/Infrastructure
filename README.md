@@ -4,5 +4,3 @@
 
 # redbridge.infrastructure
 Reusable libraries for api's, EF and identity
-
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=infrastructure)
