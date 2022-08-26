@@ -49,6 +49,22 @@ namespace Redbridge.Tests
         }
 
         [Test]
+        public void Construct_JsonWebRequestDeleteFunc_ExpectSuccess()
+        {
+            var request = new TestWebRequestFunc("https://localhost:1234", HttpVerb.Delete);
+            Assert.AreEqual(0, request.Converters.Count());
+            Assert.AreEqual("application/json", request.ContentType);
+        }
+
+        [Test]
+        public void Construct_JsonWebRequestGetFunc_ExpectSuccess()
+        {
+            var request = new TestWebRequestFunc("https://localhost:1234", HttpVerb.Get);
+            Assert.AreEqual(0, request.Converters.Count());
+            Assert.AreEqual("application/json", request.ContentType);
+        }
+
+        [Test]
         public async Task Construct_JsonWebRequestFuncPatch_ExpectSuccess()
         {
             var request = new TestWebRequestBodyFunc("https://localhost:1234", HttpVerb.Patch);

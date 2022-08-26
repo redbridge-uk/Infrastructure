@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,8 +100,17 @@ namespace Redbridge.Web.Messaging
                 return await request.SendAsync(message);
             }
 
-			throw new NotSupportedException("Only patch, post and put are currently supported for sending requests with a body.");
-		}
+            if (body != null)
+            {
+                throw new NotSupportedException(
+                    "Only patch, post and put are currently supported for sending requests with a body.");
+            }
+
+            if (HttpVerb == HttpVerb.Delete)
+                return await request.DeleteAsync(endpointUri);
+
+            return await request.GetAsync(endpointUri);
+        }
 
         public virtual string ContentType { get; protected set; } = "application/json";
 
