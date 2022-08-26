@@ -76,28 +76,7 @@ namespace Redbridge.Web.Messaging
 			}
 		}
         
-		protected async Task<HttpResponseMessage> OnExecuteRequestAsync(IHttpClientFactory clientFactory)
-		{
-			var endpointUri = OnCreateEndpointUri();
-
-            var request = clientFactory.Create();
-			
-			OnApplySignature(request);
-
-			switch (HttpVerb)
-            {
-                case HttpVerb.Get:
-                    return await request.GetAsync(endpointUri);
-                case HttpVerb.Delete:
-                    return await request.DeleteAsync(endpointUri);
-                case HttpVerb.Post:
-                    return await request.PostAsync(endpointUri, null);
-                default:
-                    throw new NotSupportedException("Only gets are currently supported for making requests with no body.");
-            }
-        }
-        
-		protected async Task<HttpResponseMessage> OnExecuteRequestAsync (IHttpClientFactory clientFactory, object body)
+		protected async Task<HttpResponseMessage> OnExecuteRequestAsync (IHttpClientFactory clientFactory, object body = null)
 		{
 			var endpointUri = OnCreateEndpointUri();
             var request = clientFactory.Create();
@@ -112,8 +91,13 @@ namespace Redbridge.Web.Messaging
 				if (HttpVerb == HttpVerb.Put)
 					return await request.PutAsync(endpointUri, content);
 				
-				return await request.PostAsync(endpointUri, content);
-			}
+				if ( HttpVerb == HttpVerb.Post)
+				    return await request.PostAsync(endpointUri, content);
+
+                var method = new HttpMethod("PATCH");
+                var message = new HttpRequestMessage(method, endpointUri) { Content = content };
+                return await request.SendAsync(message);
+            }
 
 			throw new NotSupportedException("Only patch, post and put are currently supported for sending requests with a body.");
 		}
@@ -130,8 +114,6 @@ namespace Redbridge.Web.Messaging
 			foreach (var converter in _converters)
 				serializer.Converters.Add(converter);
 		}
-
-		
 
 		protected virtual Uri OnCreateEndpointUri()
 		{
