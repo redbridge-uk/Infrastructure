@@ -10,11 +10,6 @@ using Redbridge.Exceptions;
 
 namespace Redbridge.Web.Messaging
 {
-    public interface IHttpClientFactory
-    {
-        HttpClient Create();
-    }
-
     public abstract class JsonWebRequest
 	{
 		private readonly string _requestUriString;
@@ -109,7 +104,7 @@ namespace Redbridge.Web.Messaging
 			
 			OnApplySignature(request);
 
-			if (HttpVerb == HttpVerb.Post || HttpVerb == HttpVerb.Put)
+			if (HttpVerb == HttpVerb.Post || HttpVerb == HttpVerb.Put || HttpVerb == HttpVerb.Patch)
 			{
 				var payload = OnCreatePayload(body);
 				var content = new StringContent(payload, Encoding.UTF8, ContentType);
@@ -120,7 +115,7 @@ namespace Redbridge.Web.Messaging
 				return await request.PostAsync(endpointUri, content);
 			}
 
-			throw new NotSupportedException("Only post and put are currently supported for sending requests with a body.");
+			throw new NotSupportedException("Only patch, post and put are currently supported for sending requests with a body.");
 		}
 
         public virtual string ContentType { get; protected set; } = "application/json";
