@@ -10,7 +10,6 @@ using Redbridge.Web.Messaging;
 
 namespace Redbridge.Identity.OAuthServer
 {
-
     public class OAuthUsernamePasswordAuthenticationClient : OAuthRefreshAuthenticationClient
     {
         private string _username;
