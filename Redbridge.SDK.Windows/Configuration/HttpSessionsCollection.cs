@@ -6,8 +6,8 @@ namespace Redbridge.Configuration
 	{
 		public SessionManagerSection this[int index]
 		{
-			get { return (SessionManagerSection)BaseGet(index); }
-			set
+			get => (SessionManagerSection)BaseGet(index);
+            set
 			{
 				if (BaseGet(index) != null)
 				{

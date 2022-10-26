@@ -59,20 +59,11 @@ namespace Redbridge.EntityFramework
 
         public override ObservableCollection<TEntity> Local => _data;
 
-        Type IQueryable.ElementType
-        {
-            get { return _query.ElementType; }
-        }
+        Type IQueryable.ElementType => _query.ElementType;
 
-        Expression IQueryable.Expression
-        {
-            get { return _query.Expression; }
-        }
+        Expression IQueryable.Expression => _query.Expression;
 
-        IQueryProvider IQueryable.Provider
-        {
-            get { return new TestDbAsyncQueryProvider<TEntity>(_query.Provider); }
-        }
+        IQueryProvider IQueryable.Provider => new TestDbAsyncQueryProvider<TEntity>(_query.Provider);
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {

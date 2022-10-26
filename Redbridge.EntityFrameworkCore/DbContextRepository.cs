@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using Redbridge.Data;
 using Redbridge.Exceptions;
 
-namespace Redbridge.EntityFramework
+namespace Redbridge.EntityFrameworkCore
 {
 	public abstract class DbContextRepository<TKey, TEntityData, TEntity, TContext>
 		: DbContextRepository<TContext>, IRepository<TKey, TEntityData>
@@ -15,14 +11,14 @@ namespace Redbridge.EntityFramework
         where TContext: DbContext
 	{
 		private readonly TContext _container;
-		private readonly Func<TContext, IDbSet<TEntity>> _accessor;
+		private readonly Func<TContext, DbSet<TEntity>> _accessor;
 
 		protected DbContextRepository(TContext container) : base(container)
 		{
             _container = container ?? throw new ArgumentNullException(nameof(container));
 		}
 
-		protected DbContextRepository(TContext container, Func<TContext, IDbSet<TEntity>> accessor) : base(container)
+		protected DbContextRepository(TContext container, Func<TContext, DbSet<TEntity>> accessor) : base(container)
 		{
             _container = container ?? throw new ArgumentNullException(nameof(container));
 			_accessor = accessor ?? throw new ArgumentNullException(nameof(accessor));
@@ -41,7 +37,7 @@ namespace Redbridge.EntityFramework
 		protected abstract TEntity OnConvertToEntity(TEntityData data);
 		protected abstract TEntityData OnConvertToData(TEntity entity);
 
-		protected IDbSet<TEntity> DatabaseSet => _accessor(_container);
+		protected DbSet<TEntity> DatabaseSet => _accessor(_container);
 
 		public void Add(TEntityData data)
 		{
@@ -114,7 +110,7 @@ namespace Redbridge.EntityFramework
 			return OnConvertToDataArray(entities);
 		}
 
-		protected IDbSet<TEntity> GetDirectAccessor()
+		protected DbSet<TEntity> GetDirectAccessor()
 		{
 			return _accessor(Context);
 		}
@@ -135,13 +131,11 @@ namespace Redbridge.EntityFramework
 		}
 	}
 
-
 	public abstract class DbContextRepository<TContext> where TContext: class
 	{
 		protected DbContextRepository(TContext context)
 		{
-			if (context == null) throw new ArgumentNullException(nameof(context));
-			Context = context;
+            Context = context ?? throw new ArgumentNullException(nameof(context));
 		}
 
 		protected TContext Context { get; }

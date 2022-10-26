@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
 namespace Redbridge.Data
 {
-	
-
 	[DataContract]
 	public class PageRequest
 	{
@@ -87,7 +86,7 @@ namespace Redbridge.Data
 				return 0;
 			}
 		}
-
+		
 		[DataMember]
 		public int Page
 		{
@@ -150,5 +149,5 @@ namespace Redbridge.Data
 		{
 			return ToQueryString();
 		}
-	}
+    }
 }

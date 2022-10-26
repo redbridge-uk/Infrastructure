@@ -1,11 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Data.Entity;
+﻿
+using Microsoft.EntityFrameworkCore;
 using Redbridge.Data;
 using Redbridge.Linq;
 
-namespace Redbridge.EntityFramework
+namespace Redbridge.EntityFrameworkCore
 {
 	public static class PageRequestExtensions
 	{
@@ -14,7 +12,7 @@ namespace Redbridge.EntityFramework
 			if (request == null) throw new ArgumentNullException(nameof(request));
 			if (source == null) throw new ArgumentNullException(nameof(source));
 
-			var pageItemsQuery = request.CreateQuery(source);
+			var pageItemsQuery = request.CreateQuery<T>(source);
 			var totalItemsQuery = request.GetTotalRecordCountQuery(source);
 
 			var items = await pageItemsQuery.ToArrayAsync();
@@ -28,8 +26,8 @@ namespace Redbridge.EntityFramework
 		{
 			if (request == null) throw new ArgumentNullException(nameof(request));
 			if (source == null) throw new ArgumentNullException(nameof(source));
-
-			var pageItemsQuery = request.CreateQuery(source);
+			
+			var pageItemsQuery = request.CreateQuery<T>(source);
 			var totalItemsQuery = request.GetTotalRecordCountQuery(source);
 			var items = await pageItemsQuery.ToArrayAsync();
 			var totalItemsCount = await totalItemsQuery.CountAsync();
