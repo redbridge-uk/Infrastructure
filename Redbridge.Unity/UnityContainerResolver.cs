@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Redbridge.DependencyInjection;
 using Unity;
-using Unity.Injection;
 using Unity.Lifetime;
 using Unity.Resolution;
 
@@ -31,54 +30,7 @@ namespace Redbridge.Unity
 		{
 			_container.RegisterInstance(instance);
 		}
-
-		public void RegisterType<T, T1>() where T1 : T
-		{
-			_container.RegisterType<T, T1>();
-		}
-
-		public void RegisterType<T, T1>(LifeTime lifeTime = LifeTime.Transient) where T1 : T
-		{
-			switch (lifeTime)
-			{
-				case LifeTime.Transient:
-					_container.RegisterType<T, T1>();
-					break;
-					
-				case LifeTime.Container:
-					_container.RegisterType<T, T1>(new ContainerControlledLifetimeManager());
-					break;
-
-				case LifeTime.Hierarchical:
-					_container.RegisterType<T, T1>(new HierarchicalLifetimeManager());
-					break;
-			}
-
-		}
-
-		public void RegisterType<T, T1>(string name) where T1 : T
-		{
-			_container.RegisterType<T, T1>(name);
-		}
-
-		public void RegisterType<T, T1>(string name, LifeTime lifeTime = LifeTime.Transient) where T1 : T
-		{
-			switch (lifeTime)
-			{
-				case LifeTime.Transient:
-					_container.RegisterType<T, T1>(name);
-					break;
-
-				case LifeTime.Container:
-					_container.RegisterType<T, T1>(name, new ContainerControlledLifetimeManager());
-					break;
-
-				case LifeTime.Hierarchical:
-					_container.RegisterType<T, T1>(name, new HierarchicalLifetimeManager());
-					break;
-			}
-		}
-
+		
 		public object Resolve(Type type)
 		{
 			return _container.Resolve(type);

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Redbridge.Validation;
 
-namespace Redbridge.Windows.Tests
+namespace Redbridge.Tests
 {
     [TestFixture]
     public class ObjectInstanceValidatorTests

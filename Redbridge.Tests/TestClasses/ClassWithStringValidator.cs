@@ -1,11 +1,10 @@
-﻿
-using Redbridge.Validation.Markup;
+﻿using Redbridge.Validation.Markup;
 
-namespace Redbridge.Windows.Tests.TestClasses
+namespace Redbridge.Tests.TestClasses
 {
     public class ClassWithStringValidator
     {
-        [StringValidator(IsRequired=true)]
+        [StringValidator(IsRequired = true)]
         public string Name
         {
             get;

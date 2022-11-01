@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Redbridge.Notifications;
-using Redbridge.Web.Messaging;
 
 namespace Redbridge.Configuration
 {

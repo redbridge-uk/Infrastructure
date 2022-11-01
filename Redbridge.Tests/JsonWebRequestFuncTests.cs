@@ -72,7 +72,7 @@ namespace Redbridge.Tests
             Assert.AreEqual("application/json", request.ContentType);
 
             var mockHttpRequestFactory = new Mock<IHttpClientFactory>();
-            mockHttpRequestFactory.Setup(rf => rf.Create()).Returns(new HttpClient(new TestHttpHandler()));
+            mockHttpRequestFactory.Setup(rf => rf.CreateClient(It.IsAny<string>())).Returns(new HttpClient(new TestHttpHandler()));
             await request.ExecuteAsync(mockHttpRequestFactory.Object, 42);
         }
 
@@ -84,7 +84,7 @@ namespace Redbridge.Tests
             Assert.AreEqual("application/json", request.ContentType);
 
             var mockHttpRequestFactory = new Mock<IHttpClientFactory>();
-            mockHttpRequestFactory.Setup(rf => rf.Create()).Returns(new HttpClient(new TestHttpHandler()));
+            mockHttpRequestFactory.Setup(rf => rf.CreateClient(It.IsAny<string>())).Returns(new HttpClient(new TestHttpHandler()));
             await request.ExecuteAsync(mockHttpRequestFactory.Object, 42);
         }
 
@@ -96,7 +96,7 @@ namespace Redbridge.Tests
             Assert.AreEqual("application/json", request.ContentType);
 
             var mockHttpRequestFactory = new Mock<IHttpClientFactory>();
-            mockHttpRequestFactory.Setup(rf => rf.Create()).Returns(new HttpClient(new TestHttpHandler()));
+            mockHttpRequestFactory.Setup(rf => rf.CreateClient(It.IsAny<string>())).Returns(new HttpClient(new TestHttpHandler()));
             await request.ExecuteAsync(mockHttpRequestFactory.Object, 42);
         }
 
@@ -108,7 +108,7 @@ namespace Redbridge.Tests
             Assert.AreEqual("application/json", request.ContentType);
 
             var mockHttpRequestFactory = new Mock<IHttpClientFactory>();
-            mockHttpRequestFactory.Setup(rf => rf.Create()).Returns(new HttpClient(new TestHttpHandler()));
+            mockHttpRequestFactory.Setup(rf => rf.CreateClient(It.IsAny<string>())).Returns(new HttpClient(new TestHttpHandler()));
             var nse = Assert.ThrowsAsync<NotSupportedException>(() => request.ExecuteAsync(mockHttpRequestFactory.Object, 42));
             Assert.IsNotNull(nse);
             Assert.AreEqual("Only patch, post and put are currently supported for sending requests with a body.", nse.Message);

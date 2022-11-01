@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Redbridge.Xml;
 
-namespace Redbridge.Windows.Tests
+namespace Redbridge.Tests
 {
     [TestFixture]
     public class TestGenericSerializer
@@ -10,11 +10,11 @@ namespace Redbridge.Windows.Tests
         {
             public SerializableObjectClass() { }
 
-            public SerializableObjectClass(string name) 
+            public SerializableObjectClass(string name)
             {
                 Name = name;
             }
-            
+
             public string Name
             {
                 get;

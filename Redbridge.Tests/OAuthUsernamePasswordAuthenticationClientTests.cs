@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using Moq;
 using NUnit.Framework;
 using Redbridge.Configuration;
