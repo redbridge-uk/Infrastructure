@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Redbridge.Configuration;
-using Redbridge.Web.Messaging;
 
 namespace Redbridge.LocationServices.Google
 {
@@ -25,7 +24,7 @@ namespace Redbridge.LocationServices.Google
             var key = Settings.GetStringValue("GoogleApiKey");
 
 
-            var client = _clientFactory.Create();
+            var client = _clientFactory.CreateClient();
             var baseUri = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={location.Latitude},{location.Longitude}&key={key}";
             client.BaseAddress = new Uri(baseUri);
             client.DefaultRequestHeaders.Accept.Clear();

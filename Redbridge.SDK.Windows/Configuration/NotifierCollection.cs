@@ -36,12 +36,7 @@ public class NotifierCollection : ConfigurationElementCollection
 
 	protected override bool OnDeserializeUnrecognizedElement(string elementName, XmlReader reader)
 	{
-		if (elementName == SlackNotifierConfigurationElement.ElementName)
-		{
-			Add(SlackNotifierConfigurationElement.FromXmlReader(reader));
-			return true;
-		}
-		if (elementName == EmailNotifierConfigurationElement.ElementName)
+        if (elementName == EmailNotifierConfigurationElement.ElementName)
 		{
 			Add(EmailNotifierConfigurationElement.FromXmlReader(reader));
 			return true;

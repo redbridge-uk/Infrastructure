@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Redbridge.Security;
 
-namespace Redbridge.Windows.Tests
+namespace Redbridge.Tests
 {
     [TestFixture()]
     public class Sha256CryptoServiceHashingServiceTests

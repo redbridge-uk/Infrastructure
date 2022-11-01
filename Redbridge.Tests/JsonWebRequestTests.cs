@@ -10,8 +10,6 @@ namespace Redbridge.Tests
     [TestFixture]
     public class JsonWebRequestTests
     {
-        
-
         public class TestWebRequest : JsonWebRequest
         {
             public TestWebRequest(string requestUri, HttpVerb httpVerb) : base(requestUri, httpVerb)
@@ -39,7 +37,7 @@ namespace Redbridge.Tests
         {
             var request = new TestWebRequest("https://localhost:1234", HttpVerb.Post);
             var mockClient = new Mock<IHttpClientFactory>();
-            mockClient.Setup(c => c.Create()).Returns(new HttpClient());
+            mockClient.Setup(c => c.CreateClient(It.IsAny<string>())).Returns(new HttpClient());
             request.Parameters.Add("Tester");
             Assert.AreEqual(1, request.Parameters.Count);
         }
@@ -49,7 +47,7 @@ namespace Redbridge.Tests
         {
             var request = new TestWebRequest("https://localhost:1234", HttpVerb.Post);
             var mockClient = new Mock<IHttpClientFactory>();
-            mockClient.Setup(c => c.Create()).Returns(new HttpClient());
+            mockClient.Setup(c => c.CreateClient(It.IsAny<string>())).Returns(new HttpClient());
             var client = request.ToHttpClient(mockClient.Object);
             Assert.IsNotNull(client);
         }

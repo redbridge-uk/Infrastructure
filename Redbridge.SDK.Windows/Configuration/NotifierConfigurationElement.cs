@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 using Redbridge.Notifications;

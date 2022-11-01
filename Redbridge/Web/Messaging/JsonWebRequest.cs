@@ -32,9 +32,7 @@ namespace Redbridge.Web.Messaging
             foreach (var converter in converters)
                 _converters.Add(converter);
         }
-
-        
-
+		
 		public IEnumerable<JsonConverter> Converters => _converters;
 
 		public AuthenticationMethod AuthenticationMethod { get; set; }
@@ -45,7 +43,7 @@ namespace Redbridge.Web.Messaging
 
 		public HttpClient ToHttpClient(IHttpClientFactory clientFactory)
         {
-            var client = clientFactory.Create();
+            var client = clientFactory.CreateClient();
             client.BaseAddress = OnCreateEndpointUri();
             return client;
         }
@@ -80,7 +78,7 @@ namespace Redbridge.Web.Messaging
 		protected async Task<HttpResponseMessage> OnExecuteRequestAsync (IHttpClientFactory clientFactory, object body = null)
 		{
 			var endpointUri = OnCreateEndpointUri();
-            var request = clientFactory.Create();
+            var request = clientFactory.CreateClient();
 			
 			OnApplySignature(request);
 
