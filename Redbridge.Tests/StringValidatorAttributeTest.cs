@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Redbridge.Validation.Markup;
 
-namespace Redbridge.Windows.Tests
+namespace Redbridge.Tests
 {
     /// <summary>
     /// Suite of tests for the string validator.

@@ -1,5 +1,4 @@
-﻿using Redbridge.ApiManagement;
-using Redbridge.Diagnostics;
+﻿using Redbridge.Diagnostics;
 
 namespace Redbridge.DependencyInjection
 {

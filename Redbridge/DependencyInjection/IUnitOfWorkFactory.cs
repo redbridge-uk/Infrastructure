@@ -1,6 +1,4 @@
-﻿using Redbridge.DependencyInjection;
-
-namespace Redbridge.ApiManagement
+﻿namespace Redbridge.DependencyInjection
 {
 	public interface IUnitOfWorkFactory<out T>
 	where T : IWorkUnit

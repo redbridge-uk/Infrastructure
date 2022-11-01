@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Redbridge.Linq;
 
-namespace Redbridge.Windows.Tests
+namespace Redbridge.Tests
 {
     [TestFixture]
     public class TestQueryableExtensions
@@ -11,7 +11,7 @@ namespace Redbridge.Windows.Tests
         private class QueryableObject
         {
             public string Name { get; set; }
-            public int Age { get; set;}
+            public int Age { get; set; }
         }
 
         private static readonly QueryableObject[] QueryableObjects =
