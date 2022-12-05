@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Redbridge.DependencyInjection;
-using Redbridge.Diagnostics;
 
 namespace Redbridge.EntityFrameworkCore
 {
@@ -21,15 +21,10 @@ namespace Redbridge.EntityFrameworkCore
 
         protected virtual TContext CreateContext(ILogger logger)
         {
-            logger.WriteDebug($"Creating new {typeof(TContext).Name} context instance.");
+            logger.LogDebug($"Creating new {0} context instance.", typeof(TContext).Name);
             return new TContext();
         }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
-
+        
         public Task<int> SaveChangesAsync()
         {
             return _context.SaveChangesAsync();

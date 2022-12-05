@@ -1,5 +1,5 @@
 ﻿using System;
-using Redbridge.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace Redbridge.DependencyInjection
 {
@@ -8,7 +8,7 @@ namespace Redbridge.DependencyInjection
         private readonly IContainer _resolver;
         private readonly ILogger _logger;
 
-        public NamedContainerFactory(IContainer resolver, ILogger logger)
+        protected NamedContainerFactory(IContainer resolver, ILogger logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
@@ -22,12 +22,12 @@ namespace Redbridge.DependencyInjection
 
             try
             {
-                _logger.WriteDebug($"NamedContainerFactory: attempting to resolve named type {name}");
+                _logger.LogDebug($"NamedContainerFactory: attempting to resolve named type {name}");
                 return _resolver.Resolve<T>(name);
             }
             catch (Exception e)
             {
-                _logger.WriteError($"Unable to resolve named instance of type {typeof(T)}. Exception messsage: {e.Message}");
+                _logger.LogError($"Unable to resolve named instance of type {typeof(T)}. Exception messsage: {e.Message}");
                 throw e;
             }
         }

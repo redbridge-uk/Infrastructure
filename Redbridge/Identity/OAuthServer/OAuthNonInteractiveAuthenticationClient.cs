@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Redbridge.Configuration;
 using Redbridge.Diagnostics;
 using Redbridge.Web.Messaging;
@@ -21,12 +22,12 @@ namespace Redbridge.Identity.OAuthServer
         {
 			if (!string.IsNullOrWhiteSpace(RefreshToken))
 			{
-				Logger.WriteInfo($"Discovered refresh token...reconnecting to service at url {ServiceUri}...");
+				Logger.LogInformation($"Discovered refresh token...reconnecting to service at url {ServiceUri}...");
 				await OnRefreshAccessTokenAsync();
 			}
 			else
 			{
-				Logger.WriteInfo($"Connecting to service at url {ServiceUri} as non-interactive client {ClientId})");
+				Logger.LogInformation($"Connecting to service at url {ServiceUri} as non-interactive client {ClientId})");
 				var uri = new Uri(ServiceUri, "oauth/token");
 				var request = new FormWebRequest<OAuthTokenResult>(uri, HttpVerb.Post);
 				var data = new OAuthAccessTokenRequestData() { ClientId = ClientId, ClientSecret = ClientSecret, GrantType = GrantTypes.ClientSecret };
@@ -47,7 +48,7 @@ namespace Redbridge.Identity.OAuthServer
 				}
 				else
 				{
-					Logger.WriteWarning("The login process returned no response from the oauth service.");
+					Logger.LogWarning("The login process returned no response from the oauth service.");
 					SetStatus(ClientConnectionStatus.Disconnected);
 				}
 			}

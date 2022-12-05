@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using Redbridge.Diagnostics;
 
 namespace Redbridge.DependencyInjection
@@ -9,7 +10,7 @@ namespace Redbridge.DependencyInjection
 		private readonly IContainer _resolver;
         private readonly ILogger _logger;
 
-		public ContainerFactory(IContainer resolver, ILogger logger)
+        protected ContainerFactory(IContainer resolver, ILogger logger)
 		{
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
@@ -25,7 +26,7 @@ namespace Redbridge.DependencyInjection
             }
 			catch (Exception e)
 			{
-                _logger.WriteError($"Unable to resolve instance of type {typeof(T)}. Exception messsage: {e.Message}");
+                _logger.LogError("Unable to resolve instance of type {0}. Exception messsage: {1}", typeof(T), e.Message);
 				throw e;
 			}
 		}

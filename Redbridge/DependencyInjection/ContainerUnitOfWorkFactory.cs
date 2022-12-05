@@ -1,4 +1,4 @@
-﻿using Redbridge.Diagnostics;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Redbridge.DependencyInjection
 {
