@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Redbridge.Diagnostics;
+using Microsoft.Extensions.Logging;
 using Redbridge.Identity;
 
 namespace Redbridge.Web.Messaging

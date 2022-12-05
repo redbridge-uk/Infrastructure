@@ -2,9 +2,9 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Redbridge.Configuration;
-using Redbridge.Diagnostics;
 using Redbridge.Security;
 using Redbridge.Web.Messaging;
 
@@ -17,7 +17,7 @@ namespace Redbridge.Identity.OAuthServer
 
         private readonly IHashingService _hashingService;
 
-        public OAuthUsernamePasswordAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger, IHashingService hashingService, IHttpClientFactory clientFactory) 
+        public OAuthUsernamePasswordAuthenticationClient(IApplicationSettingsRepository settings, ILogger<OAuthUsernamePasswordAuthenticationClient> logger, IHashingService hashingService, IHttpClientFactory clientFactory) 
             : base(settings, logger, clientFactory) 
         {
             _hashingService = hashingService ?? throw new ArgumentNullException(nameof(hashingService));
@@ -26,7 +26,7 @@ namespace Redbridge.Identity.OAuthServer
         protected override void OnSetCredentials(UserCredentials credentials)
         {
 			if (credentials == null)throw new ArgumentNullException(nameof(credentials));
-            Logger.WriteInfo($"OAuth client: setting credentials for {credentials.Username}");
+            Logger.LogInformation($"OAuth client: setting credentials for {credentials.Username}");
             base.OnSetCredentials(credentials);
 			_username = credentials.Username;
 			_password = credentials.Password;
@@ -40,7 +40,7 @@ namespace Redbridge.Identity.OAuthServer
 
 		protected override async Task<Stream> OnSaveAsync()
 		{
-			Logger.WriteInfo("Saving authentication settings...");
+			Logger.LogInformation("Saving authentication settings...");
 			var memoryStream = new MemoryStream();
 			var settings = JsonConvert.SerializeObject(new AuthSettings() { RefreshToken = RefreshToken, AuthenticationType = AuthenticationMethod, Username = _username, PasswordHash = _hashingService.CreateHash(_password) });
 			var writer = new StreamWriter(memoryStream);
@@ -53,12 +53,12 @@ namespace Redbridge.Identity.OAuthServer
         {
             if (CanRefresh)
             {
-                Logger.WriteInfo($"Discovered refresh token...reconnecting to service at url {ServiceUri} using refresh token...");
+                Logger.LogInformation($"Discovered refresh token...reconnecting to service at url {ServiceUri} using refresh token...");
                 await OnRefreshAccessTokenAsync();
             }
             else
             {
-                Logger.WriteDebug("Authentication client has been set with credentials requiring a password.");
+                Logger.LogDebug("Authentication client has been set with credentials requiring a password.");
             }
         }
 
@@ -66,12 +66,12 @@ namespace Redbridge.Identity.OAuthServer
         {
             if ( CanRefresh )
             {
-                Logger.WriteInfo($"Discovered refresh token...reconnecting to service at url {ServiceUri} using refresh token...");
+                Logger.LogInformation($"Discovered refresh token...reconnecting to service at url {ServiceUri} using refresh token...");
 				await OnRefreshAccessTokenAsync();
             }
             else
             {
-                Logger.WriteInfo($"Connecting to service at url {ServiceUri} as user {Username} (Client Id {ClientId})");
+                Logger.LogInformation($"Connecting to service at url {ServiceUri} as user {Username} (Client Id {ClientId})");
                 var uri = new Uri(ServiceUri, "oauth/token");
                 var request = new FormWebRequest<OAuthTokenResult>(uri, HttpVerb.Post);
                 var data = new OAuthAccessTokenRequestData() { ClientId = ClientId, ClientSecret = ClientSecret, Email = _username, Password = _password, GrantType = GrantTypes.Password };
@@ -81,8 +81,8 @@ namespace Redbridge.Identity.OAuthServer
                 {
                     if (!string.IsNullOrWhiteSpace(token.AccessToken) && !string.IsNullOrWhiteSpace(token.RefreshToken))
                     {
-                        Logger.WriteDebug($"Refreshed access token: {token.AccessToken}");
-                        Logger.WriteDebug($"Refresh token: {token.RefreshToken}");
+                        Logger.LogDebug($"Refreshed access token: {token.AccessToken}");
+                        Logger.LogDebug($"Refresh token: {token.RefreshToken}");
                         SetRefreshToken(token.RefreshToken);
                         SetAccessToken(token.AccessToken);
                         SetStatus(ClientConnectionStatus.Connected);
@@ -90,15 +90,15 @@ namespace Redbridge.Identity.OAuthServer
                     }
                     else
                     {
-                        Logger.WriteWarning("The login process returned a response from the oauth service with either an access token or refresh token missing - disconnecting.");
-                        Logger.WriteDebug($"Refreshed access token: {token.AccessToken}");
-                        Logger.WriteDebug($"Refresh token: {token.RefreshToken}");
+                        Logger.LogWarning("The login process returned a response from the oauth service with either an access token or refresh token missing - disconnecting.");
+                        Logger.LogDebug($"Refreshed access token: {token.AccessToken}");
+                        Logger.LogDebug($"Refresh token: {token.RefreshToken}");
                         SetStatus(ClientConnectionStatus.Disconnected);
                     }
                 }
                 else
                 {
-                    Logger.WriteWarning("The login process returned no response from the oauth service - disconnecting.");
+                    Logger.LogWarning("The login process returned no response from the oauth service - disconnecting.");
                     SetStatus(ClientConnectionStatus.Disconnected);
                 }
             }
@@ -106,7 +106,7 @@ namespace Redbridge.Identity.OAuthServer
 
 		protected override async Task<UserCredentials> OnLoadAsync(Stream stream)
 		{
-			Logger.WriteInfo("Loading authentication settings...");
+			Logger.LogInformation("Loading authentication settings...");
 
 			if (stream.CanSeek)
 			{
@@ -121,14 +121,14 @@ namespace Redbridge.Identity.OAuthServer
 
 				if (result != null && !string.IsNullOrWhiteSpace(result.RefreshToken))
 				{
-					Logger.WriteInfo("Refresh token found in authentication settings file. Using refresh token method.");
+					Logger.LogInformation("Refresh token found in authentication settings file. Using refresh token method.");
 					SetRefreshToken(result.RefreshToken);
 					var token = UserCredentials.FromRefreshToken(RefreshToken, AuthenticationMethod);
                     token.Username = result.Username;
                     return token;
 				}
 
-                Logger.WriteWarning($"Unable to load authentication settings from the supplied store. Returning empty credentials.");
+                Logger.LogWarning($"Unable to load authentication settings from the supplied store. Returning empty credentials.");
 				return UserCredentials.Empty(AuthenticationMethod);
 			}
 		}

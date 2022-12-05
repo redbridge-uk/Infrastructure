@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Redbridge.Diagnostics;
 
 namespace Redbridge.Web.Messaging
 {
-	public abstract class WebRequestFactory : IWebRequestFactory
+	public abstract class WebRequestFactory<TFactory> : IWebRequestFactory
 	{
 		private readonly Uri _baseUri;
-        private readonly ILogger _logger;
-		private readonly ILoggerFactory _factory;
+        private readonly ILogger<TFactory> _logger;
 
-        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILoggerFactory factory, IHttpClientFactory clientFactory)
+        protected WebRequestFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger<TFactory> logger, IHttpClientFactory clientFactory)
 		{
             _baseUri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
 			SessionManager = sessionManager ?? throw new ArgumentNullException(nameof(sessionManager));
-            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
-			_logger = factory.Create<WebRequestFactory>();
+			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
             ClientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
 
             RegisterConverters();
@@ -131,9 +129,9 @@ namespace Redbridge.Web.Messaging
 		public IWebRequestFactory CreateFactory(IWebRequestSignatureService sessionManager)
 		{
 			if (sessionManager == null) throw new ArgumentNullException(nameof(sessionManager));
-			return OnCreateFactory(_baseUri, sessionManager, _factory);
+			return OnCreateFactory(_baseUri, sessionManager, _logger);
 		}
 
-		protected abstract IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILoggerFactory logger);
+		protected abstract IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger<TFactory> logger);
 	}
 }

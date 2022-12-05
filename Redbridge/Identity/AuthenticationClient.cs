@@ -2,8 +2,8 @@
 using System.IO;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Redbridge.Configuration;
-using Redbridge.Diagnostics;
 using Redbridge.Security;
 
 namespace Redbridge.Identity
@@ -36,7 +36,7 @@ namespace Redbridge.Identity
 
         protected void SetStatus (ClientConnectionStatus status)
         {
-            Logger.WriteDebug($"Authentication client status changing to: {status}");
+            Logger.LogDebug($"Authentication client status changing to: {status}");
             _status.OnNext(status);
         }
 
@@ -54,7 +54,7 @@ namespace Redbridge.Identity
 
         public Task BeginLoginAsync()
         {
-            Logger.WriteInfo($"Beginning login process for client type {ClientType} for user {Username ??  "[Anonymous]"}...");
+            Logger.LogInformation($"Beginning login process for client type {ClientType} for user {Username ??  "[Anonymous]"}...");
             SetStatus(ClientConnectionStatus.Connecting);
             return OnBeginLoginAsync();
         }
@@ -63,7 +63,7 @@ namespace Redbridge.Identity
 
         public async Task LogoutAsync()
         {
-            Logger.WriteInfo($"Logging out client type {ClientType}...");
+            Logger.LogInformation($"Logging out client type {ClientType}...");
             await OnLogoutAsync();
             SetStatus(ClientConnectionStatus.Disconnected);
         }
@@ -75,7 +75,7 @@ namespace Redbridge.Identity
 
         public Task<Stream> SaveAsync()
         {
-            Logger.WriteInfo($"Saving security state for client type {ClientType}...");
+            Logger.LogInformation($"Saving security state for client type {ClientType}...");
             return OnSaveAsync();
         }
 
@@ -87,7 +87,7 @@ namespace Redbridge.Identity
 
         public Task<UserCredentials> LoadAsync(Stream stream)
         {
-            Logger.WriteInfo($"Restoring security state for client type {ClientType}...");
+            Logger.LogInformation($"Restoring security state for client type {ClientType}...");
             return OnLoadAsync(stream);
         }
 

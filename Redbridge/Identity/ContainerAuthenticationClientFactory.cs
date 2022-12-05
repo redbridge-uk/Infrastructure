@@ -1,6 +1,6 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using Redbridge.DependencyInjection;
-using Redbridge.Diagnostics;
 
 namespace Redbridge.Identity
 {

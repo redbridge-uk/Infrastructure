@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Redbridge.DependencyInjection
 {
-	public interface IWorkUnit : IDisposable
+	public interface IWorkUnit
 	{
 		Task<int> SaveChangesAsync();
 	}

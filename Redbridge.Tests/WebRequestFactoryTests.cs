@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Redbridge.Diagnostics;
 using Redbridge.Web.Messaging;
 
 namespace Redbridge.Tests
@@ -25,9 +25,7 @@ namespace Redbridge.Tests
 			if (serializer == null) throw new ArgumentNullException(nameof(serializer));
 
 			var jObject = JObject.Load(reader);
-			JToken jToken;
-
-			if (jObject.TryGetValue("type", StringComparison.CurrentCultureIgnoreCase, out jToken))
+			if (jObject.TryGetValue("type", StringComparison.CurrentCultureIgnoreCase, out _))
 			{
 				object targetObject = null;
 				serializer.Populate(jObject.CreateReader(), targetObject);
@@ -49,12 +47,12 @@ namespace Redbridge.Tests
 		
 	}
 
-	public class SpecializedWebRequestFactory : WebRequestFactory
+	public class SpecializedWebRequestFactory : WebRequestFactory<SpecializedWebRequestFactory>
 	{
-		public SpecializedWebRequestFactory(IWebRequestSignatureService sessionManager, ILoggerFactory factory, IHttpClientFactory clientFactory) 
+		public SpecializedWebRequestFactory(IWebRequestSignatureService sessionManager, ILogger<SpecializedWebRequestFactory> factory, IHttpClientFactory clientFactory) 
             : base(new Uri("http://mytest-api.azurewebsites.net"), sessionManager, factory, clientFactory) { }
 
-		protected override IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILoggerFactory factory)
+		protected override IWebRequestFactory OnCreateFactory(Uri baseUri, IWebRequestSignatureService sessionManager, ILogger<SpecializedWebRequestFactory> factory)
 		{
 			return new SpecializedWebRequestFactory(sessionManager, factory, ClientFactory);
 		}
@@ -75,7 +73,7 @@ namespace Redbridge.Tests
 			var sessionManager = new Mock<IWebRequestSignatureService>();
             sessionManager.Setup(sm => sm.PostProcessUrlString(It.IsAny<string>())).Returns("integrations/my");
             var clientFactory = new Mock<IHttpClientFactory>();
-            var loggerFactory = new Mock<ILoggerFactory>();
+            var loggerFactory = new Mock<ILogger<SpecializedWebRequestFactory>>();
 			var factory = new SpecializedWebRequestFactory(sessionManager.Object, loggerFactory.Object, clientFactory.Object);
 			var request = factory.CreateFuncRequest<IntegrationData[]>("integrations/my");
 			Assert.AreEqual(2, request.Converters.Count());
