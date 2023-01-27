@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Redbridge.Configuration
+namespace Redbridge.Exceptions
 {
 	[Serializable]
 	public class InvalidConfigurationRepositoryValueException : RedbridgeException
