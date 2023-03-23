@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Redbridge.Configuration;
 using Redbridge.Diagnostics;
@@ -10,7 +11,7 @@ namespace Redbridge.Identity.OAuthServer
 {
     public class OAuthNonInteractiveAuthenticationClient : OAuthRefreshAuthenticationClient
     {
-		public OAuthNonInteractiveAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger, IHttpClientFactory clientFactory) 
+		public OAuthNonInteractiveAuthenticationClient(IConfiguration settings, ILogger logger, IHttpClientFactory clientFactory) 
             : base(settings, logger, clientFactory){}
 
 		public override string Username => string.Empty;
@@ -53,5 +54,7 @@ namespace Redbridge.Identity.OAuthServer
 				}
 			}
         }
+
+        protected override string ClientSettingsIdentifier => "NonInteractive";
     }
 }

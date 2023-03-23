@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Redbridge.Configuration;
 using Redbridge.Security;
@@ -12,13 +13,13 @@ namespace Redbridge.Identity
     public abstract class AuthenticationClient : IAuthenticationClient
     {
 		private readonly BehaviorSubject<ClientConnectionStatus> _status = new BehaviorSubject<ClientConnectionStatus>(ClientConnectionStatus.Disconnected);
-        private readonly IApplicationSettingsRepository _settings;
+        private readonly IConfiguration _settings;
 
         protected ILogger Logger { get; set; }
 
         public static IAuthenticationClient Anonymous => new AnonymousAuthenticationClient();
 
-        protected AuthenticationClient(IApplicationSettingsRepository settings, ILogger logger)
+        protected AuthenticationClient(IConfiguration settings, ILogger logger)
         {
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
 			_settings = settings ?? throw new ArgumentNullException(nameof(settings));
@@ -98,11 +99,11 @@ namespace Redbridge.Identity
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+        private bool _disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!_disposedValue)
             {
                 if (disposing)
                 {
@@ -113,7 +114,7 @@ namespace Redbridge.Identity
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
                 // TODO: set large fields to null.
 
-                disposedValue = true;
+                _disposedValue = true;
             }
         }
 

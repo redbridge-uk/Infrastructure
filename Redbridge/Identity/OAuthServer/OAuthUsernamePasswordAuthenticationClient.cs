@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Redbridge.Configuration;
@@ -17,11 +18,13 @@ namespace Redbridge.Identity.OAuthServer
 
         private readonly IHashingService _hashingService;
 
-        public OAuthUsernamePasswordAuthenticationClient(IApplicationSettingsRepository settings, ILogger<OAuthUsernamePasswordAuthenticationClient> logger, IHashingService hashingService, IHttpClientFactory clientFactory) 
+        public OAuthUsernamePasswordAuthenticationClient(IConfiguration settings, ILogger<OAuthUsernamePasswordAuthenticationClient> logger, IHashingService hashingService, IHttpClientFactory clientFactory) 
             : base(settings, logger, clientFactory) 
         {
             _hashingService = hashingService ?? throw new ArgumentNullException(nameof(hashingService));
         }
+
+        protected override string ClientSettingsIdentifier => "UsernamePasswordClient";
 
         protected override void OnSetCredentials(UserCredentials credentials)
         {
