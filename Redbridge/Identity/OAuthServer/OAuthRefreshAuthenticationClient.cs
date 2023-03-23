@@ -3,10 +3,9 @@ using System.IO;
 using System.Net.Http;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Redbridge.Configuration;
-using Redbridge.Diagnostics;
 using Redbridge.Security;
 using Redbridge.Web.Messaging;
 
@@ -18,23 +17,30 @@ namespace Redbridge.Identity.OAuthServer
         private IDisposable _tokenExpiredObservable;
 		private string _accessToken;
 		private string _refreshToken;
-		private readonly string _clientId;
-		private readonly string _clientSecret;
-		private readonly Uri _serviceUri;
+        private Lazy<AuthenticationClientSettings> _settings;
 
-		protected OAuthRefreshAuthenticationClient(IApplicationSettingsRepository settings, ILogger logger, IHttpClientFactory clientFactory) : base(settings, logger)
+		protected OAuthRefreshAuthenticationClient(IConfiguration settings, ILogger logger, IHttpClientFactory clientFactory) : base(settings, logger)
         {
             _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
-            _clientId = settings.GetStringValue("ClientId");
-			_clientSecret = settings.GetStringValue("ClientSecret");
-			_serviceUri = settings.GetUrl("AuthorisationServiceUrl");
-		}
 
-        protected Uri ServiceUri => _serviceUri;
+            _settings = new Lazy<AuthenticationClientSettings>(() =>
+            {
+                var section = settings.GetRequiredSection(ClientSettingsIdentifier);
+                var clientSettings = new AuthenticationClientSettings();
+                section.Bind(clientSettings);
+                return clientSettings;
+            });
+        }
+
+        /// <summary>
+        /// The identifier for the block in the appsettings that represents this client.
+        /// </summary>
+        protected abstract string ClientSettingsIdentifier { get; }
+        protected Uri ServiceUri => new Uri(_settings.Value.AuthorisationServiceUrl);
         public override string AccessToken => _accessToken;
         protected string RefreshToken => _refreshToken;
-        protected string ClientId => _clientId;
-        protected string ClientSecret => _clientSecret;
+        protected string ClientId => _settings.Value.ClientId;
+        protected string ClientSecret => _settings.Value.ClientSecret;
         protected IHttpClientFactory ClientFactory => _clientFactory;
 
         public bool CanRefresh => !string.IsNullOrWhiteSpace(_refreshToken);
@@ -116,13 +122,11 @@ namespace Redbridge.Identity.OAuthServer
 		protected async Task OnRefreshAccessTokenAsync()
 		{
             SetStatus(ClientConnectionStatus.Refreshing);
-            Logger.LogDebug($"Refreshing token at service url {_serviceUri} as user {Username} token: {_refreshToken}...");
-			var uri = new Uri(_serviceUri, "oauth/token");
+            Logger.LogDebug($"Refreshing token at service url {_settings.Value.AuthorisationServiceUrl} as user {Username} token: {_refreshToken}...");
+			var uri = new Uri(new Uri(_settings.Value.AuthorisationServiceUrl), "oauth/token");
 			var request = new FormWebRequest<OAuthTokenResult>(uri, HttpVerb.Post);
-			var data = new OAuthRefreshTokenAccessTokenRequestData() { ClientId = _clientId, ClientSecret = _clientSecret, RefreshToken = _refreshToken };
-            Logger.LogDebug($"Refresh request client id: {_clientId}");
-            Logger.LogDebug($"Refresh request client id: {_clientSecret?.Substring(0, 5)}XXXX");
-            Logger.LogDebug($"Refresh request client id: {_refreshToken}");
+			var data = new OAuthRefreshTokenAccessTokenRequestData() { ClientId = _settings.Value.ClientId, ClientSecret = _settings.Value.ClientSecret, RefreshToken = _refreshToken };
+            Logger.LogDebug($"Refresh request client id: {_settings.Value.ClientId}");
 			var token = await request.ExecuteAsync(_clientFactory, data.AsDictionary());
 
             if (token != null)
@@ -139,9 +143,7 @@ namespace Redbridge.Identity.OAuthServer
                 }
                 else
                 {
-                    Logger.LogWarning($"The refresh response from the token service returned either no access token or no refresh token, this is considered a failure.");
-                    Logger.LogWarning($"Refreshed access token: {token.AccessToken}");
-                    Logger.LogWarning($"Refresh token: {token.RefreshToken}");
+                    Logger.LogWarning("The refresh response from the token service returned either no access token or no refresh token, this is considered a failure.");
                     CancelRefresh();
                     SetStatus(ClientConnectionStatus.Disconnected);
                 }
